@@ -16,4 +16,3 @@ steps:
     Dockerfile: 'Dockerfile'
     tags: |
       $(Build.SourceVersion)
-      latest
