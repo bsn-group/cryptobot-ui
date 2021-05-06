@@ -1,0 +1,117 @@
+﻿@page "/"
+@page "/futures-pnls"
+@layout MainLayout
+@inherits CryptobotUi.Pages.FuturesPnlsComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using CryptobotUi.Models.Cryptodb
+@inject Microsoft.Extensions.Localization.IStringLocalizer<FuturesPnls> L
+<RadzenContent Container="main">
+  <ChildContent>
+    <RadzenHeading Size="H1" Text="Futures Pnls">
+    </RadzenHeading>
+    <div class="row">
+      <div class="col-md-12">
+        <RadzenSplitButton Icon="get_app" style="margin-bottom: 10px; margin-left: 0px" Text="Export" Click="@Splitbutton0Click">
+          <ChildContent>
+            <RadzenSplitButtonItem Text="Excel" Value="xlsx">
+            </RadzenSplitButtonItem>
+            <RadzenSplitButtonItem Text="CSV" Value="csv">
+            </RadzenSplitButtonItem>
+          </ChildContent>
+        </RadzenSplitButton>
+        <RadzenButton ButtonStyle="ButtonStyle.Light" Icon="refresh" Size="ButtonSize.Medium" style="display: inline-block; float: right; margin-bottom: 1rem; margin-left: 1rem; position: static; vertical-align: middle" Click="@RefreshButtonClick">
+        </RadzenButton>
+        <RadzenTextBox Placeholder="Search ..." style="display: block; margin-bottom: 10px; width: 100%" Name="Textbox0" @oninput="@(async(args) => {search = $"{args.Value}";await pnlDataGrid.GoToPage(0);await pnlDataGrid.Reload();})">
+        </RadzenTextBox>
+        <RadzenGrid @ref="pnlDataGrid" AllowColumnResize="true" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Count="@FuturesPnlsCount" Data="@FuturesPnls" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" FilterMode="FilterMode.Advanced" TItem="CryptobotUi.Client.Model.FuturesPnlViewModel" LoadData="@PnlDataGridLoadData" RowExpand="@PnlDataGridRowExpand">
+          <Columns>
+            <RadzenGridColumn TItem="CryptobotUi.Client.Model.FuturesPnlViewModel" Property="signal_id" TextAlign="TextAlign.Right" Title="Signal Id">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="CryptobotUi.Client.Model.FuturesPnlViewModel" Property="symbol" Title="Symbol">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="CryptobotUi.Client.Model.FuturesPnlViewModel" Property="position_type" Title="Position Type">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="CryptobotUi.Client.Model.FuturesPnlViewModel" Property="exchange_id" Title="Exchange Id" Visible="false">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="CryptobotUi.Client.Model.FuturesPnlViewModel" Property="strategy_pair_name" Title="Strategy">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="CryptobotUi.Client.Model.FuturesPnlViewModel" Property="signal_status" Title="Signal Status" Visible="false">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="CryptobotUi.Client.Model.FuturesPnlViewModel" Property="position_status" Title="Position Status">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="CryptobotUi.Client.Model.FuturesPnlViewModel" Property="executed_buy_qty" Title="Executed Buy Qty" Visible="false">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="CryptobotUi.Client.Model.FuturesPnlViewModel" Property="pending_buy_qty" Title="Pending Buy Qty" Visible="false">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="CryptobotUi.Client.Model.FuturesPnlViewModel" Property="executed_sell_qty" Title="Executed Sell Qty" Visible="false">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="CryptobotUi.Client.Model.FuturesPnlViewModel" Property="pending_sell_qty" Title="Pending Sell Qty" Visible="false">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="CryptobotUi.Client.Model.FuturesPnlViewModel" FormatString="{0:F4}" Property="entry_price" TextAlign="TextAlign.Right" Title="Entry Price">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="CryptobotUi.Client.Model.FuturesPnlViewModel" FormatString="{0:F4}" Property="close_price" TextAlign="TextAlign.Right" Title="Close Price">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="CryptobotUi.Client.Model.FuturesPnlViewModel" FormatString="{0:F8}" Property="pnl" TextAlign="TextAlign.Right" Title="Pnl">
+              <Template Context="cryptobotUiClientModelFuturesPnlViewModel">
+                <RadzenLabel style="color: #B9F6CA" Text="@(String.Format("{0:F4} ({1:F2} %)", cryptobotUiClientModelFuturesPnlViewModel.pnl, cryptobotUiClientModelFuturesPnlViewModel.pnl_percent))" Visible="@(cryptobotUiClientModelFuturesPnlViewModel.pnl >= 0)">
+                </RadzenLabel>
+                <RadzenLabel style="color: #FF8A80" Text="@(String.Format("{0:F4} ({1:F2} %)", cryptobotUiClientModelFuturesPnlViewModel.pnl, cryptobotUiClientModelFuturesPnlViewModel.pnl_percent))" Visible="@(cryptobotUiClientModelFuturesPnlViewModel.pnl < 0)">
+                </RadzenLabel>
+              </Template>
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="CryptobotUi.Client.Model.FuturesPnlViewModel" FormatString="{0:P}" Property="pnl_percent" TextAlign="TextAlign.Right" Title="Pnl Percent" Visible="false">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="CryptobotUi.Client.Model.FuturesPnlViewModel" Format="date-time" FormatString="{0:g}" Property="entry_time" Title="Entry Time" Type="string">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="CryptobotUi.Client.Model.FuturesPnlViewModel" Format="date-time" FormatString="{0:g}" Property="exit_time" Title="Exit Time" Type="string">
+            </RadzenGridColumn>
+          </Columns>
+          <Template Context="cryptobotUiClientModelFuturesPnlViewModel">
+            <RadzenHeading Size="H3" Text="Commands & Orders">
+            </RadzenHeading>
+            <RadzenGrid @ref="grid0" AllowColumnResize="true" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@(cryptobotUiClientModelFuturesPnlViewModel.Commands)" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" FilterMode="FilterMode.Advanced" TItem="CryptobotUi.Models.Cryptodb.FuturesSignalCommand">
+              <Columns>
+                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.FuturesSignalCommand" Property="ETag" Title="E Tag" Visible="false">
+                </RadzenGridColumn>
+                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.FuturesSignalCommand" Property="id" Title="Id">
+                </RadzenGridColumn>
+                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.FuturesSignalCommand" FilterProperty="FuturesSignal.symbol" Property="signal_id" SortProperty="FuturesSignal.symbol" Title="Futures Signal" Visible="false">
+                  <Template Context="data">
+                  @(data.FuturesSignal?.symbol)
+                  </Template>
+                </RadzenGridColumn>
+                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.FuturesSignalCommand" FormatString="{0:F8}" Property="price" TextAlign="TextAlign.Right" Title="Price">
+                </RadzenGridColumn>
+                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.FuturesSignalCommand" FormatString="{0:F8}" Property="quantity" Title="Quantity">
+                </RadzenGridColumn>
+                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.FuturesSignalCommand" Property="leverage" Title="Leverage">
+                </RadzenGridColumn>
+                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.FuturesSignalCommand" FormatString="{0:d}" Property="request_date_time" Title="Request Time">
+                </RadzenGridColumn>
+                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.FuturesSignalCommand" FormatString="{0:d}" Property="action_date_time" Title="Action Time">
+                </RadzenGridColumn>
+                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.FuturesSignalCommand" Property="exchange_order_id" Title="Order placed?">
+                  <Template Context="data">
+                  @(data.ExchangeOrder?.status_reason)
+                  </Template>
+                </RadzenGridColumn>
+                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.FuturesSignalCommand" Property="strategy_name" Title="Strategy">
+                </RadzenGridColumn>
+                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.FuturesSignalCommand" Property="strategy_hash" Title="Strategy Hash" Visible="false">
+                </RadzenGridColumn>
+                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.FuturesSignalCommand" Property="strategy_data" Title="Strategy Data" Visible="false">
+                </RadzenGridColumn>
+                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.FuturesSignalCommand" Property="signal_action" Title="Action">
+                </RadzenGridColumn>
+                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.FuturesSignalCommand" Property="status" Title="Status">
+                </RadzenGridColumn>
+              </Columns>
+            </RadzenGrid>
+          </Template>
+        </RadzenGrid>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenContent>

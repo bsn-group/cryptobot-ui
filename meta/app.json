@@ -1,0 +1,69 @@
+{
+  "cssFiles": [],
+  "dataSources": [
+    "cryptodb"
+  ],
+  "generator": "@radzen/blazor-server",
+  "https": false,
+  "ignore": [
+    "server/Data/Lookups.cs",
+    "server/Data/*.custom.cs"
+  ],
+  "javaScriptFiles": [],
+  "layouts": [
+    "Login",
+    "Main"
+  ],
+  "localization": {
+    "cultures": [
+      {
+        "text": "English - Australia",
+        "value": "en-AU"
+      }
+    ],
+    "defaultCulture": {
+      "text": "English - Australia",
+      "value": "en-AU"
+    }
+  },
+  "logo": "",
+  "name": "CryptobotUI",
+  "namespaces": [],
+  "navigation": [
+    "Exchanges",
+    "Strategies",
+    "Symbols",
+    "Futures Pnls",
+    "Futures Positions",
+    "Strategy Conditions",
+    "MarketEvent",
+    "Signals"
+  ],
+  "pages": [
+    "Add Strategy Condition",
+    "Add Strategy",
+    "Exchanges",
+    "Strategies",
+    "Edit Strategy",
+    "Symbols",
+    "Futures Pnls",
+    "Futures Positions",
+    "Strategy Conditions",
+    "Add Symbol",
+    "Load Market Event JSON",
+    "MarketEvent",
+    "Add MarketEvent",
+    "Edit MarketEvent",
+    "Signals"
+  ],
+  "port": 8000,
+  "pwa": true,
+  "serverLang": "cs",
+  "serverPort": 5000,
+  "serverProject": true,
+  "serverVersion": "5",
+  "startPage": "Futures Pnls",
+  "theme": "dark",
+  "title": "BSN Cryptobot",
+  "wasm": true
+}

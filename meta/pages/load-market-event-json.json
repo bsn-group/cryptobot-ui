@@ -1,0 +1,117 @@
+{
+  "access": [],
+  "components": [
+    {
+      "components": [
+        {
+          "name": "pageTitle",
+          "size": "H1",
+          "text": "Load Market Event JSON",
+          "type": "heading"
+        },
+        {
+          "components": [
+            {
+              "class": "col-md-12",
+              "components": [
+                {
+                  "name": "label0",
+                  "text": "Enter / paste MarketEvent alert JSON (eg from TradingView alert)",
+                  "type": "label"
+                }
+              ],
+              "name": "col0",
+              "type": "col"
+            },
+            {
+              "class": "col-md-12",
+              "components": [
+                {
+                  "component": "marketEventJsonEditor",
+                  "name": "errLabel",
+                  "style": {
+                    "color": "#ff7e7b",
+                    "display": "block",
+                    "visibility": "visible"
+                  },
+                  "text": "${ValidationError}",
+                  "type": "label"
+                },
+                {
+                  "name": "marketEventJsonEditor",
+                  "placeholder": "Paste the market event JSON here",
+                  "rows": 15,
+                  "style": {
+                    "display": "block",
+                    "marginTop": "1rem",
+                    "paddingTop": "",
+                    "width": "100%"
+                  },
+                  "type": "textarea",
+                  "value": "${MarketEventJson}"
+                }
+              ],
+              "name": "col1",
+              "type": "col"
+            }
+          ],
+          "name": "row0",
+          "type": "row"
+        },
+        {
+          "components": [
+            {
+              "class": "col-md-12",
+              "components": [
+                {
+                  "events": {
+                    "click": [
+                      {
+                        "name": "LoadMarketEventJson",
+                        "schema": {
+                          "$ref": "#/definitions/Void",
+                          "dotnetType": "void"
+                        },
+                        "type": "invoke-method"
+                      }
+                    ]
+                  },
+                  "name": "button0",
+                  "text": "OK",
+                  "type": "button"
+                },
+                {
+                  "buttonStyle": "light",
+                  "events": {
+                    "click": [
+                      {
+                        "type": "close-popup"
+                      }
+                    ]
+                  },
+                  "name": "button1",
+                  "style": {
+                    "marginLeft": "1rem"
+                  },
+                  "text": "Cancel",
+                  "type": "button"
+                }
+              ],
+              "name": "col2",
+              "style": {
+                "marginTop": "1rem"
+              },
+              "type": "col"
+            }
+          ],
+          "name": "row1",
+          "type": "row"
+        }
+      ],
+      "container": "main",
+      "type": "content"
+    }
+  ],
+  "layout": "Main",
+  "name": "Load Market Event JSON"
+}

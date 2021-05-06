@@ -1,0 +1,381 @@
+{
+  "components": [
+    {
+      "components": [
+        {
+          "name": "pageTitle",
+          "size": "H1",
+          "text": "Signals",
+          "type": "heading"
+        },
+        {
+          "components": [
+            {
+              "class": "col-md-12",
+              "components": [
+                {
+                  "allowColumnResize": true,
+                  "allowFiltering": true,
+                  "allowPaging": true,
+                  "allowSorting": true,
+                  "columns": [
+                    {
+                      "property": "signal_id",
+                      "title": "Signal Id"
+                    },
+                    {
+                      "property": "strategy_pair_name",
+                      "title": "Strategy"
+                    },
+                    {
+                      "property": "symbol",
+                      "title": "Symbol"
+                    },
+                    {
+                      "filterProperty": "Exchange.code",
+                      "property": "exchange_id",
+                      "sortProperty": "Exchange.code",
+                      "template": "${data.Exchange?.name}",
+                      "title": "Exchange"
+                    },
+                    {
+                      "property": "position_type",
+                      "title": "Position Type"
+                    },
+                    {
+                      "formatString": "{0:g}",
+                      "property": "created_date_time",
+                      "title": "Created Time",
+                      "visible": true
+                    },
+                    {
+                      "formatString": "{0:d}",
+                      "property": "updated_date_time",
+                      "title": "Updated Date Time",
+                      "visible": false
+                    },
+                    {
+                      "property": "ETag",
+                      "title": "E Tag",
+                      "visible": false
+                    }
+                  ],
+                  "count": "${getFuturesSignalsCount}",
+                  "data": "${getFuturesSignalsResult}",
+                  "events": {
+                    "loadData": [
+                      {
+                        "name": "AppState.IsBusy",
+                        "type": "set",
+                        "value": "true",
+                        "valueType": "bool"
+                      },
+                      {
+                        "code": "args.OrderBy = \"signal_id desc\";",
+                        "type": "execute"
+                      },
+                      {
+                        "error": [
+                          {
+                            "name": "AppState.IsBusy",
+                            "type": "set",
+                            "value": "false",
+                            "valueType": "bool"
+                          },
+                          {
+                            "detail": "Unable to load FuturesSignals",
+                            "severity": "error",
+                            "summary": "Error",
+                            "type": "notify"
+                          }
+                        ],
+                        "name": "cryptodb.getFuturesSignals",
+                        "parameters": [
+                          {
+                            "name": "$top",
+                            "value": "event.top"
+                          },
+                          {
+                            "name": "$skip",
+                            "value": "event.skip"
+                          },
+                          {
+                            "name": "$count",
+                            "value": "event.top != null && event.skip != null"
+                          },
+                          {
+                            "name": "$filter",
+                            "value": "${event.filter}"
+                          },
+                          {
+                            "name": "$orderby",
+                            "value": "${event.orderby}"
+                          },
+                          {
+                            "name": "$expand",
+                            "value": "Exchange"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "name": "getFuturesSignalsResult",
+                            "type": "set",
+                            "value": "${result.Value.AsODataEnumerable()}",
+                            "valueType": "IEnumerable<CryptobotUi.Models.Cryptodb.FuturesSignal>"
+                          },
+                          {
+                            "name": "getFuturesSignalsCount",
+                            "type": "set",
+                            "value": "${result.Count}",
+                            "valueType": "int"
+                          },
+                          {
+                            "name": "AppState.IsBusy",
+                            "type": "set",
+                            "value": "false",
+                            "valueType": "bool"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ],
+                    "rowExpand": [
+                      {
+                        "name": "AppState.IsBusy",
+                        "type": "set",
+                        "value": "true",
+                        "valueType": "bool"
+                      },
+                      {
+                        "name": "master",
+                        "type": "set",
+                        "value": "${event}"
+                      },
+                      {
+                        "error": [
+                          {
+                            "name": "AppState.IsBusy",
+                            "type": "set",
+                            "value": "false",
+                            "valueType": "bool"
+                          }
+                        ],
+                        "name": "cryptodb.getFuturesSignalCommands",
+                        "parameters": [
+                          {
+                            "name": "$filter",
+                            "value": "signal_id eq ${event.signal_id}"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "code": "event.FuturesSignalCommands = ${result}.Value",
+                            "condition": "",
+                            "type": "execute"
+                          },
+                          {
+                            "name": "AppState.IsBusy",
+                            "type": "set",
+                            "value": "false",
+                            "valueType": "bool"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ]
+                  },
+                  "filterCaseSensitivity": "caseInsensitive",
+                  "filterMode": "advanced",
+                  "itemType": "CryptobotUi.Models.Cryptodb.FuturesSignal",
+                  "name": "grid0",
+                  "template": [
+                    {
+                      "name": "heading1",
+                      "size": "H2",
+                      "text": "Commands",
+                      "type": "heading"
+                    },
+                    {
+                      "allowFiltering": true,
+                      "allowPaging": true,
+                      "allowSorting": true,
+                      "columns": [
+                        {
+                          "property": "id",
+                          "title": "Id"
+                        },
+                        {
+                          "filterProperty": "FuturesSignal.symbol",
+                          "property": "signal_id",
+                          "sortProperty": "FuturesSignal.symbol",
+                          "template": "${data.FuturesSignal?.symbol}",
+                          "title": "Signal",
+                          "visible": false
+                        },
+                        {
+                          "property": "price",
+                          "title": "Price"
+                        },
+                        {
+                          "property": "quantity",
+                          "title": "Quantity"
+                        },
+                        {
+                          "property": "leverage",
+                          "title": "Leverage"
+                        },
+                        {
+                          "formatString": "{0:d}",
+                          "property": "request_date_time",
+                          "title": "Request Date Time"
+                        },
+                        {
+                          "formatString": "{0:d}",
+                          "property": "action_date_time",
+                          "title": "Action Date Time"
+                        },
+                        {
+                          "filterProperty": "ExchangeOrder.id",
+                          "property": "exchange_order_id",
+                          "sortProperty": "ExchangeOrder.id",
+                          "template": [
+                            {
+                              "icon": "done_outline",
+                              "name": "icon0",
+                              "type": "icon",
+                              "visible": "@(cryptobotUiModelsCryptodbFuturesSignalCommand.ExchangeOrder?.id > 0)"
+                            },
+                            {
+                              "icon": "close",
+                              "name": "icon1",
+                              "type": "icon",
+                              "visible": "@(cryptobotUiModelsCryptodbFuturesSignalCommand.ExchangeOrder?.id == null)"
+                            }
+                          ],
+                          "title": "Exchange Order"
+                        },
+                        {
+                          "property": "strategy_name",
+                          "title": "Strategy Name"
+                        },
+                        {
+                          "property": "strategy_hash",
+                          "title": "Strategy Hash",
+                          "visible": false
+                        },
+                        {
+                          "property": "strategy_data",
+                          "title": "Strategy Data",
+                          "visible": false
+                        },
+                        {
+                          "property": "signal_action",
+                          "title": "Signal Action"
+                        },
+                        {
+                          "property": "status",
+                          "title": "Status"
+                        },
+                        {
+                          "property": "ETag",
+                          "title": "E Tag",
+                          "visible": false
+                        }
+                      ],
+                      "data": "${data.FuturesSignalCommands}",
+                      "events": {},
+                      "filterMode": "advanced",
+                      "itemType": "CryptobotUi.Models.Cryptodb.FuturesSignalCommand",
+                      "name": "grid1",
+                      "template": [
+                        {
+                          "components": [
+                            {
+                              "class": "col-md-12",
+                              "components": [
+                                {
+                                  "name": "heading0",
+                                  "size": "H4",
+                                  "text": "@(String.Format(\"Exchange order ({0})\", cryptobotUiModelsCryptodbFuturesSignalCommand.ExchangeOrder?.id))",
+                                  "type": "heading"
+                                }
+                              ],
+                              "name": "col0",
+                              "type": "col"
+                            },
+                            {
+                              "class": "col-md-12",
+                              "components": [
+                                {
+                                  "name": "order_side",
+                                  "style": {
+                                    "marginLeft": "1rem",
+                                    "marginRight": ""
+                                  },
+                                  "text": "${cryptobotUiModelsCryptodbFuturesSignalCommand.ExchangeOrder?.order_side}",
+                                  "type": "label"
+                                },
+                                {
+                                  "name": "executed_qty",
+                                  "style": {
+                                    "marginLeft": "1rem"
+                                  },
+                                  "text": "@(String.Format(\"{0:F8}\", cryptobotUiModelsCryptodbFuturesSignalCommand.ExchangeOrder?.executed_qty))",
+                                  "type": "label"
+                                },
+                                {
+                                  "name": "executed_price",
+                                  "style": {
+                                    "marginLeft": "1rem"
+                                  },
+                                  "text": "@(String.Format(\"@ {0:F8}\", cryptobotUiModelsCryptodbFuturesSignalCommand.ExchangeOrder?.executed_price))",
+                                  "type": "label"
+                                },
+                                {
+                                  "name": "status",
+                                  "style": {
+                                    "marginLeft": "1rem"
+                                  },
+                                  "text": "${cryptobotUiModelsCryptodbFuturesSignalCommand.ExchangeOrder?.status?.ToUpper()}",
+                                  "type": "label"
+                                },
+                                {
+                                  "name": "status_reason",
+                                  "style": {
+                                    "marginLeft": "1rem"
+                                  },
+                                  "text": "${cryptobotUiModelsCryptodbFuturesSignalCommand.ExchangeOrder?.status_reason}",
+                                  "type": "label"
+                                }
+                              ],
+                              "name": "col1",
+                              "type": "col"
+                            }
+                          ],
+                          "name": "row0",
+                          "type": "row"
+                        }
+                      ],
+                      "type": "grid"
+                    }
+                  ],
+                  "title": "",
+                  "type": "grid"
+                }
+              ],
+              "type": "col"
+            }
+          ],
+          "type": "row"
+        }
+      ],
+      "container": "main",
+      "type": "content"
+    }
+  ],
+  "events": {
+    "load": []
+  },
+  "layout": "Main",
+  "name": "Signals"
+}

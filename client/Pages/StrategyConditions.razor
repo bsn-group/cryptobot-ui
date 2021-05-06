@@ -1,0 +1,65 @@
+﻿@page "/strategy-conditions"
+@layout MainLayout
+@inherits CryptobotUi.Pages.StrategyConditionsComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using CryptobotUi.Models.Cryptodb
+@inject Microsoft.Extensions.Localization.IStringLocalizer<StrategyConditions> L
+<RadzenContent Container="main">
+  <ChildContent>
+    <RadzenHeading Size="H4" Text="Conditions">
+    </RadzenHeading>
+    <div class="row">
+      <div class="col-md-12">
+        <RadzenButton Icon="add_circle_outline" style="margin-bottom: 10px" Text="Add" Click="@Button0Click">
+        </RadzenButton>
+        <RadzenSplitButton Icon="get_app" style="margin-bottom: 10px; margin-left: 10px" Text="Export" Click="@Splitbutton0Click">
+          <ChildContent>
+            <RadzenSplitButtonItem Text="Excel" Value="xlsx">
+            </RadzenSplitButtonItem>
+            <RadzenSplitButtonItem Text="CSV" Value="csv">
+            </RadzenSplitButtonItem>
+          </ChildContent>
+        </RadzenSplitButton>
+        <RadzenTextBox Placeholder="Search ..." style="display: block; margin-bottom: 10px; width: 100%" Name="Textbox0" @oninput="@(async(args) => {search = $"{args.Value}";await grid0.GoToPage(0);await grid0.Reload();})">
+        </RadzenTextBox>
+        <RadzenGrid @ref="grid0" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Count="@getStrategyConditionsCount" Data="@getStrategyConditionsResult" FilterMode="FilterMode.Advanced" TItem="CryptobotUi.Models.Cryptodb.StrategyCondition" LoadData="@Grid0LoadData">
+          <Columns>
+            <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.StrategyCondition" Property="category" Title="Category">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.StrategyCondition" FormatString="{0:dd/MM/yyyy}" Property="created_time" Title="Created Time">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.StrategyCondition" Property="name" Title="Name">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.StrategyCondition" Property="condition_group" Title="Condition Group">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.StrategyCondition" Format="int64" Property="condition_sub_group" Title="Condition Sub Group" Type="integer">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.StrategyCondition" Property="sequence" Title="Sequence">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.StrategyCondition" Property="time_frame" Title="Time Frame">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.StrategyCondition" Property="id" Title="Id">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.StrategyCondition" FilterProperty="Strategy.symbol" Property="strategy_id" SortProperty="Strategy.symbol" Title="Strategy">
+              <Template Context="data">
+              @(data.Strategy?.symbol)
+              </Template>
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.StrategyCondition" Property="version" Title="Version">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.StrategyCondition" Property="last_observed" Title="Last Observed">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.StrategyCondition" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Width="70px">
+              <Template Context="cryptobotUiModelsCryptodbStrategyCondition">
+                <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="close" Size="ButtonSize.Small" Click="@((args) =>GridDeleteButtonClick(args, cryptobotUiModelsCryptodbStrategyCondition))" @onclick:stopPropagation="true">
+                </RadzenButton>
+              </Template>
+            </RadzenGridColumn>
+          </Columns>
+        </RadzenGrid>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenContent>

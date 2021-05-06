@@ -1,0 +1,669 @@
+{
+  "components": [
+    {
+      "type": "content",
+      "container": "main",
+      "components": [
+        {
+          "components": [
+            {
+              "class": "col-md-9",
+              "components": [
+                {
+                  "name": "closeLabel",
+                  "style": {
+                    "fontWeight": "bold"
+                  },
+                  "text": "Item no longer available.",
+                  "type": "label",
+                  "visible": "${!canEdit}"
+                }
+              ],
+              "name": "col0",
+              "type": "col"
+            },
+            {
+              "class": "col-md-3",
+              "components": [
+                {
+                  "buttonStyle": "secondary",
+                  "events": {
+                    "click": [
+                      {
+                        "type": "close-popup"
+                      }
+                    ]
+                  },
+                  "icon": "",
+                  "name": "closeButton",
+                  "style": {
+                    "marginBottom": "20px"
+                  },
+                  "text": "Close",
+                  "type": "button",
+                  "visible": "${!canEdit}"
+                }
+              ],
+              "name": "col1",
+              "type": "col"
+            }
+          ],
+          "name": "row0",
+          "style": {},
+          "type": "row"
+        },
+        {
+          "components": [
+            {
+              "class": "col-md-9",
+              "components": [
+                {
+                  "name": "label0",
+                  "style": {
+                    "fontWeight": "bold"
+                  },
+                  "text": "Another user has made conflicting changes to one or more of the fields you have modified. Please reload.",
+                  "type": "label",
+                  "visible": "${hasChanges}"
+                }
+              ],
+              "name": "col0",
+              "type": "col"
+            },
+            {
+              "class": "col-md-3",
+              "components": [
+                {
+                  "buttonStyle": "secondary",
+                  "events": {
+                    "click": [
+                      {
+                        "code": "await this.Load()",
+                        "type": "execute"
+                      }
+                    ]
+                  },
+                  "icon": "autorenew",
+                  "name": "button0",
+                  "style": {
+                    "marginBottom": "20px"
+                  },
+                  "text": "Reload",
+                  "type": "button",
+                  "visible": "${hasChanges}"
+                }
+              ],
+              "name": "col1",
+              "type": "col"
+            }
+          ],
+          "name": "row0",
+          "style": {},
+          "type": "row"
+        },
+        {
+          "type": "row",
+          "components": [
+            {
+              "type": "col",
+              "class": "col-md-12",
+              "components": [
+                {
+                  "type": "template-form",
+                  "name": "form0",
+                  "components": [
+                    {
+                      "type": "row",
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "components": [
+                        {
+                          "type": "col",
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "type": "label",
+                              "text": "Name",
+                              "component": "name",
+                              "name": "nameLabel",
+                              "style": {
+                                "width": "100%"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "col",
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "valueType": "string",
+                              "maxLength": 255,
+                              "type": "textbox",
+                              "name": "name",
+                              "style": {
+                                "display": "block",
+                                "width": "100%"
+                              },
+                              "value": "${strategy.name}"
+                            },
+                            {
+                              "type": "required-validator",
+                              "name": "nameRequiredValidator",
+                              "component": "name",
+                              "text": "name is required",
+                              "style": {
+                                "position": "absolute"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "row",
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "components": [
+                        {
+                          "type": "col",
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "type": "label",
+                              "text": "Symbol",
+                              "component": "symbol",
+                              "name": "symbolLabel",
+                              "style": {
+                                "width": "100%"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "col",
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "valueType": "string",
+                              "type": "textbox",
+                              "name": "symbol",
+                              "style": {
+                                "display": "block",
+                                "width": "100%"
+                              },
+                              "value": "${strategy.symbol}"
+                            },
+                            {
+                              "type": "required-validator",
+                              "name": "symbolRequiredValidator",
+                              "component": "symbol",
+                              "text": "symbol is required",
+                              "style": {
+                                "position": "absolute"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "row",
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "components": [
+                        {
+                          "type": "col",
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "type": "label",
+                              "text": "Updated Time",
+                              "component": "updated_time",
+                              "name": "updated_timeLabel",
+                              "style": {
+                                "width": "100%"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "col",
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "valueType": "DateTime",
+                              "type": "datepicker",
+                              "name": "updated_time",
+                              "style": {
+                                "display": "block",
+                                "width": "100%"
+                              },
+                              "value": "${strategy.updated_time}"
+                            },
+                            {
+                              "type": "required-validator",
+                              "name": "updated_timeRequiredValidator",
+                              "component": "updated_time",
+                              "text": "updated_time is required",
+                              "style": {
+                                "position": "absolute"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "row",
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "components": [
+                        {
+                          "type": "col",
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "type": "label",
+                              "text": "Version",
+                              "component": "version",
+                              "name": "versionLabel",
+                              "style": {
+                                "width": "100%"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "col",
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "valueType": "Int64",
+                              "type": "numeric",
+                              "name": "version",
+                              "style": {
+                                "display": "block",
+                                "width": "100%"
+                              },
+                              "value": "${strategy.version}"
+                            },
+                            {
+                              "type": "required-validator",
+                              "name": "versionRequiredValidator",
+                              "component": "version",
+                              "text": "version is required",
+                              "style": {
+                                "position": "absolute"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "row",
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "components": [
+                        {
+                          "type": "col",
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "type": "label",
+                              "text": "Exchange Type",
+                              "component": "exchange_type",
+                              "name": "exchange_typeLabel",
+                              "style": {
+                                "width": "100%"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "col",
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "valueType": "string",
+                              "maxLength": 255,
+                              "type": "textbox",
+                              "name": "exchange_type",
+                              "style": {
+                                "display": "block",
+                                "width": "100%"
+                              },
+                              "value": "${strategy.exchange_type}"
+                            },
+                            {
+                              "type": "required-validator",
+                              "name": "exchange_typeRequiredValidator",
+                              "component": "exchange_type",
+                              "text": "exchange_type is required",
+                              "style": {
+                                "position": "absolute"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "row",
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "components": [
+                        {
+                          "type": "col",
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "type": "label",
+                              "text": "Id",
+                              "component": "id",
+                              "name": "idLabel",
+                              "style": {
+                                "width": "100%"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "col",
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "valueType": "Int64",
+                              "type": "numeric",
+                              "name": "id",
+                              "style": {
+                                "display": "block",
+                                "width": "100%"
+                              },
+                              "value": "${strategy.id}"
+                            },
+                            {
+                              "type": "required-validator",
+                              "name": "idRequiredValidator",
+                              "component": "id",
+                              "text": "id is required",
+                              "style": {
+                                "position": "absolute"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "row",
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "components": [
+                        {
+                          "type": "col",
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "type": "label",
+                              "text": "Position Type",
+                              "component": "position_type",
+                              "name": "position_typeLabel",
+                              "style": {
+                                "width": "100%"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "col",
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "valueType": "string",
+                              "maxLength": 255,
+                              "type": "textbox",
+                              "name": "position_type",
+                              "style": {
+                                "display": "block",
+                                "width": "100%"
+                              },
+                              "value": "${strategy.position_type}"
+                            },
+                            {
+                              "type": "required-validator",
+                              "name": "position_typeRequiredValidator",
+                              "component": "position_type",
+                              "text": "position_type is required",
+                              "style": {
+                                "position": "absolute"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "row",
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "components": [
+                        {
+                          "type": "col",
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "type": "label",
+                              "text": "Status",
+                              "component": "status",
+                              "name": "statusLabel",
+                              "style": {
+                                "width": "100%"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "col",
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "valueType": "string",
+                              "maxLength": 54,
+                              "type": "textbox",
+                              "name": "status",
+                              "style": {
+                                "display": "block",
+                                "width": "100%"
+                              },
+                              "value": "${strategy.status}"
+                            },
+                            {
+                              "type": "required-validator",
+                              "name": "statusRequiredValidator",
+                              "component": "status",
+                              "text": "status is required",
+                              "style": {
+                                "position": "absolute"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "row",
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "components": [
+                        {
+                          "type": "col",
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "type": "label",
+                              "text": "E Tag",
+                              "component": "ETag",
+                              "name": "ETagLabel",
+                              "style": {
+                                "width": "100%"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "col",
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "valueType": "string",
+                              "type": "textbox",
+                              "name": "ETag",
+                              "style": {
+                                "width": "100%"
+                              },
+                              "value": "${strategy.ETag}"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "row",
+                      "components": [
+                        {
+                          "type": "col",
+                          "class": "col offset-sm-3",
+                          "components": [
+                            {
+                              "type": "button",
+                              "buttonType": "submit",
+                              "icon": "save",
+                              "text": "Save",
+                              "buttonStyle": "primary"
+                            },
+                            {
+                              "type": "button",
+                              "buttonStyle": "light",
+                              "style": {
+                                "marginLeft": "1rem"
+                              },
+                              "text": "Cancel",
+                              "events": {
+                                "click": [
+                                  {
+                                    "type": "close-popup"
+                                  }
+                                ]
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ],
+                  "events": {
+                    "submit": [
+                      {
+                        "error": [
+                          {
+                            "detail": "Unable to update Strategy",
+                            "severity": "error",
+                            "summary": "Error",
+                            "type": "notify"
+                          }
+                        ],
+                        "name": "cryptodb.updateStrategy",
+                        "parameters": [
+                          {
+                            "name": "id",
+                            "value": "${parameters.id}"
+                          },
+                          {
+                            "name": "Strategy",
+                            "value": "${strategy}"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "type": "close-popup",
+                            "result": "${strategy}",
+                            "condition": "result.StatusCode != System.Net.HttpStatusCode.PreconditionFailed"
+                          },
+                          {
+                            "name": "hasChanges",
+                            "type": "set",
+                            "value": "result.StatusCode == System.Net.HttpStatusCode.PreconditionFailed",
+                            "valueType": "bool"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ]
+                  },
+                  "itemType": "CryptobotUi.Models.Cryptodb.Strategy",
+                  "data": "${strategy}",
+                  "visible": "${strategy != null && canEdit}"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "hasChanges",
+        "type": "set",
+        "value": "false",
+        "valueType": "bool"
+      },
+      {
+        "name": "canEdit",
+        "type": "set",
+        "value": "true",
+        "valueType": "bool"
+      },
+      {
+        "name": "cryptodb.getStrategyByid",
+        "parameters": [
+          {
+            "name": "id",
+            "value": "${parameters.id}"
+          }
+        ],
+        "then": [
+          {
+            "name": "strategy",
+            "type": "set",
+            "value": "${result}",
+            "valueType": "CryptobotUi.Models.Cryptodb.Strategy"
+          },
+          {
+            "name": "canEdit",
+            "type": "set",
+            "value": "result != null",
+            "valueType": "bool"
+          }
+        ],
+        "error": [],
+        "type": "invoke"
+      }
+    ]
+  },
+  "name": "Edit Strategy",
+  "layout": "Main",
+  "access": []
+}

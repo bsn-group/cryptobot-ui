@@ -1,0 +1,40 @@
+﻿@page "/add-symbol"
+@layout MainLayout
+@inherits CryptobotUi.Pages.AddSymbolComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using CryptobotUi.Models.Cryptodb
+@inject Microsoft.Extensions.Localization.IStringLocalizer<AddSymbol> L
+<RadzenContent Container="main">
+  <ChildContent>
+    <div class="row">
+      <div class="col-md-12">
+        <RadzenTemplateForm Data="@symbol" TItem="CryptobotUi.Models.Cryptodb.Symbol" Visible="@(symbol != null)" Submit="@Form0Submit">
+          <ChildContent>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Component="name" style="width: 100%" Text="Name">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenTextBox MaxLength="255" style="display: block; width: 100%" @bind-Value="@(symbol.name)" Name="Name">
+                </RadzenTextBox>
+                <RadzenRequiredValidator Component="Name" style="position: absolute" Text="name is required">
+                </RadzenRequiredValidator>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col offset-sm-3">
+                <RadzenButton ButtonStyle="ButtonStyle.Primary" ButtonType="ButtonType.Submit" Icon="save" Text="Save">
+                </RadzenButton>
+                <RadzenButton ButtonStyle="ButtonStyle.Light" style="margin-left: 1rem" Text="Cancel" Click="@Button2Click">
+                </RadzenButton>
+              </div>
+            </div>
+          </ChildContent>
+        </RadzenTemplateForm>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenContent>

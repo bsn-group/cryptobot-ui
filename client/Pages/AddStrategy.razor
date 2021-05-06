@@ -1,0 +1,104 @@
+﻿@page "/add-strategy"
+@layout MainLayout
+@inherits CryptobotUi.Pages.AddStrategyComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using CryptobotUi.Models.Cryptodb
+@inject Microsoft.Extensions.Localization.IStringLocalizer<AddStrategy> L
+<RadzenContent Container="main">
+  <ChildContent>
+    <div class="row">
+      <div class="col-md-12">
+        <RadzenTemplateForm Data="@strategy" TItem="CryptobotUi.Models.Cryptodb.Strategy" Visible="@(strategy != null)" Submit="@Form0Submit">
+          <ChildContent>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Component="name" style="width: 100%" Text="Name">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenTextBox style="display: block; width: 100%" @bind-Value="@(strategy.name)" Name="Name">
+                </RadzenTextBox>
+                <RadzenRequiredValidator Component="Name" style="display: block; position: absolute" Text="name is required">
+                </RadzenRequiredValidator>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Component="symbol" style="width: 100%" Text="Symbol">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenDropDown AllowFiltering="true" Data="@getSymbolsResult" style="display: block" TextProperty="name" @bind-Value="@(strategy.symbol)" ValueProperty="name" Name="Symbol" Change="@SymbolChange">
+                </RadzenDropDown>
+                <RadzenRequiredValidator Component="Symbol" style="position: absolute" Text="symbol is required">
+                </RadzenRequiredValidator>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Component="exchange_type" style="width: 100%" Text="Exchange Type">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenDropDown AllowFiltering="true" Data="@exchangeTypes" style="display: block" TextProperty="Name" @bind-Value="@(strategy.exchange_type)" ValueProperty="Name" Name="Exchange_type" Change="@ExchangeTypeChange">
+                </RadzenDropDown>
+                <RadzenRequiredValidator Component="Exchange_type" style="position: absolute" Text="exchange_type is required">
+                </RadzenRequiredValidator>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Component="position_type" style="width: 100%" Text="Position Type">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenDropDown Data="@positionTypes" style="display: block" TextProperty="Name" @bind-Value="@(strategy.position_type)" ValueProperty="Name" Name="Position_type" Change="@PositionTypeChange">
+                </RadzenDropDown>
+                <RadzenRequiredValidator Component="Position_type" style="position: absolute" Text="position_type is required">
+                </RadzenRequiredValidator>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-12">
+                <RadzenGrid @ref="conditionsGrid" AllowColumnResize="true" AllowSorting="false" Data="@(strategy.StrategyConditions)" EditMode="DataGridEditMode.Single" EmptyText="No conditions yet. Click (+) to add a new condition." TItem="CryptobotUi.Models.Cryptodb.StrategyCondition">
+                  <Columns>
+                    <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.StrategyCondition" Property="name" Title="Name">
+                    </RadzenGridColumn>
+                    <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.StrategyCondition" Property="condition_group" Title="Condition Group" Type="string">
+                    </RadzenGridColumn>
+                    <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.StrategyCondition" Property="condition_sub_group" Title="Condition Sub Group" Type="integer">
+                    </RadzenGridColumn>
+                    <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.StrategyCondition" Property="category" Title="Category">
+                    </RadzenGridColumn>
+                    <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.StrategyCondition" Property="time_frame" Title="Time Frame">
+                    </RadzenGridColumn>
+                    <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.StrategyCondition" Property="last_observed" Title="Last Observed">
+                    </RadzenGridColumn>
+                    <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.StrategyCondition" Property="sequence" Title="Sequence" Type="integer">
+                    </RadzenGridColumn>
+                    <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.StrategyCondition" FormatString="{0:d}" Property="created_time" Title="Created Time" Visible="false">
+                    </RadzenGridColumn>
+                    <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.StrategyCondition" Property="version" Title="Version">
+                    </RadzenGridColumn>
+                  </Columns>
+                </RadzenGrid>
+                <RadzenButton Icon="add_circle_outline" style="float: right; margin-right: 0px; margin-top: 5px" Text="Condition" Click="@AddConditionButtonClick">
+                </RadzenButton>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col offset-sm-3">
+                <RadzenButton ButtonStyle="ButtonStyle.Primary" ButtonType="ButtonType.Submit" Icon="save" Text="Save">
+                </RadzenButton>
+                <RadzenButton ButtonStyle="ButtonStyle.Light" style="margin-left: 1rem" Text="Cancel" Click="@Button3Click">
+                </RadzenButton>
+              </div>
+            </div>
+          </ChildContent>
+        </RadzenTemplateForm>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenContent>

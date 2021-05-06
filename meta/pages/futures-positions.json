@@ -1,0 +1,309 @@
+{
+  "components": [
+    {
+      "components": [
+        {
+          "name": "pageTitle",
+          "size": "H1",
+          "text": "Futures Positions",
+          "type": "heading"
+        },
+        {
+          "components": [
+            {
+              "class": "col-md-12",
+              "components": [
+                {
+                  "events": {
+                    "click": [
+                      {
+                        "condition": "${event?.Value == \"csv\"}",
+                        "fileName": "Futures Positions",
+                        "name": "cryptodb.getFuturesPositions",
+                        "parameters": [
+                          {
+                            "name": "$filter",
+                            "value": "${grid0.Query.Filter}"
+                          },
+                          {
+                            "name": "$orderby",
+                            "value": "${grid0.Query.OrderBy}"
+                          },
+                          {
+                            "name": "$expand",
+                            "value": ""
+                          },
+                          {
+                            "name": "$select",
+                            "value": "signal_id,symbol,position_type,exchange_id,strategy_pair_name,signal_status,position_status,executed_buy_qty,pending_buy_qty,executed_sell_qty,pending_sell_qty,entry_price,close_price"
+                          }
+                        ],
+                        "type": "export"
+                      },
+                      {
+                        "condition": "${event == null || event.Value == \"xlsx\"}",
+                        "fileName": "Futures Positions",
+                        "format": "xlsx",
+                        "name": "cryptodb.getFuturesPositions",
+                        "parameters": [
+                          {
+                            "name": "$filter",
+                            "value": "${grid0.Query.Filter}"
+                          },
+                          {
+                            "name": "$orderby",
+                            "value": "${grid0.Query.OrderBy}"
+                          },
+                          {
+                            "name": "$expand",
+                            "value": ""
+                          },
+                          {
+                            "name": "$select",
+                            "value": "signal_id,symbol,position_type,exchange_id,strategy_pair_name,signal_status,position_status,executed_buy_qty,pending_buy_qty,executed_sell_qty,pending_sell_qty,entry_price,close_price"
+                          }
+                        ],
+                        "type": "export"
+                      }
+                    ]
+                  },
+                  "icon": "get_app",
+                  "items": [
+                    {
+                      "icon": "",
+                      "text": "Excel",
+                      "value": "xlsx"
+                    },
+                    {
+                      "icon": "",
+                      "text": "CSV",
+                      "value": "csv"
+                    }
+                  ],
+                  "name": "splitbutton0",
+                  "style": {
+                    "marginBottom": "10px",
+                    "marginLeft": "0px"
+                  },
+                  "text": "Export",
+                  "type": "splitbutton"
+                },
+                {
+                  "attributes": [
+                    {
+                      "name": "@oninput",
+                      "value": "@(async(args) => {search = $\"{args.Value}\";await grid0.GoToPage(0);await grid0.Reload();})"
+                    }
+                  ],
+                  "name": "textbox0",
+                  "placeholder": "Search ...",
+                  "style": {
+                    "display": "block",
+                    "marginBottom": "10px",
+                    "width": "100%"
+                  },
+                  "type": "textbox",
+                  "value": ""
+                },
+                {
+                  "allowFiltering": true,
+                  "allowPaging": true,
+                  "allowSorting": true,
+                  "columns": [
+                    {
+                      "property": "signal_id",
+                      "title": "Signal Id"
+                    },
+                    {
+                      "property": "symbol",
+                      "title": "Symbol"
+                    },
+                    {
+                      "property": "position_type",
+                      "title": "Position Type"
+                    },
+                    {
+                      "property": "exchange_id",
+                      "title": "Exchange Id"
+                    },
+                    {
+                      "property": "strategy_pair_name",
+                      "title": "Strategy Pair Name"
+                    },
+                    {
+                      "property": "signal_status",
+                      "title": "Signal Status"
+                    },
+                    {
+                      "property": "position_status",
+                      "title": "Position Status"
+                    },
+                    {
+                      "property": "executed_buy_qty",
+                      "title": "Executed Buy Qty"
+                    },
+                    {
+                      "property": "pending_buy_qty",
+                      "title": "Pending Buy Qty"
+                    },
+                    {
+                      "property": "executed_sell_qty",
+                      "title": "Executed Sell Qty"
+                    },
+                    {
+                      "property": "pending_sell_qty",
+                      "title": "Pending Sell Qty"
+                    },
+                    {
+                      "property": "entry_price",
+                      "title": "Entry Price"
+                    },
+                    {
+                      "property": "close_price",
+                      "title": "Close Price"
+                    }
+                  ],
+                  "count": "${getFuturesPositionsCount}",
+                  "data": "${getFuturesPositionsResult}",
+                  "events": {
+                    "loadData": [
+                      {
+                        "name": "AppState.IsBusy",
+                        "type": "set",
+                        "value": "true",
+                        "valueType": "bool"
+                      },
+                      {
+                        "error": [
+                          {
+                            "name": "AppState.IsBusy",
+                            "type": "set",
+                            "value": "false",
+                            "valueType": "bool"
+                          },
+                          {
+                            "detail": "Unable to load FuturesPositions",
+                            "severity": "error",
+                            "summary": "Error",
+                            "type": "notify"
+                          }
+                        ],
+                        "name": "cryptodb.getFuturesPositions",
+                        "parameters": [
+                          {
+                            "name": "$top",
+                            "value": "event.top"
+                          },
+                          {
+                            "name": "$skip",
+                            "value": "event.skip"
+                          },
+                          {
+                            "name": "$count",
+                            "value": "event.top != null && event.skip != null"
+                          },
+                          {
+                            "name": "$filter",
+                            "operator": "and",
+                            "value": [
+                              {
+                                "filters": [
+                                  {
+                                    "operation": "contains",
+                                    "property": "symbol",
+                                    "type": "string",
+                                    "value": "\"${search}\""
+                                  },
+                                  {
+                                    "operation": "contains",
+                                    "property": "position_type",
+                                    "type": "string",
+                                    "value": "\"${search}\""
+                                  },
+                                  {
+                                    "operation": "contains",
+                                    "property": "strategy_pair_name",
+                                    "type": "string",
+                                    "value": "\"${search}\""
+                                  },
+                                  {
+                                    "operation": "contains",
+                                    "property": "signal_status",
+                                    "type": "string",
+                                    "value": "\"${search}\""
+                                  },
+                                  {
+                                    "operation": "contains",
+                                    "property": "position_status",
+                                    "type": "string",
+                                    "value": "\"${search}\""
+                                  }
+                                ],
+                                "operator": "or"
+                              },
+                              {
+                                "value": "${(string.IsNullOrEmpty(event.filter)? \"true\" : event.filter)}"
+                              }
+                            ]
+                          },
+                          {
+                            "name": "$orderby",
+                            "value": "${event.orderby}"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "name": "getFuturesPositionsResult",
+                            "type": "set",
+                            "value": "${result.Value.AsODataEnumerable()}",
+                            "valueType": "IEnumerable<CryptobotUi.Models.Cryptodb.FuturesPosition>"
+                          },
+                          {
+                            "name": "getFuturesPositionsCount",
+                            "type": "set",
+                            "value": "${result.Count}",
+                            "valueType": "int"
+                          },
+                          {
+                            "name": "AppState.IsBusy",
+                            "type": "set",
+                            "value": "false",
+                            "valueType": "bool"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ]
+                  },
+                  "filterMode": "advanced",
+                  "itemType": "CryptobotUi.Models.Cryptodb.FuturesPosition",
+                  "name": "grid0",
+                  "title": "",
+                  "type": "grid"
+                }
+              ],
+              "type": "col"
+            }
+          ],
+          "type": "row"
+        }
+      ],
+      "container": "main",
+      "type": "content"
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "condition": "string.IsNullOrEmpty(search)",
+        "name": "search",
+        "type": "set",
+        "value": "\"\"",
+        "valueType": "string"
+      }
+    ]
+  },
+  "layout": "Main",
+  "name": "Futures Positions",
+  "access": []
+}

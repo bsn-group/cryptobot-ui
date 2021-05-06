@@ -1,0 +1,153 @@
+{
+  "components": [
+    {
+      "components": [
+        {
+          "components": [
+            {
+              "class": "col-md-12",
+              "components": [
+                {
+                  "components": [
+                    {
+                      "components": [
+                        {
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "component": "name",
+                              "name": "nameLabel",
+                              "style": {
+                                "width": "100%"
+                              },
+                              "text": "Name",
+                              "type": "label"
+                            }
+                          ],
+                          "type": "col"
+                        },
+                        {
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "maxLength": 255,
+                              "name": "name",
+                              "style": {
+                                "display": "block",
+                                "width": "100%"
+                              },
+                              "type": "textbox",
+                              "value": "${symbol.name}",
+                              "valueType": "string"
+                            },
+                            {
+                              "component": "name",
+                              "name": "nameRequiredValidator",
+                              "style": {
+                                "position": "absolute"
+                              },
+                              "text": "name is required",
+                              "type": "required-validator"
+                            }
+                          ],
+                          "type": "col"
+                        }
+                      ],
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "type": "row"
+                    },
+                    {
+                      "components": [
+                        {
+                          "class": "col offset-sm-3",
+                          "components": [
+                            {
+                              "buttonStyle": "primary",
+                              "buttonType": "submit",
+                              "icon": "save",
+                              "text": "Save",
+                              "type": "button"
+                            },
+                            {
+                              "buttonStyle": "light",
+                              "events": {
+                                "click": [
+                                  {
+                                    "type": "close-popup"
+                                  }
+                                ]
+                              },
+                              "style": {
+                                "marginLeft": "1rem"
+                              },
+                              "text": "Cancel",
+                              "type": "button"
+                            }
+                          ],
+                          "type": "col"
+                        }
+                      ],
+                      "type": "row"
+                    }
+                  ],
+                  "data": "${symbol}",
+                  "events": {
+                    "submit": [
+                      {
+                        "error": [
+                          {
+                            "detail": "Unable to create new Symbol!",
+                            "severity": "error",
+                            "summary": "Error",
+                            "type": "notify"
+                          }
+                        ],
+                        "name": "cryptodb.createSymbol",
+                        "parameters": [
+                          {
+                            "name": "Symbol",
+                            "value": "${symbol}"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "result": "${symbol}",
+                            "type": "close-popup"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ]
+                  },
+                  "itemType": "CryptobotUi.Models.Cryptodb.Symbol",
+                  "name": "form0",
+                  "type": "template-form",
+                  "visible": "${symbol != null}"
+                }
+              ],
+              "type": "col"
+            }
+          ],
+          "type": "row"
+        }
+      ],
+      "container": "main",
+      "type": "content"
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "symbol",
+        "type": "set",
+        "value": "new CryptobotUi.Models.Cryptodb.Symbol(){}",
+        "valueType": "CryptobotUi.Models.Cryptodb.Symbol"
+      }
+    ]
+  },
+  "layout": "Main",
+  "name": "Add Symbol",
+  "access": []
+}

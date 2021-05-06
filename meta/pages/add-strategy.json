@@ -1,0 +1,453 @@
+{
+  "components": [
+    {
+      "components": [
+        {
+          "components": [
+            {
+              "class": "col-md-12",
+              "components": [
+                {
+                  "components": [
+                    {
+                      "components": [
+                        {
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "component": "name",
+                              "name": "label0",
+                              "style": {
+                                "width": "100%"
+                              },
+                              "text": "Name",
+                              "type": "label"
+                            }
+                          ],
+                          "name": "col1",
+                          "type": "col"
+                        },
+                        {
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "name": "name",
+                              "placeholder": "",
+                              "style": {
+                                "display": "block",
+                                "width": "100%"
+                              },
+                              "type": "textbox",
+                              "value": "${strategy.name}"
+                            },
+                            {
+                              "component": "name",
+                              "name": "nameRequiredValidator",
+                              "style": {
+                                "display": "block",
+                                "position": "absolute"
+                              },
+                              "text": "name is required",
+                              "type": "required-validator"
+                            }
+                          ],
+                          "name": "col2",
+                          "type": "col"
+                        }
+                      ],
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "type": "row"
+                    },
+                    {
+                      "components": [
+                        {
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "component": "symbol",
+                              "name": "symbolLabel",
+                              "style": {
+                                "width": "100%"
+                              },
+                              "text": "Symbol",
+                              "type": "label"
+                            }
+                          ],
+                          "type": "col"
+                        },
+                        {
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "allowFiltering": true,
+                              "data": "${getSymbolsResult}",
+                              "events": {
+                                "change": [
+                                  {
+                                    "name": "SetName",
+                                    "schema": {
+                                      "$ref": "#/definitions/Void",
+                                      "dotnetType": "void"
+                                    },
+                                    "type": "invoke-method"
+                                  }
+                                ]
+                              },
+                              "name": "symbol",
+                              "style": {
+                                "display": "block"
+                              },
+                              "textProperty": "name",
+                              "type": "dropdown",
+                              "value": "${strategy.symbol}",
+                              "valueProperty": "name",
+                              "valueType": "string"
+                            },
+                            {
+                              "component": "symbol",
+                              "name": "symbolRequiredValidator",
+                              "style": {
+                                "position": "absolute"
+                              },
+                              "text": "symbol is required",
+                              "type": "required-validator"
+                            }
+                          ],
+                          "type": "col"
+                        }
+                      ],
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "type": "row"
+                    },
+                    {
+                      "components": [
+                        {
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "component": "exchange_type",
+                              "name": "exchange_typeLabel",
+                              "style": {
+                                "width": "100%"
+                              },
+                              "text": "Exchange Type",
+                              "type": "label"
+                            }
+                          ],
+                          "type": "col"
+                        },
+                        {
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "allowFiltering": true,
+                              "data": "${exchangeTypes}",
+                              "events": {
+                                "change": [
+                                  {
+                                    "name": "SetName",
+                                    "schema": {
+                                      "$ref": "#/definitions/Void",
+                                      "dotnetType": "void"
+                                    },
+                                    "type": "invoke-method"
+                                  }
+                                ]
+                              },
+                              "name": "exchange_type",
+                              "style": {
+                                "display": "block"
+                              },
+                              "textProperty": "Name",
+                              "type": "dropdown",
+                              "value": "${strategy.exchange_type}",
+                              "valueProperty": "Name",
+                              "valueType": "string"
+                            },
+                            {
+                              "component": "exchange_type",
+                              "name": "exchange_typeRequiredValidator",
+                              "style": {
+                                "position": "absolute"
+                              },
+                              "text": "exchange_type is required",
+                              "type": "required-validator"
+                            }
+                          ],
+                          "type": "col"
+                        }
+                      ],
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "type": "row"
+                    },
+                    {
+                      "components": [
+                        {
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "component": "position_type",
+                              "name": "position_typeLabel",
+                              "style": {
+                                "width": "100%"
+                              },
+                              "text": "Position Type",
+                              "type": "label"
+                            }
+                          ],
+                          "type": "col"
+                        },
+                        {
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "data": "${positionTypes}",
+                              "events": {
+                                "change": [
+                                  {
+                                    "name": "SetName",
+                                    "schema": {
+                                      "$ref": "#/definitions/Void",
+                                      "dotnetType": "void"
+                                    },
+                                    "type": "invoke-method"
+                                  }
+                                ]
+                              },
+                              "name": "position_type",
+                              "style": {
+                                "display": "block"
+                              },
+                              "template": "",
+                              "textProperty": "Name",
+                              "type": "dropdown",
+                              "value": "${strategy.position_type}",
+                              "valueProperty": "Name",
+                              "valueType": "string"
+                            },
+                            {
+                              "component": "position_type",
+                              "name": "position_typeRequiredValidator",
+                              "style": {
+                                "position": "absolute"
+                              },
+                              "text": "position_type is required",
+                              "type": "required-validator"
+                            }
+                          ],
+                          "type": "col"
+                        }
+                      ],
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "type": "row"
+                    },
+                    {
+                      "components": [
+                        {
+                          "class": "col-md-12",
+                          "components": [
+                            {
+                              "allowColumnResize": true,
+                              "allowSorting": false,
+                              "columns": [
+                                {
+                                  "property": "name",
+                                  "title": "Name"
+                                },
+                                {
+                                  "format": "",
+                                  "property": "condition_group",
+                                  "title": "Condition Group",
+                                  "type": "string"
+                                },
+                                {
+                                  "format": "",
+                                  "property": "condition_sub_group",
+                                  "title": "Condition Sub Group",
+                                  "type": "integer"
+                                },
+                                {
+                                  "property": "category",
+                                  "title": "Category"
+                                },
+                                {
+                                  "property": "time_frame",
+                                  "title": "Time Frame"
+                                },
+                                {
+                                  "property": "last_observed",
+                                  "title": "Last Observed"
+                                },
+                                {
+                                  "format": "",
+                                  "property": "sequence",
+                                  "title": "Sequence",
+                                  "type": "integer"
+                                },
+                                {
+                                  "formatString": "{0:d}",
+                                  "property": "created_time",
+                                  "title": "Created Time",
+                                  "visible": false
+                                },
+                                {
+                                  "property": "version",
+                                  "title": "Version"
+                                }
+                              ],
+                              "data": "${strategy.StrategyConditions}",
+                              "editMode": "single",
+                              "emptyText": "No conditions yet. Click (+) to add a new condition.",
+                              "itemType": "CryptobotUi.Models.Cryptodb.StrategyCondition",
+                              "name": "conditionsGrid",
+                              "type": "grid",
+                              "value": ""
+                            },
+                            {
+                              "events": {
+                                "click": [
+                                  {
+                                    "path": "add-strategy-condition",
+                                    "then": [
+                                      {
+                                        "name": "AddCondition",
+                                        "parameters": [
+                                          {
+                                            "name": "condition",
+                                            "type": "CryptobotUi.Models.Cryptodb.StrategyCondition",
+                                            "value": "${dialogResult}"
+                                          }
+                                        ],
+                                        "schema": {
+                                          "$ref": "#/definitions/Void",
+                                          "dotnetType": "void"
+                                        },
+                                        "type": "invoke-method"
+                                      }
+                                    ],
+                                    "type": "popup",
+                                    "width": 800
+                                  }
+                                ]
+                              },
+                              "icon": "add_circle_outline",
+                              "name": "addConditionButton",
+                              "style": {
+                                "float": "right",
+                                "marginRight": "0px",
+                                "marginTop": "5px"
+                              },
+                              "text": "Condition",
+                              "type": "button"
+                            }
+                          ],
+                          "name": "col0",
+                          "type": "col"
+                        }
+                      ],
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "type": "row"
+                    },
+                    {
+                      "components": [
+                        {
+                          "class": "col offset-sm-3",
+                          "components": [
+                            {
+                              "buttonStyle": "primary",
+                              "buttonType": "submit",
+                              "icon": "save",
+                              "text": "Save",
+                              "type": "button"
+                            },
+                            {
+                              "buttonStyle": "light",
+                              "events": {
+                                "click": [
+                                  {
+                                    "type": "close-popup"
+                                  }
+                                ]
+                              },
+                              "style": {
+                                "marginLeft": "1rem"
+                              },
+                              "text": "Cancel",
+                              "type": "button"
+                            }
+                          ],
+                          "type": "col"
+                        }
+                      ],
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "type": "row"
+                    }
+                  ],
+                  "data": "${strategy}",
+                  "events": {
+                    "submit": [
+                      {
+                        "name": "CreateStrategy",
+                        "schema": {
+                          "$ref": "#/definitions/Task",
+                          "dotnetType": "System.Threading.Tasks.Task"
+                        },
+                        "type": "invoke-method"
+                      }
+                    ]
+                  },
+                  "itemType": "CryptobotUi.Models.Cryptodb.Strategy",
+                  "name": "form0",
+                  "type": "template-form",
+                  "visible": "${strategy != null}"
+                }
+              ],
+              "type": "col"
+            }
+          ],
+          "type": "row"
+        }
+      ],
+      "container": "main",
+      "type": "content"
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "strategy",
+        "type": "set",
+        "value": "new CryptobotUi.Models.Cryptodb.Strategy(){}",
+        "valueType": "CryptobotUi.Models.Cryptodb.Strategy"
+      },
+      {
+        "name": "cryptodb.getSymbols",
+        "parameters": [],
+        "then": [
+          {
+            "name": "getSymbolsResult",
+            "type": "set",
+            "value": "${result.Value.AsODataEnumerable()}",
+            "valueType": "IEnumerable<CryptobotUi.Models.Cryptodb.Symbol>"
+          }
+        ],
+        "type": "invoke"
+      }
+    ]
+  },
+  "layout": "Main",
+  "name": "Add Strategy",
+  "access": []
+}

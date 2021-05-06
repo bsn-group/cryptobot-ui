@@ -1,0 +1,118 @@
+{
+  "access": [],
+  "components": [
+    {
+      "components": [
+        {
+          "name": "pageTitle",
+          "size": "H1",
+          "text": "Exchanges",
+          "type": "heading"
+        },
+        {
+          "components": [
+            {
+              "class": "col-md-12",
+              "components": [
+                {
+                  "allowFiltering": true,
+                  "allowPaging": true,
+                  "allowSorting": true,
+                  "columns": [
+                    {
+                      "property": "name",
+                      "title": "Name"
+                    },
+                    {
+                      "property": "active",
+                      "title": "Active"
+                    }
+                  ],
+                  "count": "${getExchangesCount}",
+                  "data": "${getExchangesResult}",
+                  "events": {
+                    "loadData": [
+                      {
+                        "name": "AppState.IsBusy",
+                        "type": "set",
+                        "value": "true",
+                        "valueType": "bool"
+                      },
+                      {
+                        "error": [
+                          {
+                            "name": "AppState.IsBusy",
+                            "type": "set",
+                            "value": "false",
+                            "valueType": "bool"
+                          }
+                        ],
+                        "name": "cryptodb.getExchanges",
+                        "parameters": [
+                          {
+                            "name": "$top",
+                            "value": "event.top"
+                          },
+                          {
+                            "name": "$skip",
+                            "value": "event.skip"
+                          },
+                          {
+                            "name": "$count",
+                            "value": "event.top != null && event.skip != null"
+                          },
+                          {
+                            "name": "$filter",
+                            "value": "${event.filter}"
+                          },
+                          {
+                            "name": "$orderby",
+                            "value": "${event.orderby}"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "name": "getExchangesResult",
+                            "type": "set",
+                            "value": "${result.Value.AsODataEnumerable()}",
+                            "valueType": "IEnumerable<CryptobotUi.Models.Cryptodb.Exchange>"
+                          },
+                          {
+                            "name": "getExchangesCount",
+                            "type": "set",
+                            "value": "${result.Count}",
+                            "valueType": "int"
+                          },
+                          {
+                            "name": "AppState.IsBusy",
+                            "type": "set",
+                            "value": "false",
+                            "valueType": "bool"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ]
+                  },
+                  "filterCaseSensitivity": "caseInsensitive",
+                  "itemType": "CryptobotUi.Models.Cryptodb.Exchange",
+                  "name": "grid0",
+                  "pageSize": 10,
+                  "type": "grid"
+                }
+              ],
+              "name": "col0",
+              "type": "col"
+            }
+          ],
+          "name": "row0",
+          "type": "row"
+        }
+      ],
+      "container": "main",
+      "type": "content"
+    }
+  ],
+  "layout": "Main",
+  "name": "Exchanges"
+}

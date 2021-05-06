@@ -1,0 +1,116 @@
+﻿@page "/add-strategy-condition/{strategy_id}"
+@layout MainLayout
+@inherits CryptobotUi.Pages.AddStrategyConditionComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using CryptobotUi.Models.Cryptodb
+@inject Microsoft.Extensions.Localization.IStringLocalizer<AddStrategyCondition> L
+<RadzenContent Container="main">
+  <ChildContent>
+    <div class="row">
+      <div class="col-md-12">
+        <RadzenTemplateForm Data="@strategycondition" TItem="CryptobotUi.Models.Cryptodb.StrategyCondition" Visible="@(strategycondition != null)">
+          <ChildContent>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Component="name" style="width: 100%" Text="Name">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenTextBox MaxLength="255" style="display: block; width: 100%" @bind-Value="@(strategycondition.name)" Name="Name">
+                </RadzenTextBox>
+                <RadzenRequiredValidator Component="Name" style="position: absolute" Text="name is required">
+                </RadzenRequiredValidator>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Component="condition_group" style="width: 100%" Text="Condition Group">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenDropDown Data="@conditionGroups" style="display: block" TextProperty="Name" @bind-Value="@(strategycondition.condition_group)" ValueProperty="Name" Name="Condition_group">
+                </RadzenDropDown>
+                <RadzenRequiredValidator Component="Condition_group" style="display: block; margin-bottom: ; position: absolute" Text="condition group is required">
+                </RadzenRequiredValidator>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Component="condition_sub_group" style="width: 100%" Text="Condition Sub Group">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenNumeric style="display: block; width: 100%" @bind-Value="@(strategycondition.condition_sub_group)" Name="Condition_sub_group">
+                </RadzenNumeric>
+                <RadzenRequiredValidator Component="Condition_sub_group" style="position: absolute" Text="condition_sub_group is required">
+                </RadzenRequiredValidator>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Component="category" style="width: 100%" Text="Category">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenTextBox MaxLength="255" style="display: block; width: 100%" @bind-Value="@(strategycondition.category)" Name="Category">
+                </RadzenTextBox>
+                <RadzenRequiredValidator Component="Category" style="position: absolute" Text="category is required">
+                </RadzenRequiredValidator>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Component="time_frame" style="width: 100%" Text="Time Frame (mins)">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenNumeric Max="1440" Min="1" style="display: block" @bind-Value="@(strategycondition.time_frame)" Name="Time_frame">
+                </RadzenNumeric>
+                <RadzenRequiredValidator Component="Time_frame" style="position: absolute" Text="time_frame is required">
+                </RadzenRequiredValidator>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Component="last_observed" style="width: 100%" Text="Last Observed (mins)">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenNumeric style="display: block; width: 100%" @bind-Value="@(strategycondition.last_observed)" Name="Last_observed">
+                </RadzenNumeric>
+                <RadzenRequiredValidator Component="Last_observed" style="position: absolute" Text="last_observed is required">
+                </RadzenRequiredValidator>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Component="sequence" style="width: 100%" Text="Sequence">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenNumeric style="display: block; width: 100%" @bind-Value="@(strategycondition.sequence)" Name="Sequence">
+                </RadzenNumeric>
+                <RadzenRequiredValidator Component="Sequence" style="position: absolute" Text="sequence is required">
+                </RadzenRequiredValidator>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col offset-sm-3" >
+                <RadzenButton ButtonStyle="ButtonStyle.Primary" ButtonType="ButtonType.Button" Icon="save" Text="Save" Click="@Button1Click">
+                </RadzenButton>
+                <RadzenButton ButtonStyle="ButtonStyle.Light" style="margin-left: 1rem" Text="Cancel" Click="@Button2Click">
+                </RadzenButton>
+              </div>
+              <div class="col  col-md-3">
+                <RadzenButton ButtonStyle="ButtonStyle.Secondary" style="float: right; margin-left: 1rem" Text="From JSON" Click="@FromJsonButtonClick">
+                </RadzenButton>
+              </div>
+            </div>
+          </ChildContent>
+        </RadzenTemplateForm>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenContent>

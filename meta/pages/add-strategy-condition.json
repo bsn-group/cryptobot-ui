@@ -1,0 +1,490 @@
+{
+  "components": [
+    {
+      "components": [
+        {
+          "components": [
+            {
+              "class": "col-md-12",
+              "components": [
+                {
+                  "components": [
+                    {
+                      "components": [
+                        {
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "component": "name",
+                              "name": "nameLabel",
+                              "style": {
+                                "width": "100%"
+                              },
+                              "text": "Name",
+                              "type": "label"
+                            }
+                          ],
+                          "name": "col0",
+                          "type": "col"
+                        },
+                        {
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "maxLength": 255,
+                              "name": "name",
+                              "style": {
+                                "display": "block",
+                                "width": "100%"
+                              },
+                              "type": "textbox",
+                              "value": "${strategycondition.name}",
+                              "valueType": "string"
+                            },
+                            {
+                              "component": "name",
+                              "name": "nameRequiredValidator",
+                              "style": {
+                                "position": "absolute"
+                              },
+                              "text": "name is required",
+                              "type": "required-validator"
+                            }
+                          ],
+                          "name": "col1",
+                          "type": "col"
+                        }
+                      ],
+                      "name": "row0",
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "type": "row"
+                    },
+                    {
+                      "components": [
+                        {
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "component": "condition_group",
+                              "name": "conditionGroupLabel",
+                              "style": {
+                                "width": "100%"
+                              },
+                              "text": "Condition Group",
+                              "type": "label"
+                            }
+                          ],
+                          "name": "col2",
+                          "type": "col"
+                        },
+                        {
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "data": "${conditionGroups}",
+                              "name": "condition_group",
+                              "style": {
+                                "display": "block"
+                              },
+                              "textProperty": "Name",
+                              "type": "dropdown",
+                              "value": "${strategycondition.condition_group}",
+                              "valueProperty": "Name",
+                              "valueType": "string"
+                            },
+                            {
+                              "component": "condition_group",
+                              "name": "conditionGroupRequiredValidator",
+                              "style": {
+                                "display": "block",
+                                "marginBottom": "",
+                                "position": "absolute"
+                              },
+                              "text": "condition group is required",
+                              "type": "required-validator"
+                            }
+                          ],
+                          "name": "col3",
+                          "type": "col"
+                        }
+                      ],
+                      "name": "row1",
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "type": "row"
+                    },
+                    {
+                      "components": [
+                        {
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "component": "condition_sub_group",
+                              "name": "label0",
+                              "style": {
+                                "width": "100%"
+                              },
+                              "text": "Condition Sub Group",
+                              "type": "label"
+                            }
+                          ],
+                          "name": "col6",
+                          "type": "col"
+                        },
+                        {
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "name": "condition_sub_group",
+                              "style": {
+                                "display": "block",
+                                "width": "100%"
+                              },
+                              "type": "numeric",
+                              "value": "${strategycondition.condition_sub_group}",
+                              "valueType": "long"
+                            },
+                            {
+                              "component": "condition_sub_group",
+                              "name": "conditionSubGroupRequiredValidator",
+                              "style": {
+                                "position": "absolute"
+                              },
+                              "text": "condition_sub_group is required",
+                              "type": "required-validator"
+                            }
+                          ],
+                          "name": "col7",
+                          "type": "col"
+                        }
+                      ],
+                      "name": "row3",
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "type": "row"
+                    },
+                    {
+                      "components": [
+                        {
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "component": "category",
+                              "name": "categoryLabel",
+                              "style": {
+                                "width": "100%"
+                              },
+                              "text": "Category",
+                              "type": "label"
+                            }
+                          ],
+                          "type": "col"
+                        },
+                        {
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "maxLength": 255,
+                              "name": "category",
+                              "style": {
+                                "display": "block",
+                                "width": "100%"
+                              },
+                              "type": "textbox",
+                              "value": "${strategycondition.category}",
+                              "valueType": "string"
+                            },
+                            {
+                              "component": "category",
+                              "name": "categoryRequiredValidator",
+                              "style": {
+                                "position": "absolute"
+                              },
+                              "text": "category is required",
+                              "type": "required-validator"
+                            }
+                          ],
+                          "type": "col"
+                        }
+                      ],
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "type": "row"
+                    },
+                    {
+                      "components": [
+                        {
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "component": "time_frame",
+                              "name": "time_frameLabel",
+                              "style": {
+                                "width": "100%"
+                              },
+                              "text": "Time Frame (mins)",
+                              "type": "label"
+                            }
+                          ],
+                          "type": "col"
+                        },
+                        {
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "max": 1440,
+                              "min": 1,
+                              "name": "time_frame",
+                              "style": {
+                                "display": "block"
+                              },
+                              "type": "numeric",
+                              "value": "${strategycondition.time_frame}",
+                              "valueType": "string"
+                            },
+                            {
+                              "component": "time_frame",
+                              "name": "time_frameRequiredValidator",
+                              "style": {
+                                "position": "absolute"
+                              },
+                              "text": "time_frame is required",
+                              "type": "required-validator"
+                            }
+                          ],
+                          "type": "col"
+                        }
+                      ],
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "type": "row"
+                    },
+                    {
+                      "components": [
+                        {
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "component": "last_observed",
+                              "name": "last_observedLabel",
+                              "style": {
+                                "width": "100%"
+                              },
+                              "text": "Last Observed (mins)",
+                              "type": "label"
+                            }
+                          ],
+                          "name": "col4",
+                          "type": "col"
+                        },
+                        {
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "name": "last_observed",
+                              "style": {
+                                "display": "block",
+                                "width": "100%"
+                              },
+                              "type": "numeric",
+                              "value": "${strategycondition.last_observed}",
+                              "valueType": "Int64"
+                            },
+                            {
+                              "component": "last_observed",
+                              "name": "last_observedRequiredValidator",
+                              "style": {
+                                "position": "absolute"
+                              },
+                              "text": "last_observed is required",
+                              "type": "required-validator"
+                            }
+                          ],
+                          "name": "col5",
+                          "type": "col"
+                        }
+                      ],
+                      "name": "row2",
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "type": "row"
+                    },
+                    {
+                      "components": [
+                        {
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "component": "sequence",
+                              "name": "label1",
+                              "style": {
+                                "width": "100%"
+                              },
+                              "text": "Sequence",
+                              "type": "label"
+                            }
+                          ],
+                          "name": "col8",
+                          "type": "col"
+                        },
+                        {
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "name": "sequence",
+                              "style": {
+                                "display": "block",
+                                "width": "100%"
+                              },
+                              "type": "numeric",
+                              "value": "${strategycondition.sequence}",
+                              "valueType": "long"
+                            },
+                            {
+                              "component": "sequence",
+                              "name": "sequenceRequiredValidator",
+                              "style": {
+                                "position": "absolute"
+                              },
+                              "text": "sequence is required",
+                              "type": "required-validator"
+                            }
+                          ],
+                          "name": "col9",
+                          "type": "col"
+                        }
+                      ],
+                      "name": "row4",
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "type": "row"
+                    },
+                    {
+                      "components": [
+                        {
+                          "class": "col offset-sm-3",
+                          "components": [
+                            {
+                              "buttonStyle": "primary",
+                              "buttonType": "button",
+                              "events": {
+                                "click": [
+                                  {
+                                    "result": "${strategycondition}",
+                                    "type": "close-popup"
+                                  }
+                                ]
+                              },
+                              "icon": "save",
+                              "text": "Save",
+                              "type": "button"
+                            },
+                            {
+                              "buttonStyle": "light",
+                              "events": {
+                                "click": [
+                                  {
+                                    "type": "close-popup"
+                                  }
+                                ]
+                              },
+                              "style": {
+                                "marginLeft": "1rem"
+                              },
+                              "text": "Cancel",
+                              "type": "button"
+                            }
+                          ],
+                          "style": {},
+                          "type": "col"
+                        },
+                        {
+                          "class": "col  col-md-3",
+                          "components": [
+                            {
+                              "buttonStyle": "secondary",
+                              "events": {
+                                "click": [
+                                  {
+                                    "path": "load-market-event-json",
+                                    "then": [
+                                      {
+                                        "name": "LoadStrategyDataFromMarketEvent",
+                                        "parameters": [
+                                          {
+                                            "name": "marketEvent",
+                                            "type": "CryptobotUi.Client.Model.MarketEvent",
+                                            "value": "${dialogResult}"
+                                          }
+                                        ],
+                                        "schema": {
+                                          "$ref": "#/definitions/Void",
+                                          "dotnetType": "void"
+                                        },
+                                        "type": "invoke-method"
+                                      }
+                                    ],
+                                    "type": "popup",
+                                    "width": 800
+                                  }
+                                ]
+                              },
+                              "icon": "",
+                              "name": "fromJSONButton",
+                              "style": {
+                                "float": "right",
+                                "marginLeft": "1rem"
+                              },
+                              "text": "From JSON",
+                              "type": "button"
+                            }
+                          ],
+                          "name": "col11",
+                          "type": "col"
+                        }
+                      ],
+                      "type": "row"
+                    }
+                  ],
+                  "data": "${strategycondition}",
+                  "events": {
+                    "submit": []
+                  },
+                  "itemType": "CryptobotUi.Models.Cryptodb.StrategyCondition",
+                  "name": "form0",
+                  "type": "template-form",
+                  "visible": "${strategycondition != null}"
+                }
+              ],
+              "type": "col"
+            }
+          ],
+          "type": "row"
+        }
+      ],
+      "container": "main",
+      "type": "content"
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "strategycondition",
+        "type": "set",
+        "value": "new CryptobotUi.Models.Cryptodb.StrategyCondition(){}",
+        "valueType": "CryptobotUi.Models.Cryptodb.StrategyCondition"
+      }
+    ]
+  },
+  "layout": "Main",
+  "name": "Add Strategy Condition",
+  "access": []
+}

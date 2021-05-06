@@ -1,0 +1,60 @@
+﻿@inherits CryptobotUi.Layouts.MainLayoutComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using CryptobotUi.Models.Cryptodb
+@inject Microsoft.Extensions.Localization.IStringLocalizer<MainLayout> L
+<RadzenDialog />
+<RadzenNotification />
+<RadzenTooltip />
+<RadzenContextMenu />
+
+<RadzenHeader>
+  <ChildContent>
+    <div class="row justify-content-start align-items-center">
+      <div class="col-6 d-flex align-items-center">
+        <RadzenSidebarToggle Click="@SidebarToggle0Click">
+        </RadzenSidebarToggle>
+        <RadzenLabel Text="BSN Cryptobot">
+        </RadzenLabel>
+      </div>
+      <div class="col-6 text-right">
+      </div>
+    </div>
+  </ChildContent>
+</RadzenHeader>
+<RadzenBody @ref="body0">
+  <ChildContent>
+    <RadzenProgressBar Mode="ProgressBarMode.Indeterminate" ShowValue="true" style="border-radius: 0; display: block; height: 0.2rem; margin-bottom: 0.1rem" Value="100" Visible="@(AppState.IsBusy)">
+    </RadzenProgressBar>
+    <RadzenContentContainer Name="main">
+    @Body
+    </RadzenContentContainer>
+  </ChildContent>
+</RadzenBody>
+<RadzenSidebar @ref="sidebar0">
+  <ChildContent>
+    <RadzenPanelMenu style="height: 100%">
+      <ChildContent>
+        <RadzenPanelMenuItem Path="futures-pnls" Text="Futures PnL">
+        </RadzenPanelMenuItem>
+        <RadzenPanelMenuItem Path="strategies" Text="Strategies">
+        </RadzenPanelMenuItem>
+        <RadzenPanelMenuItem Path="signals" Text="Signals">
+        </RadzenPanelMenuItem>
+        <RadzenPanelMenuItem Path="market-event" Text="Market Events">
+        </RadzenPanelMenuItem>
+        <RadzenPanelMenuItem Path="symbols" Text="Symbols">
+        </RadzenPanelMenuItem>
+        <RadzenPanelMenuItem Path="exchanges" Text="Exchanges">
+        </RadzenPanelMenuItem>
+      </ChildContent>
+    </RadzenPanelMenu>
+  </ChildContent>
+</RadzenSidebar>
+<RadzenFooter>
+  <ChildContent>
+    <RadzenLabel Text="BSN Cryptobot, Copyright Ⓒ 2021">
+    </RadzenLabel>
+  </ChildContent>
+</RadzenFooter>

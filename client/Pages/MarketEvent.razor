@@ -1,0 +1,50 @@
+﻿@page "/market-event"
+@layout MainLayout
+@inherits CryptobotUi.Pages.MarketEventComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using CryptobotUi.Models.Cryptodb
+@inject Microsoft.Extensions.Localization.IStringLocalizer<MarketEvent> L
+<RadzenContent Container="main">
+  <ChildContent>
+    <RadzenHeading Size="H1" Text="Market Events">
+    </RadzenHeading>
+    <div class="row">
+      <div class="col-md-12">
+        <RadzenButton Icon="add_circle_outline" style="margin-bottom: 10px" Text="Add" Click="@Button0Click">
+        </RadzenButton>
+        <RadzenGrid @ref="grid0" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Count="@getMarketEventsCount" Data="@getMarketEventsResult" FilterMode="FilterMode.Advanced" TItem="CryptobotUi.Models.Cryptodb.MarketEvent" LoadData="@Grid0LoadData" RowSelect="@Grid0RowSelect">
+          <Columns>
+            <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.MarketEvent" Property="time_frame" Title="Time Frame">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.MarketEvent" Property="id" Title="Id" Visible="false">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.MarketEvent" FormatString="{0:g}" Property="event_time" Title="Event Time">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.MarketEvent" Property="price" Title="Price">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.MarketEvent" Property="source" Title="Source">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.MarketEvent" Property="name" Title="Name">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.MarketEvent" Property="message" Title="Message">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.MarketEvent" Property="symbol" Title="Symbol">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.MarketEvent" Property="market" Title="Market" Visible="false">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.MarketEvent" Property="category" Title="Category">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.MarketEvent" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Visible="false" Width="70px">
+              <Template Context="cryptobotUiModelsCryptodbMarketEvent">
+                <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="close" Size="ButtonSize.Small" Click="@((args) =>GridDeleteButtonClick(args, cryptobotUiModelsCryptodbMarketEvent))" @onclick:stopPropagation="true">
+                </RadzenButton>
+              </Template>
+            </RadzenGridColumn>
+          </Columns>
+        </RadzenGrid>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenContent>

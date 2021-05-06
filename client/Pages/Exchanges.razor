@@ -1,0 +1,26 @@
+﻿@page "/exchanges"
+@layout MainLayout
+@inherits CryptobotUi.Pages.ExchangesComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using CryptobotUi.Models.Cryptodb
+@inject Microsoft.Extensions.Localization.IStringLocalizer<Exchanges> L
+<RadzenContent Container="main">
+  <ChildContent>
+    <RadzenHeading Size="H1" Text="Exchanges">
+    </RadzenHeading>
+    <div class="row">
+      <div class="col-md-12">
+        <RadzenGrid @ref="grid0" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Count="@getExchangesCount" Data="@getExchangesResult" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" TItem="CryptobotUi.Models.Cryptodb.Exchange" PageSize="10" LoadData="@Grid0LoadData">
+          <Columns>
+            <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.Exchange" Property="name" Title="Name">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.Exchange" Property="active" Title="Active">
+            </RadzenGridColumn>
+          </Columns>
+        </RadzenGrid>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenContent>

@@ -1,0 +1,126 @@
+{
+  "components": [
+    {
+      "components": [
+        {
+          "class": "justify-content-start align-items-center",
+          "components": [
+            {
+              "class": "col-6 d-flex align-items-center",
+              "components": [
+                {
+                  "events": {
+                    "click": [
+                      {
+                        "code": "await InvokeAsync(() => { sidebar0.Toggle(); });",
+                        "type": "execute"
+                      },
+                      {
+                        "code": "await InvokeAsync(() => { body0.Toggle(); });",
+                        "type": "execute"
+                      }
+                    ]
+                  },
+                  "name": "sidebar-toggle0",
+                  "type": "sidebar-toggle"
+                },
+                {
+                  "name": "label0",
+                  "text": "BSN Cryptobot",
+                  "type": "label"
+                }
+              ],
+              "name": "leftCol",
+              "type": "col"
+            },
+            {
+              "class": "col-6 text-right",
+              "name": "rightCol",
+              "type": "col"
+            }
+          ],
+          "name": "headerRow",
+          "type": "row"
+        }
+      ],
+      "name": "header0",
+      "type": "header"
+    },
+    {
+      "components": [
+        {
+          "mode": "indeterminate",
+          "name": "progress",
+          "showValue": true,
+          "style": {
+            "borderRadius": "0",
+            "display": "block",
+            "height": "0.2rem",
+            "marginBottom": "0.1rem"
+          },
+          "type": "progressbar",
+          "value": 100,
+          "visible": "${AppState.IsBusy}"
+        },
+        {
+          "name": "main",
+          "type": "content-container"
+        }
+      ],
+      "name": "body0",
+      "type": "body"
+    },
+    {
+      "components": [
+        {
+          "items": [
+            {
+              "path": "futures-pnls",
+              "text": "Futures PnL"
+            },
+            {
+              "path": "strategies",
+              "text": "Strategies"
+            },
+            {
+              "path": "signals",
+              "text": "Signals"
+            },
+            {
+              "path": "market-event",
+              "text": "Market Events"
+            },
+            {
+              "items": [],
+              "path": "symbols",
+              "text": "Symbols"
+            },
+            {
+              "path": "exchanges",
+              "text": "Exchanges"
+            }
+          ],
+          "name": "panelmenu0",
+          "style": {
+            "height": "100%"
+          },
+          "type": "panelmenu"
+        }
+      ],
+      "name": "sidebar0",
+      "type": "sidebar"
+    },
+    {
+      "components": [
+        {
+          "name": "footerText",
+          "text": "BSN Cryptobot, Copyright Ⓒ 2021",
+          "type": "label"
+        }
+      ],
+      "name": "footer0",
+      "type": "footer"
+    }
+  ],
+  "name": "Main"
+}

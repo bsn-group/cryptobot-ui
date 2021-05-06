@@ -1,0 +1,34 @@
+﻿@page "/load-market-event-json"
+@layout MainLayout
+@inherits CryptobotUi.Pages.LoadMarketEventJsonComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using CryptobotUi.Models.Cryptodb
+@inject Microsoft.Extensions.Localization.IStringLocalizer<LoadMarketEventJson> L
+<RadzenContent Container="main">
+  <ChildContent>
+    <RadzenHeading Size="H1" Text="Load Market Event JSON">
+    </RadzenHeading>
+    <div class="row">
+      <div class="col-md-12">
+        <RadzenLabel Text="Enter / paste MarketEvent alert JSON (eg from TradingView alert)">
+        </RadzenLabel>
+      </div>
+      <div class="col-md-12">
+        <RadzenLabel Component="marketEventJsonEditor" style="color: #ff7e7b; display: block; visibility: visible" Text="@($"{ValidationError}")">
+        </RadzenLabel>
+        <RadzenTextArea Placeholder="Paste the market event JSON here" Rows="15" style="display: block; margin-top: 1rem; padding-top: ; width: 100%" @bind-Value="@MarketEventJson" Name="MarketEventJsonEditor">
+        </RadzenTextArea>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12" style="margin-top: 1rem">
+        <RadzenButton Text="OK" Click="@Button0Click">
+        </RadzenButton>
+        <RadzenButton ButtonStyle="ButtonStyle.Light" style="margin-left: 1rem" Text="Cancel" Click="@Button1Click">
+        </RadzenButton>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenContent>

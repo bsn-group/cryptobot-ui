@@ -1,0 +1,420 @@
+{
+  "access": [],
+  "components": [
+    {
+      "components": [
+        {
+          "name": "pageTitle",
+          "size": "H1",
+          "text": "Futures Pnls",
+          "type": "heading"
+        },
+        {
+          "components": [
+            {
+              "class": "col-md-12",
+              "components": [
+                {
+                  "events": {
+                    "click": [
+                      {
+                        "condition": "${event?.Value == \"csv\"}",
+                        "fileName": "Futures Pnls",
+                        "name": "cryptodb.getFuturesPnls",
+                        "parameters": [
+                          {
+                            "name": "$filter",
+                            "value": "${pnlDataGrid.Query.Filter}"
+                          },
+                          {
+                            "name": "$orderby",
+                            "value": "${pnlDataGrid.Query.OrderBy}"
+                          },
+                          {
+                            "name": "$expand",
+                            "value": ""
+                          },
+                          {
+                            "name": "$select",
+                            "value": "signal_id,symbol,position_type,exchange_id,strategy_pair_name,signal_status,position_status,executed_buy_qty,pending_buy_qty,executed_sell_qty,pending_sell_qty,entry_price,close_price,pnl,pnl_percent"
+                          }
+                        ],
+                        "type": "export"
+                      },
+                      {
+                        "condition": "${event == null || event.Value == \"xlsx\"}",
+                        "fileName": "Futures Pnls",
+                        "format": "xlsx",
+                        "name": "cryptodb.getFuturesPnls",
+                        "parameters": [
+                          {
+                            "name": "$filter",
+                            "value": "${pnlDataGrid.Query.Filter}"
+                          },
+                          {
+                            "name": "$orderby",
+                            "value": "${pnlDataGrid.Query.OrderBy}"
+                          },
+                          {
+                            "name": "$expand",
+                            "value": ""
+                          },
+                          {
+                            "name": "$select",
+                            "value": "signal_id,symbol,position_type,exchange_id,strategy_pair_name,signal_status,position_status,executed_buy_qty,pending_buy_qty,executed_sell_qty,pending_sell_qty,entry_price,close_price,pnl,pnl_percent"
+                          }
+                        ],
+                        "type": "export"
+                      }
+                    ]
+                  },
+                  "icon": "get_app",
+                  "items": [
+                    {
+                      "icon": "",
+                      "text": "Excel",
+                      "value": "xlsx"
+                    },
+                    {
+                      "icon": "",
+                      "text": "CSV",
+                      "value": "csv"
+                    }
+                  ],
+                  "name": "splitbutton0",
+                  "style": {
+                    "marginBottom": "10px",
+                    "marginLeft": "0px"
+                  },
+                  "text": "Export",
+                  "type": "splitbutton",
+                  "visible": true
+                },
+                {
+                  "buttonStyle": "light",
+                  "events": {
+                    "click": [
+                      {
+                        "code": "await pnlDataGrid.Reload();",
+                        "type": "execute"
+                      }
+                    ]
+                  },
+                  "icon": "refresh",
+                  "name": "refreshButton",
+                  "size": "md",
+                  "style": {
+                    "display": "inline-block",
+                    "float": "right",
+                    "marginBottom": "1rem",
+                    "marginLeft": "1rem",
+                    "position": "static",
+                    "verticalAlign": "middle"
+                  },
+                  "text": "",
+                  "type": "button"
+                },
+                {
+                  "attributes": [
+                    {
+                      "name": "@oninput",
+                      "value": "@(async(args) => {search = $\"{args.Value}\";await pnlDataGrid.GoToPage(0);await pnlDataGrid.Reload();})"
+                    }
+                  ],
+                  "name": "textbox0",
+                  "placeholder": "Search ...",
+                  "style": {
+                    "display": "block",
+                    "marginBottom": "10px",
+                    "width": "100%"
+                  },
+                  "type": "textbox",
+                  "value": ""
+                },
+                {
+                  "allowColumnResize": true,
+                  "allowFiltering": true,
+                  "allowPaging": true,
+                  "allowSorting": true,
+                  "columns": [
+                    {
+                      "footerTemplate": "",
+                      "property": "signal_id",
+                      "template": "",
+                      "textAlign": "right",
+                      "title": "Signal Id",
+                      "visible": true
+                    },
+                    {
+                      "property": "symbol",
+                      "title": "Symbol"
+                    },
+                    {
+                      "property": "position_type",
+                      "title": "Position Type",
+                      "visible": true
+                    },
+                    {
+                      "property": "exchange_id",
+                      "title": "Exchange Id",
+                      "visible": false
+                    },
+                    {
+                      "property": "strategy_pair_name",
+                      "title": "Strategy"
+                    },
+                    {
+                      "property": "signal_status",
+                      "title": "Signal Status",
+                      "visible": false
+                    },
+                    {
+                      "property": "position_status",
+                      "title": "Position Status"
+                    },
+                    {
+                      "property": "executed_buy_qty",
+                      "title": "Executed Buy Qty",
+                      "visible": false
+                    },
+                    {
+                      "property": "pending_buy_qty",
+                      "title": "Pending Buy Qty",
+                      "visible": false
+                    },
+                    {
+                      "property": "executed_sell_qty",
+                      "title": "Executed Sell Qty",
+                      "visible": false
+                    },
+                    {
+                      "property": "pending_sell_qty",
+                      "title": "Pending Sell Qty",
+                      "visible": false
+                    },
+                    {
+                      "formatString": "{0:F4}",
+                      "property": "entry_price",
+                      "textAlign": "right",
+                      "title": "Entry Price",
+                      "visible": true
+                    },
+                    {
+                      "formatString": "{0:F4}",
+                      "property": "close_price",
+                      "textAlign": "right",
+                      "title": "Close Price"
+                    },
+                    {
+                      "cssClass": "",
+                      "formatString": "{0:F8}",
+                      "property": "pnl",
+                      "template": [
+                        {
+                          "name": "label3",
+                          "style": {
+                            "color": "#B9F6CA"
+                          },
+                          "text": "@(String.Format(\"{0:F4} ({1:F2} %)\", cryptobotUiClientModelFuturesPnlViewModel.pnl, cryptobotUiClientModelFuturesPnlViewModel.pnl_percent))",
+                          "type": "label",
+                          "visible": "@(cryptobotUiClientModelFuturesPnlViewModel.pnl >= 0)"
+                        },
+                        {
+                          "name": "label6",
+                          "style": {
+                            "color": "#FF8A80"
+                          },
+                          "text": "@(String.Format(\"{0:F4} ({1:F2} %)\", cryptobotUiClientModelFuturesPnlViewModel.pnl, cryptobotUiClientModelFuturesPnlViewModel.pnl_percent))",
+                          "type": "label",
+                          "visible": "@(cryptobotUiClientModelFuturesPnlViewModel.pnl < 0)"
+                        }
+                      ],
+                      "textAlign": "right",
+                      "title": "Pnl"
+                    },
+                    {
+                      "formatString": "{0:P}",
+                      "property": "pnl_percent",
+                      "textAlign": "right",
+                      "title": "Pnl Percent",
+                      "visible": false
+                    },
+                    {
+                      "format": "date-time",
+                      "formatString": "{0:g}",
+                      "property": "entry_time",
+                      "title": "Entry Time",
+                      "type": "string"
+                    },
+                    {
+                      "format": "date-time",
+                      "formatString": "{0:g}",
+                      "property": "exit_time",
+                      "title": "Exit Time",
+                      "type": "string"
+                    }
+                  ],
+                  "count": "${FuturesPnlsCount}",
+                  "data": "${FuturesPnls}",
+                  "events": {
+                    "loadData": [
+                      {
+                        "name": "OnPnlGridLoadData",
+                        "parameters": [
+                          {
+                            "name": "args",
+                            "type": "Radzen.LoadDataArgs",
+                            "value": "${event}"
+                          }
+                        ],
+                        "schema": {
+                          "$ref": "#/definitions/Task",
+                          "dotnetType": "System.Threading.Tasks.Task"
+                        },
+                        "type": "invoke-method"
+                      }
+                    ],
+                    "rowExpand": [
+                      {
+                        "name": "OnPnlGridRowExpand",
+                        "parameters": [
+                          {
+                            "name": "pnl",
+                            "type": "CryptobotUi.Client.Model.FuturesPnlViewModel",
+                            "value": "${event}"
+                          }
+                        ],
+                        "schema": {
+                          "$ref": "#/definitions/Task",
+                          "dotnetType": "System.Threading.Tasks.Task"
+                        },
+                        "type": "invoke-method"
+                      }
+                    ]
+                  },
+                  "filterCaseSensitivity": "caseInsensitive",
+                  "filterMode": "advanced",
+                  "itemType": "CryptobotUi.Client.Model.FuturesPnlViewModel",
+                  "name": "pnlDataGrid",
+                  "template": [
+                    {
+                      "name": "heading0",
+                      "size": "H3",
+                      "text": "Commands & Orders",
+                      "type": "heading"
+                    },
+                    {
+                      "allowColumnResize": true,
+                      "allowFiltering": true,
+                      "allowPaging": true,
+                      "allowSorting": true,
+                      "columns": [
+                        {
+                          "property": "ETag",
+                          "title": "E Tag",
+                          "visible": false
+                        },
+                        {
+                          "property": "id",
+                          "title": "Id"
+                        },
+                        {
+                          "filterProperty": "FuturesSignal.symbol",
+                          "property": "signal_id",
+                          "sortProperty": "FuturesSignal.symbol",
+                          "template": "${data.FuturesSignal?.symbol}",
+                          "title": "Futures Signal",
+                          "visible": false
+                        },
+                        {
+                          "formatString": "{0:F8}",
+                          "property": "price",
+                          "textAlign": "right",
+                          "title": "Price"
+                        },
+                        {
+                          "formatString": "{0:F8}",
+                          "property": "quantity",
+                          "title": "Quantity"
+                        },
+                        {
+                          "property": "leverage",
+                          "title": "Leverage"
+                        },
+                        {
+                          "formatString": "{0:d}",
+                          "property": "request_date_time",
+                          "title": "Request Time"
+                        },
+                        {
+                          "formatString": "{0:d}",
+                          "property": "action_date_time",
+                          "title": "Action Time"
+                        },
+                        {
+                          "filterProperty": "",
+                          "property": "exchange_order_id",
+                          "sortProperty": "",
+                          "template": "${data.ExchangeOrder?.status_reason}",
+                          "title": "Order placed?"
+                        },
+                        {
+                          "property": "strategy_name",
+                          "title": "Strategy"
+                        },
+                        {
+                          "property": "strategy_hash",
+                          "title": "Strategy Hash",
+                          "visible": false
+                        },
+                        {
+                          "property": "strategy_data",
+                          "title": "Strategy Data",
+                          "visible": false
+                        },
+                        {
+                          "property": "signal_action",
+                          "title": "Action"
+                        },
+                        {
+                          "property": "status",
+                          "title": "Status"
+                        }
+                      ],
+                      "count": "${data.CommandCount}",
+                      "data": "${data.Commands}",
+                      "filterCaseSensitivity": "caseInsensitive",
+                      "filterMode": "advanced",
+                      "itemType": "CryptobotUi.Models.Cryptodb.FuturesSignalCommand",
+                      "name": "grid0",
+                      "type": "grid"
+                    }
+                  ],
+                  "title": "",
+                  "type": "grid"
+                }
+              ],
+              "type": "col"
+            }
+          ],
+          "type": "row"
+        }
+      ],
+      "container": "main",
+      "type": "content"
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "condition": "string.IsNullOrEmpty(search)",
+        "name": "search",
+        "type": "set",
+        "value": "\"\"",
+        "valueType": "string"
+      }
+    ]
+  },
+  "layout": "Main",
+  "name": "Futures Pnls"
+}
