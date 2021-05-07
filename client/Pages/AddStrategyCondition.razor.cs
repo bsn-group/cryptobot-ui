@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Collections.Generic;
-using System.Threading.Tasks;
-using Radzen;
-using Radzen.Blazor;
 using CryptobotUi.Client.Model;
 
 namespace CryptobotUi.Pages
@@ -14,7 +11,7 @@ namespace CryptobotUi.Pages
             Enum.GetNames<ConditionGroups>()
                 .Select(p => new LookupValue { Name = p });
 
-        protected void LoadStrategyDataFromMarketEvent(MarketEvent marketEvent)
+        protected void LoadStrategyDataFromMarketEvent(CryptobotUi.Models.Shared.MarketEvent marketEvent)
         {
             if (marketEvent != null)
             {

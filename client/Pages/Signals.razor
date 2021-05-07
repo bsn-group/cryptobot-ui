@@ -56,14 +56,6 @@
                 </RadzenGridColumn>
                 <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.FuturesSignalCommand" FormatString="{0:d}" Property="action_date_time" Title="Action Date Time">
                 </RadzenGridColumn>
-                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.FuturesSignalCommand" FilterProperty="ExchangeOrder.id" Property="exchange_order_id" SortProperty="ExchangeOrder.id" Title="Exchange Order">
-                  <Template Context="cryptobotUiModelsCryptodbFuturesSignalCommand">
-                    <RadzenIcon Icon="done_outline" Visible="@(cryptobotUiModelsCryptodbFuturesSignalCommand.ExchangeOrder?.id > 0)">
-                    </RadzenIcon>
-                    <RadzenIcon Icon="close" Visible="@(cryptobotUiModelsCryptodbFuturesSignalCommand.ExchangeOrder?.id == null)">
-                    </RadzenIcon>
-                  </Template>
-                </RadzenGridColumn>
                 <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.FuturesSignalCommand" Property="strategy_name" Title="Strategy Name">
                 </RadzenGridColumn>
                 <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.FuturesSignalCommand" Property="strategy_hash" Title="Strategy Hash" Visible="false">
@@ -77,26 +69,6 @@
                 <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.FuturesSignalCommand" Property="ETag" Title="E Tag" Visible="false">
                 </RadzenGridColumn>
               </Columns>
-              <Template Context="cryptobotUiModelsCryptodbFuturesSignalCommand">
-                <div class="row">
-                  <div class="col-md-12">
-                    <RadzenHeading Size="H4" Text="@(String.Format("Exchange order ({0})", cryptobotUiModelsCryptodbFuturesSignalCommand.ExchangeOrder?.id))">
-                    </RadzenHeading>
-                  </div>
-                  <div class="col-md-12">
-                    <RadzenLabel style="margin-left: 1rem; margin-right: " Text="@($"{(cryptobotUiModelsCryptodbFuturesSignalCommand.ExchangeOrder?.order_side)}")">
-                    </RadzenLabel>
-                    <RadzenLabel style="margin-left: 1rem" Text="@(String.Format("{0:F8}", cryptobotUiModelsCryptodbFuturesSignalCommand.ExchangeOrder?.executed_qty))">
-                    </RadzenLabel>
-                    <RadzenLabel style="margin-left: 1rem" Text="@(String.Format("@ {0:F8}", cryptobotUiModelsCryptodbFuturesSignalCommand.ExchangeOrder?.executed_price))">
-                    </RadzenLabel>
-                    <RadzenLabel style="margin-left: 1rem" Text="@($"{(cryptobotUiModelsCryptodbFuturesSignalCommand.ExchangeOrder?.status?.ToUpper())}")">
-                    </RadzenLabel>
-                    <RadzenLabel style="margin-left: 1rem" Text="@($"{(cryptobotUiModelsCryptodbFuturesSignalCommand.ExchangeOrder?.status_reason)}")">
-                    </RadzenLabel>
-                  </div>
-                </div>
-              </Template>
             </RadzenGrid>
           </Template>
         </RadzenGrid>

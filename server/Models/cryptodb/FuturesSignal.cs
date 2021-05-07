@@ -28,6 +28,24 @@ namespace CryptobotUi.Models.Cryptodb
 
     public IEnumerable<FuturesSignalCommand> FuturesSignalCommands { get; set; }
     [ConcurrencyCheck]
+    public string symbol
+    {
+      get;
+      set;
+    }
+    [ConcurrencyCheck]
+    public string strategy_pair_name
+    {
+      get;
+      set;
+    }
+    [ConcurrencyCheck]
+    public string position_type
+    {
+      get;
+      set;
+    }
+    [ConcurrencyCheck]
     public DateTime created_date_time
     {
       get;
@@ -46,23 +64,5 @@ namespace CryptobotUi.Models.Cryptodb
       set;
     }
     public Exchange Exchange { get; set; }
-    [ConcurrencyCheck]
-    public string symbol
-    {
-      get;
-      set;
-    }
-    [ConcurrencyCheck]
-    public string strategy_pair_name
-    {
-      get;
-      set;
-    }
-    [ConcurrencyCheck]
-    public string position_type
-    {
-      get;
-      set;
-    }
   }
 }

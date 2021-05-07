@@ -19,18 +19,18 @@ namespace CryptobotUi.Models.Cryptodb
     }
 
     [ConcurrencyCheck]
-    public DateTime created_time
-    {
-      get;
-      set;
-    }
-    [ConcurrencyCheck]
     public Int64 strategy_id
     {
       get;
       set;
     }
     public Strategy Strategy { get; set; }
+    [ConcurrencyCheck]
+    public string name
+    {
+      get;
+      set;
+    }
     [ConcurrencyCheck]
     public Int64 time_frame
     {
@@ -39,6 +39,24 @@ namespace CryptobotUi.Models.Cryptodb
     }
     [ConcurrencyCheck]
     public Int64 last_observed
+    {
+      get;
+      set;
+    }
+    [ConcurrencyCheck]
+    public string category
+    {
+      get;
+      set;
+    }
+    [ConcurrencyCheck]
+    public string condition_group
+    {
+      get;
+      set;
+    }
+    [ConcurrencyCheck]
+    public DateTime created_time
     {
       get;
       set;
@@ -55,12 +73,6 @@ namespace CryptobotUi.Models.Cryptodb
       get;
       set;
     }
-    [ConcurrencyCheck]
-    public Int64 condition_sub_group
-    {
-      get;
-      set;
-    }
     [Key]
     public Int64 id
     {
@@ -68,19 +80,7 @@ namespace CryptobotUi.Models.Cryptodb
       set;
     }
     [ConcurrencyCheck]
-    public string category
-    {
-      get;
-      set;
-    }
-    [ConcurrencyCheck]
-    public string name
-    {
-      get;
-      set;
-    }
-    [ConcurrencyCheck]
-    public string condition_group
+    public Int64 condition_sub_group
     {
       get;
       set;

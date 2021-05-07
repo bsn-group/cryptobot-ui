@@ -20,7 +20,31 @@ namespace CryptobotUi.Models.Cryptodb
     }
 
     [ConcurrencyCheck]
+    public string status_reason
+    {
+      get;
+      set;
+    }
+    [ConcurrencyCheck]
+    public string symbol
+    {
+      get;
+      set;
+    }
+    [ConcurrencyCheck]
     public decimal price
+    {
+      get;
+      set;
+    }
+    [ConcurrencyCheck]
+    public string exchange_order_id
+    {
+      get;
+      set;
+    }
+    [ConcurrencyCheck]
+    public string exchange_order_id_secondary
     {
       get;
       set;
@@ -44,6 +68,12 @@ namespace CryptobotUi.Models.Cryptodb
       set;
     }
     [ConcurrencyCheck]
+    public string status
+    {
+      get;
+      set;
+    }
+    [ConcurrencyCheck]
     public Int64 exchange_id
     {
       get;
@@ -57,6 +87,18 @@ namespace CryptobotUi.Models.Cryptodb
     }
 
     public IEnumerable<FuturesSignalCommand> FuturesSignalCommands { get; set; }
+    [ConcurrencyCheck]
+    public string order_side
+    {
+      get;
+      set;
+    }
+    [ConcurrencyCheck]
+    public string fee_currency
+    {
+      get;
+      set;
+    }
     [ConcurrencyCheck]
     public decimal? fee_amount
     {
@@ -83,48 +125,6 @@ namespace CryptobotUi.Models.Cryptodb
     }
     [ConcurrencyCheck]
     public Int64 last_trade_id
-    {
-      get;
-      set;
-    }
-    [ConcurrencyCheck]
-    public string status_reason
-    {
-      get;
-      set;
-    }
-    [ConcurrencyCheck]
-    public string symbol
-    {
-      get;
-      set;
-    }
-    [ConcurrencyCheck]
-    public string exchange_order_id
-    {
-      get;
-      set;
-    }
-    [ConcurrencyCheck]
-    public string exchange_order_id_secondary
-    {
-      get;
-      set;
-    }
-    [ConcurrencyCheck]
-    public string status
-    {
-      get;
-      set;
-    }
-    [ConcurrencyCheck]
-    public string order_side
-    {
-      get;
-      set;
-    }
-    [ConcurrencyCheck]
-    public string fee_currency
     {
       get;
       set;

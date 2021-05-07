@@ -50,6 +50,18 @@ namespace CryptobotUi.Models.Cryptodb
       set;
     }
     [ConcurrencyCheck]
+    public string signal_action
+    {
+      get;
+      set;
+    }
+    [ConcurrencyCheck]
+    public string status
+    {
+      get;
+      set;
+    }
+    [ConcurrencyCheck]
     public DateTime request_date_time
     {
       get;
@@ -82,18 +94,6 @@ namespace CryptobotUi.Models.Cryptodb
     }
     [ConcurrencyCheck]
     public string strategy_data
-    {
-      get;
-      set;
-    }
-    [ConcurrencyCheck]
-    public string signal_action
-    {
-      get;
-      set;
-    }
-    [ConcurrencyCheck]
-    public string status
     {
       get;
       set;

@@ -13,5 +13,10 @@ namespace CryptobotUi.Pages
     {
         [Inject]
         protected AppState AppState { get; set; }
+
+        protected async Task RaiseMarketEvent(CryptobotUi.Models.Cryptodb.MarketEvent evt)
+        {
+            
+        }
     }
 }

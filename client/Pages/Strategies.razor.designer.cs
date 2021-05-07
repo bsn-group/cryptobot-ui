@@ -234,6 +234,11 @@ namespace CryptobotUi.Pages
             await grid1.Reload();
         }
 
+        protected async System.Threading.Tasks.Task RaiseMarketEventButtonClick(MouseEventArgs args, dynamic data)
+        {
+            await RaiseMarketEvent(data);
+        }
+
         protected async System.Threading.Tasks.Task StrategyConditionDeleteButtonClick(MouseEventArgs args, dynamic data)
         {
             try

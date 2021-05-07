@@ -12,7 +12,7 @@ using CryptobotUi.Client.Pages;
 
 namespace CryptobotUi.Pages
 {
-    public partial class AddMarketEventComponent : ComponentBase
+    public partial class RaiseMarketEventComponent : ComponentBase
     {
         [Parameter(CaptureUnmatchedValues = true)]
         public IReadOnlyDictionary<string, dynamic> Attributes { get; set; }
@@ -47,8 +47,8 @@ namespace CryptobotUi.Pages
         [Inject]
         protected CryptodbService Cryptodb { get; set; }
 
-        CryptobotUi.Models.Cryptodb.MarketEvent _marketevent;
-        protected CryptobotUi.Models.Cryptodb.MarketEvent marketevent
+        CryptobotUi.Models.Shared.MarketEvent _marketevent;
+        protected CryptobotUi.Models.Shared.MarketEvent marketevent
         {
             get
             {
@@ -72,20 +72,12 @@ namespace CryptobotUi.Pages
         }
         protected async System.Threading.Tasks.Task Load()
         {
-            marketevent = new CryptobotUi.Models.Cryptodb.MarketEvent(){};
+            marketevent = marketevent ?? new CryptobotUi.Models.Shared.MarketEvent(){};
         }
 
-        protected async System.Threading.Tasks.Task Form0Submit(CryptobotUi.Models.Cryptodb.MarketEvent args)
+        protected async System.Threading.Tasks.Task Form0Submit(CryptobotUi.Models.Shared.MarketEvent args)
         {
-            try
-            {
-                var cryptodbCreateMarketEventResult = await Cryptodb.CreateMarketEvent(marketEvent:marketevent);
-                DialogService.Close(marketevent);
-            }
-            catch (System.Exception cryptodbCreateMarketEventException)
-            {
-                NotificationService.Notify(new NotificationMessage(){ Severity = NotificationSeverity.Error,Summary = $"Error",Detail = $"Unable to create new MarketEvent!" });
-            }
+            DialogService.Close(args);
         }
 
         protected async System.Threading.Tasks.Task Button2Click(MouseEventArgs args)

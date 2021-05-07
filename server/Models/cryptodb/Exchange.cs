@@ -28,12 +28,6 @@ namespace CryptobotUi.Models.Cryptodb
 
     public IEnumerable<FuturesSignal> FuturesSignals { get; set; }
     [ConcurrencyCheck]
-    public bool active
-    {
-      get;
-      set;
-    }
-    [ConcurrencyCheck]
     public string code
     {
       get;
@@ -41,6 +35,12 @@ namespace CryptobotUi.Models.Cryptodb
     }
     [ConcurrencyCheck]
     public string name
+    {
+      get;
+      set;
+    }
+    [ConcurrencyCheck]
+    public bool active
     {
       get;
       set;

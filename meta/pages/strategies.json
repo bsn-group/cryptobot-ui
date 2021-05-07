@@ -423,6 +423,7 @@
                       "type": "button"
                     },
                     {
+                      "allowColumnResize": true,
                       "allowFiltering": true,
                       "allowPaging": true,
                       "allowSorting": false,
@@ -437,15 +438,18 @@
                         },
                         {
                           "property": "condition_group",
-                          "title": "Condition group"
+                          "title": "Condition group",
+                          "visible": false
                         },
                         {
                           "property": "condition_sub_group",
-                          "title": "Condition Sub Group"
+                          "title": "Condition Sub Group",
+                          "visible": false
                         },
                         {
                           "property": "category",
-                          "title": "Category"
+                          "title": "Category",
+                          "visible": false
                         },
                         {
                           "property": "time_frame",
@@ -463,16 +467,51 @@
                         {
                           "property": "sequence",
                           "sortProperty": "",
-                          "title": "Sequence"
+                          "title": "Sequence",
+                          "visible": false
                         },
                         {
                           "property": "version",
-                          "title": "Version"
+                          "title": "Version",
+                          "visible": false
                         },
                         {
                           "filterable": false,
                           "sortable": false,
                           "template": [
+                            {
+                              "attributes": [
+                                {
+                                  "name": "@onclick:stopPropagation",
+                                  "value": true
+                                }
+                              ],
+                              "buttonStyle": "warning",
+                              "events": {
+                                "click": [
+                                  {
+                                    "name": "RaiseMarketEvent",
+                                    "parameters": [
+                                      {
+                                        "name": "condition",
+                                        "type": "CryptobotUi.Models.Cryptodb.StrategyCondition",
+                                        "value": "data"
+                                      }
+                                    ],
+                                    "schema": {
+                                      "$ref": "#/definitions/Task",
+                                      "dotnetType": "System.Threading.Tasks.Task"
+                                    },
+                                    "type": "invoke-method"
+                                  }
+                                ]
+                              },
+                              "icon": "flash_on",
+                              "name": "raiseMarketEventButton",
+                              "size": "sm",
+                              "text": "",
+                              "type": "button"
+                            },
                             {
                               "attributes": [
                                 {
@@ -514,12 +553,15 @@
                               "icon": "close",
                               "name": "StrategyConditionDeleteButton",
                               "size": "sm",
+                              "style": {
+                                "marginLeft": "1rem"
+                              },
                               "text": "",
                               "type": "button"
                             }
                           ],
                           "textAlign": "center",
-                          "width": "70px"
+                          "width": "170px"
                         }
                       ],
                       "data": "${data.StrategyConditions}",

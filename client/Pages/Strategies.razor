@@ -52,17 +52,17 @@
             </RadzenHeading>
             <RadzenButton Icon="add_circle_outline" style="margin-bottom: 10px" Text="Add" Click="@((args) =>StrategyConditionAddButtonClick(args, cryptobotUiModelsCryptodbStrategy))">
             </RadzenButton>
-            <RadzenGrid @ref="grid1" AllowFiltering="true" AllowPaging="true" AllowSorting="false" Data="@(cryptobotUiModelsCryptodbStrategy.StrategyConditions)" EditMode="DataGridEditMode.Single" EmptyText="No conditions. Click (+) to add." FilterMode="FilterMode.Advanced" TItem="CryptobotUi.Models.Cryptodb.StrategyCondition">
+            <RadzenGrid @ref="grid1" AllowColumnResize="true" AllowFiltering="true" AllowPaging="true" AllowSorting="false" Data="@(cryptobotUiModelsCryptodbStrategy.StrategyConditions)" EditMode="DataGridEditMode.Single" EmptyText="No conditions. Click (+) to add." FilterMode="FilterMode.Advanced" TItem="CryptobotUi.Models.Cryptodb.StrategyCondition">
               <Columns>
                 <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.StrategyCondition" Property="id" Title="Id">
                 </RadzenGridColumn>
                 <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.StrategyCondition" Property="name" Title="Name">
                 </RadzenGridColumn>
-                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.StrategyCondition" Property="condition_group" Title="Condition group">
+                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.StrategyCondition" Property="condition_group" Title="Condition group" Visible="false">
                 </RadzenGridColumn>
-                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.StrategyCondition" Property="condition_sub_group" Title="Condition Sub Group">
+                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.StrategyCondition" Property="condition_sub_group" Title="Condition Sub Group" Visible="false">
                 </RadzenGridColumn>
-                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.StrategyCondition" Property="category" Title="Category">
+                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.StrategyCondition" Property="category" Title="Category" Visible="false">
                 </RadzenGridColumn>
                 <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.StrategyCondition" Property="time_frame" Title="Time Frame">
                 </RadzenGridColumn>
@@ -70,13 +70,15 @@
                 </RadzenGridColumn>
                 <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.StrategyCondition" FormatString="{0:d}" Property="created_time" Title="Created Time">
                 </RadzenGridColumn>
-                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.StrategyCondition" Property="sequence" Title="Sequence">
+                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.StrategyCondition" Property="sequence" Title="Sequence" Visible="false">
                 </RadzenGridColumn>
-                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.StrategyCondition" Property="version" Title="Version">
+                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.StrategyCondition" Property="version" Title="Version" Visible="false">
                 </RadzenGridColumn>
-                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.StrategyCondition" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Width="70px">
+                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.StrategyCondition" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Width="170px">
                   <Template Context="cryptobotUiModelsCryptodbStrategyCondition">
-                    <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="close" Size="ButtonSize.Small" Click="@((args) =>StrategyConditionDeleteButtonClick(args, cryptobotUiModelsCryptodbStrategyCondition))" @onclick:stopPropagation="true">
+                    <RadzenButton ButtonStyle="ButtonStyle.Warning" Icon="flash_on" Size="ButtonSize.Small" Click="@((args) =>RaiseMarketEventButtonClick(args, cryptobotUiModelsCryptodbStrategyCondition))" @onclick:stopPropagation="true">
+                    </RadzenButton>
+                    <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="close" Size="ButtonSize.Small" style="margin-left: 1rem" Click="@((args) =>StrategyConditionDeleteButtonClick(args, cryptobotUiModelsCryptodbStrategyCondition))" @onclick:stopPropagation="true">
                     </RadzenButton>
                   </Template>
                 </RadzenGridColumn>

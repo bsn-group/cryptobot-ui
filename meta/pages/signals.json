@@ -235,26 +235,6 @@
                           "title": "Action Date Time"
                         },
                         {
-                          "filterProperty": "ExchangeOrder.id",
-                          "property": "exchange_order_id",
-                          "sortProperty": "ExchangeOrder.id",
-                          "template": [
-                            {
-                              "icon": "done_outline",
-                              "name": "icon0",
-                              "type": "icon",
-                              "visible": "@(cryptobotUiModelsCryptodbFuturesSignalCommand.ExchangeOrder?.id > 0)"
-                            },
-                            {
-                              "icon": "close",
-                              "name": "icon1",
-                              "type": "icon",
-                              "visible": "@(cryptobotUiModelsCryptodbFuturesSignalCommand.ExchangeOrder?.id == null)"
-                            }
-                          ],
-                          "title": "Exchange Order"
-                        },
-                        {
                           "property": "strategy_name",
                           "title": "Strategy Name"
                         },
@@ -287,75 +267,7 @@
                       "filterMode": "advanced",
                       "itemType": "CryptobotUi.Models.Cryptodb.FuturesSignalCommand",
                       "name": "grid1",
-                      "template": [
-                        {
-                          "components": [
-                            {
-                              "class": "col-md-12",
-                              "components": [
-                                {
-                                  "name": "heading0",
-                                  "size": "H4",
-                                  "text": "@(String.Format(\"Exchange order ({0})\", cryptobotUiModelsCryptodbFuturesSignalCommand.ExchangeOrder?.id))",
-                                  "type": "heading"
-                                }
-                              ],
-                              "name": "col0",
-                              "type": "col"
-                            },
-                            {
-                              "class": "col-md-12",
-                              "components": [
-                                {
-                                  "name": "order_side",
-                                  "style": {
-                                    "marginLeft": "1rem",
-                                    "marginRight": ""
-                                  },
-                                  "text": "${cryptobotUiModelsCryptodbFuturesSignalCommand.ExchangeOrder?.order_side}",
-                                  "type": "label"
-                                },
-                                {
-                                  "name": "executed_qty",
-                                  "style": {
-                                    "marginLeft": "1rem"
-                                  },
-                                  "text": "@(String.Format(\"{0:F8}\", cryptobotUiModelsCryptodbFuturesSignalCommand.ExchangeOrder?.executed_qty))",
-                                  "type": "label"
-                                },
-                                {
-                                  "name": "executed_price",
-                                  "style": {
-                                    "marginLeft": "1rem"
-                                  },
-                                  "text": "@(String.Format(\"@ {0:F8}\", cryptobotUiModelsCryptodbFuturesSignalCommand.ExchangeOrder?.executed_price))",
-                                  "type": "label"
-                                },
-                                {
-                                  "name": "status",
-                                  "style": {
-                                    "marginLeft": "1rem"
-                                  },
-                                  "text": "${cryptobotUiModelsCryptodbFuturesSignalCommand.ExchangeOrder?.status?.ToUpper()}",
-                                  "type": "label"
-                                },
-                                {
-                                  "name": "status_reason",
-                                  "style": {
-                                    "marginLeft": "1rem"
-                                  },
-                                  "text": "${cryptobotUiModelsCryptodbFuturesSignalCommand.ExchangeOrder?.status_reason}",
-                                  "type": "label"
-                                }
-                              ],
-                              "name": "col1",
-                              "type": "col"
-                            }
-                          ],
-                          "name": "row0",
-                          "type": "row"
-                        }
-                      ],
+                      "template": "",
                       "type": "grid"
                     }
                   ],

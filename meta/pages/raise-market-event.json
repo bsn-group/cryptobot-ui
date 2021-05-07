@@ -1,110 +1,15 @@
 {
+  "access": [],
   "components": [
     {
       "components": [
         {
           "components": [
             {
-              "class": "col-md-9",
-              "components": [
-                {
-                  "name": "closeLabel",
-                  "style": {
-                    "fontWeight": "bold"
-                  },
-                  "text": "Item no longer available.",
-                  "type": "label",
-                  "visible": "${!canEdit}"
-                }
-              ],
-              "name": "col0",
-              "type": "col"
-            },
-            {
-              "class": "col-md-3",
-              "components": [
-                {
-                  "buttonStyle": "secondary",
-                  "events": {
-                    "click": [
-                      {
-                        "type": "close-popup"
-                      }
-                    ]
-                  },
-                  "icon": "",
-                  "name": "closeButton",
-                  "style": {
-                    "marginBottom": "20px"
-                  },
-                  "text": "Close",
-                  "type": "button",
-                  "visible": "${!canEdit}"
-                }
-              ],
-              "name": "col1",
-              "type": "col"
-            }
-          ],
-          "name": "row0",
-          "style": {},
-          "type": "row"
-        },
-        {
-          "components": [
-            {
-              "class": "col-md-9",
-              "components": [
-                {
-                  "name": "label0",
-                  "style": {
-                    "fontWeight": "bold"
-                  },
-                  "text": "Another user has made conflicting changes to one or more of the fields you have modified. Please reload.",
-                  "type": "label",
-                  "visible": "${hasChanges}"
-                }
-              ],
-              "name": "col0",
-              "type": "col"
-            },
-            {
-              "class": "col-md-3",
-              "components": [
-                {
-                  "buttonStyle": "secondary",
-                  "events": {
-                    "click": [
-                      {
-                        "code": "await this.Load()",
-                        "type": "execute"
-                      }
-                    ]
-                  },
-                  "icon": "autorenew",
-                  "name": "button0",
-                  "style": {
-                    "marginBottom": "20px"
-                  },
-                  "text": "Reload",
-                  "type": "button",
-                  "visible": "${hasChanges}"
-                }
-              ],
-              "name": "col1",
-              "type": "col"
-            }
-          ],
-          "name": "row0",
-          "style": {},
-          "type": "row"
-        },
-        {
-          "components": [
-            {
               "class": "col-md-12",
               "components": [
                 {
+                  "action": "",
                   "components": [
                     {
                       "components": [
@@ -112,12 +17,12 @@
                           "class": "col-md-3",
                           "components": [
                             {
-                              "component": "time_frame",
-                              "name": "time_frameLabel",
+                              "component": "name",
+                              "name": "nameLabel",
                               "style": {
                                 "width": "100%"
                               },
-                              "text": "Time Frame",
+                              "text": "Name",
                               "type": "label"
                             }
                           ],
@@ -127,118 +32,23 @@
                           "class": "col-md-9",
                           "components": [
                             {
-                              "name": "time_frame",
+                              "maxLength": 255,
+                              "name": "name",
                               "style": {
                                 "display": "block",
                                 "width": "100%"
                               },
-                              "type": "numeric",
-                              "value": "${marketevent.time_frame}",
-                              "valueType": "Int64"
+                              "type": "textbox",
+                              "value": "${marketevent.Name}",
+                              "valueType": "string"
                             },
                             {
-                              "component": "time_frame",
-                              "name": "time_frameRequiredValidator",
+                              "component": "name",
+                              "name": "nameRequiredValidator",
                               "style": {
                                 "position": "absolute"
                               },
-                              "text": "time_frame is required",
-                              "type": "required-validator"
-                            }
-                          ],
-                          "type": "col"
-                        }
-                      ],
-                      "style": {
-                        "marginBottom": "1rem"
-                      },
-                      "type": "row"
-                    },
-                    {
-                      "components": [
-                        {
-                          "class": "col-md-3",
-                          "components": [
-                            {
-                              "component": "id",
-                              "name": "idLabel",
-                              "style": {
-                                "width": "100%"
-                              },
-                              "text": "Id",
-                              "type": "label"
-                            }
-                          ],
-                          "type": "col"
-                        },
-                        {
-                          "class": "col-md-9",
-                          "components": [
-                            {
-                              "name": "id",
-                              "style": {
-                                "display": "block",
-                                "width": "100%"
-                              },
-                              "type": "numeric",
-                              "value": "${marketevent.id}",
-                              "valueType": "Int64"
-                            },
-                            {
-                              "component": "id",
-                              "name": "idRequiredValidator",
-                              "style": {
-                                "position": "absolute"
-                              },
-                              "text": "id is required",
-                              "type": "required-validator"
-                            }
-                          ],
-                          "type": "col"
-                        }
-                      ],
-                      "style": {
-                        "marginBottom": "1rem"
-                      },
-                      "type": "row"
-                    },
-                    {
-                      "components": [
-                        {
-                          "class": "col-md-3",
-                          "components": [
-                            {
-                              "component": "event_time",
-                              "name": "event_timeLabel",
-                              "style": {
-                                "width": "100%"
-                              },
-                              "text": "Event Time",
-                              "type": "label"
-                            }
-                          ],
-                          "type": "col"
-                        },
-                        {
-                          "class": "col-md-9",
-                          "components": [
-                            {
-                              "name": "event_time",
-                              "style": {
-                                "display": "block",
-                                "width": "100%"
-                              },
-                              "type": "datepicker",
-                              "value": "${marketevent.event_time}",
-                              "valueType": "DateTime"
-                            },
-                            {
-                              "component": "event_time",
-                              "name": "event_timeRequiredValidator",
-                              "style": {
-                                "position": "absolute"
-                              },
-                              "text": "event_time is required",
+                              "text": "name is required",
                               "type": "required-validator"
                             }
                           ],
@@ -271,14 +81,18 @@
                           "class": "col-md-9",
                           "components": [
                             {
+                              "format": "",
+                              "min": 0,
                               "name": "price",
+                              "placeholder": "",
+                              "step": "",
                               "style": {
                                 "display": "block",
                                 "width": "100%"
                               },
                               "type": "numeric",
-                              "value": "${marketevent.price}",
-                              "valueType": "decimal"
+                              "value": "${marketevent.Price}",
+                              "valueType": "Decimal"
                             },
                             {
                               "component": "price",
@@ -293,6 +107,155 @@
                           "type": "col"
                         }
                       ],
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "type": "row"
+                    },
+                    {
+                      "components": [
+                        {
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "component": "symbol",
+                              "name": "symbolLabel",
+                              "style": {
+                                "width": "100%"
+                              },
+                              "text": "Symbol",
+                              "type": "label"
+                            }
+                          ],
+                          "name": "col0",
+                          "type": "col"
+                        },
+                        {
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "maxLength": 255,
+                              "name": "symbol",
+                              "placeholder": "",
+                              "style": {
+                                "display": "block",
+                                "width": "100%"
+                              },
+                              "type": "textbox",
+                              "value": "${marketevent.Symbol}",
+                              "valueType": "string"
+                            },
+                            {
+                              "component": "symbol",
+                              "name": "symbolRequiredValidator",
+                              "style": {
+                                "position": "absolute"
+                              },
+                              "text": "symbol is required",
+                              "type": "required-validator"
+                            }
+                          ],
+                          "name": "col1",
+                          "type": "col"
+                        }
+                      ],
+                      "name": "row0",
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "type": "row"
+                    },
+                    {
+                      "components": [
+                        {
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "component": "market",
+                              "name": "marketLabel",
+                              "style": {
+                                "width": "100%"
+                              },
+                              "text": "Market",
+                              "type": "label"
+                            }
+                          ],
+                          "name": "col2",
+                          "type": "col"
+                        },
+                        {
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "maxLength": 255,
+                              "name": "market",
+                              "placeholder": "",
+                              "style": {
+                                "display": "block",
+                                "width": "100%"
+                              },
+                              "type": "textbox",
+                              "value": "${marketevent.Market}",
+                              "valueType": "string"
+                            }
+                          ],
+                          "name": "col3",
+                          "type": "col"
+                        }
+                      ],
+                      "name": "row1",
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "type": "row"
+                    },
+                    {
+                      "components": [
+                        {
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "component": "category",
+                              "name": "categoryLabel",
+                              "style": {
+                                "width": "100%"
+                              },
+                              "text": "Category",
+                              "type": "label"
+                            }
+                          ],
+                          "name": "col4",
+                          "type": "col"
+                        },
+                        {
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "maxLength": 128,
+                              "name": "category",
+                              "style": {
+                                "display": "block",
+                                "width": "100%"
+                              },
+                              "type": "textbox",
+                              "value": "${marketevent.Category}",
+                              "valueType": "string"
+                            },
+                            {
+                              "component": "category",
+                              "name": "categoryRequiredValidator",
+                              "style": {
+                                "position": "absolute"
+                              },
+                              "text": "category is required",
+                              "type": "required-validator"
+                            }
+                          ],
+                          "name": "col5",
+                          "type": "col"
+                        }
+                      ],
+                      "name": "row2",
                       "style": {
                         "marginBottom": "1rem"
                       },
@@ -326,17 +289,8 @@
                                 "width": "100%"
                               },
                               "type": "textbox",
-                              "value": "${marketevent.source}",
+                              "value": "${marketevent.Source}",
                               "valueType": "string"
-                            },
-                            {
-                              "component": "source",
-                              "name": "sourceRequiredValidator",
-                              "style": {
-                                "position": "absolute"
-                              },
-                              "text": "source is required",
-                              "type": "required-validator"
                             }
                           ],
                           "type": "col"
@@ -353,44 +307,49 @@
                           "class": "col-md-3",
                           "components": [
                             {
-                              "component": "name",
-                              "name": "nameLabel",
+                              "component": "time_frame",
+                              "name": "time_frameLabel",
                               "style": {
                                 "width": "100%"
                               },
-                              "text": "Name",
+                              "text": "Time Frame",
                               "type": "label"
                             }
                           ],
+                          "name": "col6",
                           "type": "col"
                         },
                         {
                           "class": "col-md-9",
                           "components": [
                             {
-                              "maxLength": 255,
-                              "name": "name",
+                              "max": 10080,
+                              "min": 1,
+                              "name": "time_frame",
+                              "placeholder": "",
                               "style": {
                                 "display": "block",
                                 "width": "100%"
                               },
-                              "type": "textbox",
-                              "value": "${marketevent.name}",
-                              "valueType": "string"
+                              "type": "numeric",
+                              "value": "${marketevent.TimeFrame}",
+                              "valueType": "Int64"
                             },
                             {
-                              "component": "name",
-                              "name": "nameRequiredValidator",
+                              "component": "time_frame",
+                              "name": "time_frameRequiredValidator",
                               "style": {
                                 "position": "absolute"
                               },
-                              "text": "name is required",
+                              "text": "time_frame is required",
                               "type": "required-validator"
                             }
                           ],
+                          "name": "col7",
                           "type": "col"
                         }
                       ],
+                      "name": "row3",
                       "style": {
                         "marginBottom": "1rem"
                       },
@@ -402,12 +361,12 @@
                           "class": "col-md-3",
                           "components": [
                             {
-                              "component": "message",
-                              "name": "messageLabel",
+                              "component": "exchange",
+                              "name": "exchangeLabel",
                               "style": {
                                 "width": "100%"
                               },
-                              "text": "Message",
+                              "text": "Exchange",
                               "type": "label"
                             }
                           ],
@@ -418,22 +377,22 @@
                           "components": [
                             {
                               "maxLength": 8192,
-                              "name": "message",
+                              "name": "exchange",
                               "style": {
                                 "display": "block",
                                 "width": "100%"
                               },
                               "type": "textbox",
-                              "value": "${marketevent.message}",
+                              "value": "${marketevent.Exchange}",
                               "valueType": "string"
                             },
                             {
-                              "component": "message",
+                              "component": "exchange",
                               "name": "messageRequiredValidator",
                               "style": {
                                 "position": "absolute"
                               },
-                              "text": "message is required",
+                              "text": "exchange is required",
                               "type": "required-validator"
                             }
                           ],
@@ -451,180 +410,40 @@
                           "class": "col-md-3",
                           "components": [
                             {
-                              "component": "symbol",
-                              "name": "symbolLabel",
+                              "component": "contracts",
+                              "name": "contractsLabel",
                               "style": {
                                 "width": "100%"
                               },
-                              "text": "Symbol",
+                              "text": "Contracts",
                               "type": "label"
                             }
                           ],
+                          "name": "col8",
                           "type": "col"
                         },
                         {
                           "class": "col-md-9",
                           "components": [
                             {
-                              "maxLength": 255,
-                              "name": "symbol",
+                              "max": 1000000,
+                              "min": 0,
+                              "name": "contracts",
+                              "placeholder": "",
                               "style": {
                                 "display": "block",
                                 "width": "100%"
                               },
-                              "type": "textbox",
-                              "value": "${marketevent.symbol}",
-                              "valueType": "string"
-                            },
-                            {
-                              "component": "symbol",
-                              "name": "symbolRequiredValidator",
-                              "style": {
-                                "position": "absolute"
-                              },
-                              "text": "symbol is required",
-                              "type": "required-validator"
+                              "type": "numeric",
+                              "value": "${marketevent.Contracts}",
+                              "valueType": "Int64"
                             }
                           ],
+                          "name": "col9",
                           "type": "col"
                         }
                       ],
-                      "style": {
-                        "marginBottom": "1rem"
-                      },
-                      "type": "row"
-                    },
-                    {
-                      "components": [
-                        {
-                          "class": "col-md-3",
-                          "components": [
-                            {
-                              "component": "market",
-                              "name": "marketLabel",
-                              "style": {
-                                "width": "100%"
-                              },
-                              "text": "Market",
-                              "type": "label"
-                            }
-                          ],
-                          "type": "col"
-                        },
-                        {
-                          "class": "col-md-9",
-                          "components": [
-                            {
-                              "maxLength": 255,
-                              "name": "market",
-                              "style": {
-                                "display": "block",
-                                "width": "100%"
-                              },
-                              "type": "textbox",
-                              "value": "${marketevent.market}",
-                              "valueType": "string"
-                            },
-                            {
-                              "component": "market",
-                              "name": "marketRequiredValidator",
-                              "style": {
-                                "position": "absolute"
-                              },
-                              "text": "market is required",
-                              "type": "required-validator"
-                            }
-                          ],
-                          "type": "col"
-                        }
-                      ],
-                      "style": {
-                        "marginBottom": "1rem"
-                      },
-                      "type": "row"
-                    },
-                    {
-                      "components": [
-                        {
-                          "class": "col-md-3",
-                          "components": [
-                            {
-                              "component": "category",
-                              "name": "categoryLabel",
-                              "style": {
-                                "width": "100%"
-                              },
-                              "text": "Category",
-                              "type": "label"
-                            }
-                          ],
-                          "type": "col"
-                        },
-                        {
-                          "class": "col-md-9",
-                          "components": [
-                            {
-                              "maxLength": 128,
-                              "name": "category",
-                              "style": {
-                                "display": "block",
-                                "width": "100%"
-                              },
-                              "type": "textbox",
-                              "value": "${marketevent.category}",
-                              "valueType": "string"
-                            },
-                            {
-                              "component": "category",
-                              "name": "categoryRequiredValidator",
-                              "style": {
-                                "position": "absolute"
-                              },
-                              "text": "category is required",
-                              "type": "required-validator"
-                            }
-                          ],
-                          "type": "col"
-                        }
-                      ],
-                      "style": {
-                        "marginBottom": "1rem"
-                      },
-                      "type": "row"
-                    },
-                    {
-                      "components": [
-                        {
-                          "class": "col-md-3",
-                          "components": [
-                            {
-                              "component": "ETag",
-                              "name": "ETagLabel",
-                              "style": {
-                                "width": "100%"
-                              },
-                              "text": "E Tag",
-                              "type": "label"
-                            }
-                          ],
-                          "type": "col"
-                        },
-                        {
-                          "class": "col-md-9",
-                          "components": [
-                            {
-                              "name": "ETag",
-                              "style": {
-                                "width": "100%"
-                              },
-                              "type": "textbox",
-                              "value": "${marketevent.ETag}",
-                              "valueType": "string"
-                            }
-                          ],
-                          "type": "col"
-                        }
-                      ],
+                      "name": "row4",
                       "style": {
                         "marginBottom": "1rem"
                       },
@@ -638,8 +457,8 @@
                             {
                               "buttonStyle": "primary",
                               "buttonType": "submit",
-                              "icon": "save",
-                              "text": "Save",
+                              "icon": "flash_on",
+                              "text": "Raise",
                               "type": "button"
                             },
                             {
@@ -668,46 +487,16 @@
                   "events": {
                     "submit": [
                       {
-                        "error": [
-                          {
-                            "detail": "Unable to update MarketEvent",
-                            "severity": "error",
-                            "summary": "Error",
-                            "type": "notify"
-                          }
-                        ],
-                        "name": "cryptodb.updateMarketEvent",
-                        "parameters": [
-                          {
-                            "name": "id",
-                            "value": "${parameters.id}"
-                          },
-                          {
-                            "name": "MarketEvent",
-                            "value": "${marketevent}"
-                          }
-                        ],
-                        "then": [
-                          {
-                            "condition": "result.StatusCode != System.Net.HttpStatusCode.PreconditionFailed",
-                            "result": "${marketevent}",
-                            "type": "close-popup"
-                          },
-                          {
-                            "name": "hasChanges",
-                            "type": "set",
-                            "value": "result.StatusCode == System.Net.HttpStatusCode.PreconditionFailed",
-                            "valueType": "bool"
-                          }
-                        ],
-                        "type": "invoke"
+                        "result": "args",
+                        "type": "close-popup"
                       }
                     ]
                   },
-                  "itemType": "CryptobotUi.Models.Cryptodb.MarketEvent",
+                  "itemType": "CryptobotUi.Models.Shared.MarketEvent",
+                  "method": "",
                   "name": "form0",
                   "type": "template-form",
-                  "visible": "${marketevent != null && canEdit}"
+                  "visible": "${marketevent != null}"
                 }
               ],
               "type": "col"
@@ -723,45 +512,13 @@
   "events": {
     "load": [
       {
-        "name": "hasChanges",
+        "name": "marketevent",
         "type": "set",
-        "value": "false",
-        "valueType": "bool"
-      },
-      {
-        "name": "canEdit",
-        "type": "set",
-        "value": "true",
-        "valueType": "bool"
-      },
-      {
-        "error": [],
-        "name": "cryptodb.getMarketEventByid",
-        "parameters": [
-          {
-            "name": "id",
-            "value": "${parameters.id}"
-          }
-        ],
-        "then": [
-          {
-            "name": "marketevent",
-            "type": "set",
-            "value": "${result}",
-            "valueType": "CryptobotUi.Models.Cryptodb.MarketEvent"
-          },
-          {
-            "name": "canEdit",
-            "type": "set",
-            "value": "result != null",
-            "valueType": "bool"
-          }
-        ],
-        "type": "invoke"
+        "value": "marketevent ?? new CryptobotUi.Models.Shared.MarketEvent(){}",
+        "valueType": "CryptobotUi.Models.Shared.MarketEvent"
       }
     ]
   },
   "layout": "Main",
-  "name": "Edit Market Event",
-  "access": []
+  "name": "Raise Market Event"
 }

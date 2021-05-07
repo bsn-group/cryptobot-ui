@@ -9,6 +9,7 @@ namespace CryptobotUi
         static partial void OnConfigureBuilder(WebAssemblyHostBuilder builder)
         {
             builder.Services.AddSingleton(new AppState());
+            builder.Services.AddScoped<MarketEventClient>();
         }
     }
 }

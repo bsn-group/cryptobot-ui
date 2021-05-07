@@ -85,6 +85,24 @@ namespace CryptobotUi.Models.Cryptodb
       set;
     }
     [ConcurrencyCheck]
+    public Int64? open_commands_count
+    {
+      get;
+      set;
+    }
+    [ConcurrencyCheck]
+    public Int64? close_commands_count
+    {
+      get;
+      set;
+    }
+    [ConcurrencyCheck]
+    public Int64? pending_commands_count
+    {
+      get;
+      set;
+    }
+    [ConcurrencyCheck]
     public decimal? entry_price
     {
       get;

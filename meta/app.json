@@ -52,8 +52,7 @@
     "Add Symbol",
     "Load Market Event JSON",
     "MarketEvent",
-    "Add MarketEvent",
-    "Edit MarketEvent",
+    "Raise MarketEvent",
     "Signals"
   ],
   "port": 8000,

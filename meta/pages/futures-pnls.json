@@ -352,13 +352,6 @@
                           "title": "Action Time"
                         },
                         {
-                          "filterProperty": "",
-                          "property": "exchange_order_id",
-                          "sortProperty": "",
-                          "template": "${data.ExchangeOrder?.status_reason}",
-                          "title": "Order placed?"
-                        },
-                        {
                           "property": "strategy_name",
                           "title": "Strategy"
                         },

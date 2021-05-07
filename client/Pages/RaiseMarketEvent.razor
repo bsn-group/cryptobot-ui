@@ -1,0 +1,130 @@
+﻿@page "/raise-market-event"
+@layout MainLayout
+@inherits CryptobotUi.Pages.RaiseMarketEventComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using CryptobotUi.Models.Cryptodb
+@inject Microsoft.Extensions.Localization.IStringLocalizer<RaiseMarketEvent> L
+<RadzenContent Container="main">
+  <ChildContent>
+    <div class="row">
+      <div class="col-md-12">
+        <RadzenTemplateForm Data="@marketevent" TItem="CryptobotUi.Models.Shared.MarketEvent" Visible="@(marketevent != null)" Submit="@Form0Submit">
+          <ChildContent>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Component="name" style="width: 100%" Text="Name">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenTextBox MaxLength="255" style="display: block; width: 100%" @bind-Value="@(marketevent.Name)" Name="Name">
+                </RadzenTextBox>
+                <RadzenRequiredValidator Component="Name" style="position: absolute" Text="name is required">
+                </RadzenRequiredValidator>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Component="price" style="width: 100%" Text="Price">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenNumeric Min="0" style="display: block; width: 100%" @bind-Value="@(marketevent.Price)" Name="Price">
+                </RadzenNumeric>
+                <RadzenRequiredValidator Component="Price" style="position: absolute" Text="price is required">
+                </RadzenRequiredValidator>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Component="symbol" style="width: 100%" Text="Symbol">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenTextBox MaxLength="255" style="display: block; width: 100%" @bind-Value="@(marketevent.Symbol)" Name="Symbol">
+                </RadzenTextBox>
+                <RadzenRequiredValidator Component="Symbol" style="position: absolute" Text="symbol is required">
+                </RadzenRequiredValidator>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Component="market" style="width: 100%" Text="Market">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenTextBox MaxLength="255" style="display: block; width: 100%" @bind-Value="@(marketevent.Market)" Name="Market">
+                </RadzenTextBox>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Component="category" style="width: 100%" Text="Category">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenTextBox MaxLength="128" style="display: block; width: 100%" @bind-Value="@(marketevent.Category)" Name="Category">
+                </RadzenTextBox>
+                <RadzenRequiredValidator Component="Category" style="position: absolute" Text="category is required">
+                </RadzenRequiredValidator>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Component="source" style="width: 100%" Text="Source">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenTextBox MaxLength="255" style="display: block; width: 100%" @bind-Value="@(marketevent.Source)" Name="Source">
+                </RadzenTextBox>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Component="time_frame" style="width: 100%" Text="Time Frame">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenNumeric Max="10080" Min="1" style="display: block; width: 100%" @bind-Value="@(marketevent.TimeFrame)" Name="Time_frame">
+                </RadzenNumeric>
+                <RadzenRequiredValidator Component="Time_frame" style="position: absolute" Text="time_frame is required">
+                </RadzenRequiredValidator>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Component="exchange" style="width: 100%" Text="Exchange">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenTextBox MaxLength="8192" style="display: block; width: 100%" @bind-Value="@(marketevent.Exchange)" Name="Exchange">
+                </RadzenTextBox>
+                <RadzenRequiredValidator Component="Exchange" style="position: absolute" Text="exchange is required">
+                </RadzenRequiredValidator>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Component="contracts" style="width: 100%" Text="Contracts">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenNumeric Max="1000000" Min="0" style="display: block; width: 100%" @bind-Value="@(marketevent.Contracts)" Name="Contracts">
+                </RadzenNumeric>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col offset-sm-3">
+                <RadzenButton ButtonStyle="ButtonStyle.Primary" ButtonType="ButtonType.Submit" Icon="flash_on" Text="Raise">
+                </RadzenButton>
+                <RadzenButton ButtonStyle="ButtonStyle.Light" style="margin-left: 1rem" Text="Cancel" Click="@Button2Click">
+                </RadzenButton>
+              </div>
+            </div>
+          </ChildContent>
+        </RadzenTemplateForm>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenContent>

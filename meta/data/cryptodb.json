@@ -48,11 +48,6 @@
             }
           ]
         },
-        "active": {
-          "x-default-sql": "true",
-          "x-nullable": false,
-          "type": "boolean"
-        },
         "code": {
           "type": "string",
           "length": 255
@@ -61,6 +56,11 @@
           "x-nullable": false,
           "type": "string",
           "length": 50
+        },
+        "active": {
+          "x-default-sql": "true",
+          "x-nullable": false,
+          "type": "boolean"
         }
       }
     },
@@ -68,22 +68,39 @@
       "x-table": "public.exchange_order",
       "resource": "ExchangeOrders",
       "required": [
+        "symbol",
         "price",
+        "exchange_order_id",
         "signal_id",
         "original_qty",
-        "exchange_id",
-        "created_time",
-        "updated_time",
-        "symbol",
-        "exchange_order_id",
         "status",
-        "order_side"
+        "exchange_id",
+        "order_side",
+        "created_time",
+        "updated_time"
       ],
       "properties": {
+        "status_reason": {
+          "type": "string"
+        },
+        "symbol": {
+          "x-nullable": false,
+          "type": "string",
+          "length": 255
+        },
         "price": {
           "x-nullable": false,
           "type": "number",
           "format": "decimal"
+        },
+        "exchange_order_id": {
+          "x-nullable": false,
+          "type": "string",
+          "length": 255
+        },
+        "exchange_order_id_secondary": {
+          "type": "string",
+          "length": 255
         },
         "signal_id": {
           "x-nullable": false,
@@ -98,6 +115,11 @@
         "executed_qty": {
           "type": "number",
           "format": "decimal"
+        },
+        "status": {
+          "x-nullable": false,
+          "type": "string",
+          "length": 128
         },
         "exchange_id": {
           "x-nullable": false,
@@ -117,6 +139,15 @@
               "type": "FuturesSignalCommand"
             }
           ]
+        },
+        "order_side": {
+          "x-nullable": false,
+          "type": "string",
+          "length": 12
+        },
+        "fee_currency": {
+          "type": "string",
+          "length": 32
         },
         "fee_amount": {
           "type": "number",
@@ -141,37 +172,6 @@
           "x-nullable": false,
           "type": "integer",
           "format": "int64"
-        },
-        "status_reason": {
-          "type": "string"
-        },
-        "symbol": {
-          "x-nullable": false,
-          "type": "string",
-          "length": 255
-        },
-        "exchange_order_id": {
-          "x-nullable": false,
-          "type": "string",
-          "length": 255
-        },
-        "exchange_order_id_secondary": {
-          "type": "string",
-          "length": 255
-        },
-        "status": {
-          "x-nullable": false,
-          "type": "string",
-          "length": 128
-        },
-        "order_side": {
-          "x-nullable": false,
-          "type": "string",
-          "length": 12
-        },
-        "fee_currency": {
-          "type": "string",
-          "length": 32
         },
         "FuturesSignalCommands": {
           "type": "array",
@@ -229,6 +229,18 @@
         "pending_sell_qty": {
           "type": "number",
           "format": "decimal"
+        },
+        "open_commands_count": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "close_commands_count": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "pending_commands_count": {
+          "type": "integer",
+          "format": "int64"
         },
         "entry_price": {
           "type": "number",
@@ -305,6 +317,18 @@
           "type": "number",
           "format": "decimal"
         },
+        "open_commands_count": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "close_commands_count": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "pending_commands_count": {
+          "type": "integer",
+          "format": "int64"
+        },
         "entry_price": {
           "type": "number",
           "format": "decimal"
@@ -328,10 +352,10 @@
       "resource": "FuturesSignals",
       "required": [
         "signal_id",
-        "created_date_time",
         "symbol",
         "strategy_pair_name",
-        "position_type"
+        "position_type",
+        "created_date_time"
       ],
       "properties": {
         "signal_id": {
@@ -346,6 +370,21 @@
               "type": "FuturesSignalCommand"
             }
           ]
+        },
+        "symbol": {
+          "x-nullable": false,
+          "type": "string",
+          "length": 255
+        },
+        "strategy_pair_name": {
+          "x-nullable": false,
+          "type": "string",
+          "length": 255
+        },
+        "position_type": {
+          "x-nullable": false,
+          "type": "string",
+          "length": 32
         },
         "created_date_time": {
           "x-nullable": false,
@@ -375,21 +414,6 @@
             "navigationProperty": "FuturesSignals"
           }
         },
-        "symbol": {
-          "x-nullable": false,
-          "type": "string",
-          "length": 255
-        },
-        "strategy_pair_name": {
-          "x-nullable": false,
-          "type": "string",
-          "length": 255
-        },
-        "position_type": {
-          "x-nullable": false,
-          "type": "string",
-          "length": 32
-        },
         "FuturesSignalCommands": {
           "type": "array",
           "items": {
@@ -406,12 +430,12 @@
         "signal_id",
         "price",
         "leverage",
+        "signal_action",
+        "status",
         "request_date_time",
         "strategy_name",
         "strategy_hash",
-        "strategy_data",
-        "signal_action",
-        "status"
+        "strategy_data"
       ],
       "properties": {
         "id": {
@@ -450,6 +474,16 @@
         "leverage": {
           "x-nullable": false,
           "type": "integer"
+        },
+        "signal_action": {
+          "x-nullable": false,
+          "type": "string",
+          "length": 32
+        },
+        "status": {
+          "x-nullable": false,
+          "type": "string",
+          "length": 32
         },
         "request_date_time": {
           "x-nullable": false,
@@ -491,16 +525,6 @@
           "x-nullable": false,
           "type": "string",
           "length": 8192
-        },
-        "signal_action": {
-          "x-nullable": false,
-          "type": "string",
-          "length": 32
-        },
-        "status": {
-          "x-nullable": false,
-          "type": "string",
-          "length": 32
         }
       }
     },
@@ -510,12 +534,12 @@
       "required": [
         "time_frame",
         "id",
-        "event_time",
-        "price",
         "source",
         "name",
         "message",
+        "event_time",
         "symbol",
+        "price",
         "market",
         "category"
       ],
@@ -530,16 +554,6 @@
           "x-nullable": false,
           "type": "integer",
           "format": "int64"
-        },
-        "event_time": {
-          "x-nullable": false,
-          "type": "string",
-          "format": "date-time"
-        },
-        "price": {
-          "x-nullable": false,
-          "type": "number",
-          "format": "decimal"
         },
         "source": {
           "x-nullable": false,
@@ -556,10 +570,20 @@
           "type": "string",
           "length": 8192
         },
+        "event_time": {
+          "x-nullable": false,
+          "type": "string",
+          "format": "date-time"
+        },
         "symbol": {
           "x-nullable": false,
           "type": "string",
           "length": 255
+        },
+        "price": {
+          "x-nullable": false,
+          "type": "number",
+          "format": "decimal"
         },
         "market": {
           "x-nullable": false,
@@ -570,6 +594,10 @@
           "x-nullable": false,
           "type": "string",
           "length": 128
+        },
+        "contracts": {
+          "type": "number",
+          "format": "decimal"
         }
       }
     },
@@ -577,20 +605,44 @@
       "x-table": "public.strategy",
       "resource": "Strategies",
       "required": [
-        "version",
-        "updated_time",
-        "created_time",
-        "status",
         "name",
         "position_type",
         "exchange_type",
-        "symbol"
+        "symbol",
+        "version",
+        "status",
+        "updated_time",
+        "created_time"
       ],
       "properties": {
+        "name": {
+          "x-nullable": false,
+          "type": "string",
+          "length": 255
+        },
+        "position_type": {
+          "x-nullable": false,
+          "type": "string",
+          "length": 255
+        },
+        "exchange_type": {
+          "x-nullable": false,
+          "type": "string",
+          "length": 255
+        },
+        "symbol": {
+          "x-nullable": false,
+          "type": "string"
+        },
         "version": {
           "x-nullable": false,
           "type": "integer",
           "format": "int64"
+        },
+        "status": {
+          "x-nullable": false,
+          "type": "string",
+          "length": 54
         },
         "updated_time": {
           "x-nullable": false,
@@ -616,30 +668,6 @@
             }
           ]
         },
-        "status": {
-          "x-nullable": false,
-          "type": "string",
-          "length": 54
-        },
-        "name": {
-          "x-nullable": false,
-          "type": "string",
-          "length": 255
-        },
-        "position_type": {
-          "x-nullable": false,
-          "type": "string",
-          "length": 255
-        },
-        "exchange_type": {
-          "x-nullable": false,
-          "type": "string",
-          "length": 255
-        },
-        "symbol": {
-          "x-nullable": false,
-          "type": "string"
-        },
         "StrategyConditions": {
           "type": "array",
           "items": {
@@ -652,23 +680,18 @@
       "x-table": "public.strategy_conditions",
       "resource": "StrategyConditions",
       "required": [
-        "created_time",
         "strategy_id",
+        "name",
         "time_frame",
         "last_observed",
+        "category",
+        "condition_group",
+        "created_time",
         "sequence",
         "version",
-        "condition_sub_group",
-        "category",
-        "name",
-        "condition_group"
+        "condition_sub_group"
       ],
       "properties": {
-        "created_time": {
-          "x-nullable": false,
-          "type": "string",
-          "format": "date-time"
-        },
         "Strategy": {
           "type": "object",
           "$ref": "#/definitions/Strategy"
@@ -683,9 +706,14 @@
             "type": "Strategy",
             "principalKey": "id",
             "name": "Strategy",
-            "textProperty": "status",
+            "textProperty": "name",
             "navigationProperty": "StrategyConditions"
           }
+        },
+        "name": {
+          "x-nullable": false,
+          "type": "string",
+          "length": 255
         },
         "time_frame": {
           "x-nullable": false,
@@ -697,17 +725,27 @@
           "type": "integer",
           "format": "int64"
         },
+        "category": {
+          "x-nullable": false,
+          "type": "string",
+          "length": 255
+        },
+        "condition_group": {
+          "x-nullable": false,
+          "type": "string",
+          "length": 255
+        },
+        "created_time": {
+          "x-nullable": false,
+          "type": "string",
+          "format": "date-time"
+        },
         "sequence": {
           "x-nullable": false,
           "type": "integer",
           "format": "int64"
         },
         "version": {
-          "x-nullable": false,
-          "type": "integer",
-          "format": "int64"
-        },
-        "condition_sub_group": {
           "x-nullable": false,
           "type": "integer",
           "format": "int64"
@@ -719,20 +757,10 @@
           "type": "integer",
           "format": "int64"
         },
-        "category": {
+        "condition_sub_group": {
           "x-nullable": false,
-          "type": "string",
-          "length": 255
-        },
-        "name": {
-          "x-nullable": false,
-          "type": "string",
-          "length": 255
-        },
-        "condition_group": {
-          "x-nullable": false,
-          "type": "string",
-          "length": 255
+          "type": "integer",
+          "format": "int64"
         }
       }
     },

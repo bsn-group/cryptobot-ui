@@ -1,7 +1,6 @@
 ﻿using System;
 using Radzen;
 using System.Text.Json;
-using CryptobotUi.Client.Model;
 using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 using System.Text;
@@ -19,7 +18,7 @@ namespace CryptobotUi.Pages
         {
             try 
             {
-                var marketEvent = JsonSerializer.Deserialize<MarketEvent>(MarketEventJson, new JsonSerializerOptions {
+                var marketEvent = JsonSerializer.Deserialize<CryptobotUi.Models.Shared.MarketEvent>(MarketEventJson, new JsonSerializerOptions {
                     PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
                     NumberHandling = JsonNumberHandling.Strict,
                 });

@@ -1,4 +1,5 @@
 {
+  "access": [],
   "components": [
     {
       "components": [
@@ -14,37 +15,16 @@
               "class": "col-md-12",
               "components": [
                 {
-                  "events": {
-                    "click": [
-                      {
-                        "path": "add-market-event",
-                        "then": [
-                          {
-                            "code": "await grid0.Reload();",
-                            "type": "execute"
-                          },
-                          {
-                            "code": "await InvokeAsync(() => { StateHasChanged(); });",
-                            "type": "execute"
-                          }
-                        ],
-                        "type": "popup"
-                      }
-                    ]
-                  },
-                  "icon": "add_circle_outline",
-                  "name": "button0",
-                  "style": {
-                    "marginBottom": "10px"
-                  },
-                  "text": "Add",
-                  "type": "button"
-                },
-                {
+                  "allowColumnResize": true,
                   "allowFiltering": true,
                   "allowPaging": true,
                   "allowSorting": true,
                   "columns": [
+                    {
+                      "formatString": "{0:g}",
+                      "property": "event_time",
+                      "title": "Event Time"
+                    },
                     {
                       "property": "time_frame",
                       "title": "Time Frame"
@@ -53,11 +33,6 @@
                       "property": "id",
                       "title": "Id",
                       "visible": false
-                    },
-                    {
-                      "formatString": "{0:g}",
-                      "property": "event_time",
-                      "title": "Event Time"
                     },
                     {
                       "property": "price",
@@ -147,6 +122,10 @@
                   "events": {
                     "loadData": [
                       {
+                        "code": "args.OrderBy = string.IsNullOrWhiteSpace(args.OrderBy) ? \"event_time desc\" : args.OrderBy;",
+                        "type": "execute"
+                      },
+                      {
                         "error": [
                           {
                             "detail": "Unable to load MarketEvents",
@@ -195,28 +174,7 @@
                         "type": "invoke"
                       }
                     ],
-                    "rowSelect": [
-                      {
-                        "parameters": [
-                          {
-                            "name": "id",
-                            "value": "${event.id}"
-                          }
-                        ],
-                        "path": "edit-market-event",
-                        "then": [
-                          {
-                            "code": "await grid0.Reload();",
-                            "type": "execute"
-                          },
-                          {
-                            "code": "await InvokeAsync(() => { StateHasChanged(); });",
-                            "type": "execute"
-                          }
-                        ],
-                        "type": "popup"
-                      }
-                    ]
+                    "rowSelect": []
                   },
                   "filterMode": "advanced",
                   "itemType": "CryptobotUi.Models.Cryptodb.MarketEvent",
@@ -239,6 +197,5 @@
     "load": []
   },
   "layout": "Main",
-  "name": "MarketEvent",
-  "access": []
+  "name": "MarketEvent"
 }

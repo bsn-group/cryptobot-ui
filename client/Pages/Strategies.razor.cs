@@ -2,8 +2,10 @@
 using System.Linq;
 using System.Threading.Tasks;
 using CryptobotUi.Client.Model;
+using CryptobotUi.Client.Pages;
 using CryptobotUi.Models.Cryptodb;
 using Microsoft.AspNetCore.Components;
+using Radzen;
 
 namespace CryptobotUi.Pages
 {
@@ -11,6 +13,9 @@ namespace CryptobotUi.Pages
     {
         [Inject]
         protected AppState AppState { get; set; }
+
+        [Inject]
+        protected MarketEventClient MarketEventClient { get; set; }
 
         public async Task CreateStrategyCondition(StrategyCondition strategyCondition, long strategy_id) {
             if (strategyCondition != null)
@@ -38,6 +43,32 @@ namespace CryptobotUi.Pages
                 }
             }
         }
-    }
 
+        protected async Task RaiseMarketEvent(CryptobotUi.Models.Cryptodb.StrategyCondition condition)
+        {
+            var evt = condition == null
+            ? new Models.Shared.MarketEvent()
+            : new Models.Shared.MarketEvent
+            {
+                Name = condition.name,
+                Symbol = _master?.symbol,
+                TimeFrame = condition.time_frame,
+                Source = "Manual",
+                Category = condition.category
+            };
+
+            CryptobotUi.Models.Shared.MarketEvent result = await DialogService.OpenAsync<RaiseMarketEvent>("Raise market event",
+                parameters: new System.Collections.Generic.Dictionary<string, object> {
+                    { "MarketEvent", evt }
+                },
+                options: new DialogOptions {
+                    Width = $"{800}px"
+                });
+
+            if (result != null)
+            {
+                await MarketEventClient.RaiseMarketEvent(result);
+            }
+        }
+    }
 }

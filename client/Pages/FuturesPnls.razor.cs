@@ -80,7 +80,7 @@ namespace CryptobotUi.Pages
 
                 var signalId = pnl.signal_id;
                 args.Filter = string.IsNullOrWhiteSpace(args.Filter) ? $"signal_id eq {signalId}" : args.Filter;
-                var commands = await Cryptodb.GetFuturesSignalCommands(filter: $"{args.Filter}"); //, orderby: $"{args.OrderBy}", expand: $"ExchangeOrder", top: args.Top, skip: args.Skip, count: args.Top != null && args.Skip != null);
+                var commands = await Cryptodb.GetFuturesSignalCommands(filter: $"{args.Filter}"); //, orderby: $"{args.OrderBy}", top: args.Top, skip: args.Skip, count: args.Top != null && args.Skip != null);
 
                 pnl.Commands = commands.Value;
                 //pnl.CommandCount = commands.Count;

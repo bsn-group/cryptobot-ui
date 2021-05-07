@@ -71,7 +71,7 @@
           <Template Context="cryptobotUiClientModelFuturesPnlViewModel">
             <RadzenHeading Size="H3" Text="Commands & Orders">
             </RadzenHeading>
-            <RadzenGrid @ref="grid0" AllowColumnResize="true" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@(cryptobotUiClientModelFuturesPnlViewModel.Commands)" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" FilterMode="FilterMode.Advanced" TItem="CryptobotUi.Models.Cryptodb.FuturesSignalCommand">
+            <RadzenGrid @ref="grid0" AllowColumnResize="true" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Count="@(cryptobotUiClientModelFuturesPnlViewModel.CommandCount)" Data="@(cryptobotUiClientModelFuturesPnlViewModel.Commands)" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" FilterMode="FilterMode.Advanced" TItem="CryptobotUi.Models.Cryptodb.FuturesSignalCommand">
               <Columns>
                 <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.FuturesSignalCommand" Property="ETag" Title="E Tag" Visible="false">
                 </RadzenGridColumn>
@@ -91,11 +91,6 @@
                 <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.FuturesSignalCommand" FormatString="{0:d}" Property="request_date_time" Title="Request Time">
                 </RadzenGridColumn>
                 <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.FuturesSignalCommand" FormatString="{0:d}" Property="action_date_time" Title="Action Time">
-                </RadzenGridColumn>
-                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.FuturesSignalCommand" Property="exchange_order_id" Title="Order placed?">
-                  <Template Context="data">
-                  @(data.ExchangeOrder?.status_reason)
-                  </Template>
                 </RadzenGridColumn>
                 <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.FuturesSignalCommand" Property="strategy_name" Title="Strategy">
                 </RadzenGridColumn>

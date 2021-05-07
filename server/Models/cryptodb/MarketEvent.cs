@@ -31,18 +31,6 @@ namespace CryptobotUi.Models.Cryptodb
       set;
     }
     [ConcurrencyCheck]
-    public DateTime event_time
-    {
-      get;
-      set;
-    }
-    [ConcurrencyCheck]
-    public decimal price
-    {
-      get;
-      set;
-    }
-    [ConcurrencyCheck]
     public string source
     {
       get;
@@ -61,7 +49,19 @@ namespace CryptobotUi.Models.Cryptodb
       set;
     }
     [ConcurrencyCheck]
+    public DateTime event_time
+    {
+      get;
+      set;
+    }
+    [ConcurrencyCheck]
     public string symbol
+    {
+      get;
+      set;
+    }
+    [ConcurrencyCheck]
+    public decimal price
     {
       get;
       set;
@@ -74,6 +74,12 @@ namespace CryptobotUi.Models.Cryptodb
     }
     [ConcurrencyCheck]
     public string category
+    {
+      get;
+      set;
+    }
+    [ConcurrencyCheck]
+    public decimal? contracts
     {
       get;
       set;

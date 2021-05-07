@@ -95,16 +95,10 @@ namespace CryptobotUi.Pages
 
         }
 
-        protected async System.Threading.Tasks.Task Button0Click(MouseEventArgs args)
-        {
-            var dialogResult = await DialogService.OpenAsync<AddMarketEvent>("Add Market Event", null);
-            await grid0.Reload();
-
-            await InvokeAsync(() => { StateHasChanged(); });
-        }
-
         protected async System.Threading.Tasks.Task Grid0LoadData(LoadDataArgs args)
         {
+            args.OrderBy = string.IsNullOrWhiteSpace(args.OrderBy) ? "event_time desc" : args.OrderBy;
+
             try
             {
                 var cryptodbGetMarketEventsResult = await Cryptodb.GetMarketEvents(filter:$"{args.Filter}", orderby:$"{args.OrderBy}", top:args.Top, skip:args.Skip, count:args.Top != null && args.Skip != null);
@@ -116,14 +110,6 @@ namespace CryptobotUi.Pages
             {
                 NotificationService.Notify(new NotificationMessage(){ Severity = NotificationSeverity.Error,Summary = $"Error",Detail = $"Unable to load MarketEvents" });
             }
-        }
-
-        protected async System.Threading.Tasks.Task Grid0RowSelect(CryptobotUi.Models.Cryptodb.MarketEvent args)
-        {
-            var dialogResult = await DialogService.OpenAsync<EditMarketEvent>("Edit Market Event", new Dictionary<string, object>() { {"id", args.id} });
-            await grid0.Reload();
-
-            await InvokeAsync(() => { StateHasChanged(); });
         }
 
         protected async System.Threading.Tasks.Task GridDeleteButtonClick(MouseEventArgs args, dynamic data)
