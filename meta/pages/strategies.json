@@ -162,7 +162,7 @@
                       "title": "Status"
                     },
                     {
-                      "formatString": "{0:d}",
+                      "formatString": "{0:g}",
                       "property": "updated_time",
                       "title": "Updated Time"
                     },
@@ -439,17 +439,17 @@
                         {
                           "property": "condition_group",
                           "title": "Condition group",
-                          "visible": false
+                          "visible": true
                         },
                         {
                           "property": "condition_sub_group",
                           "title": "Condition Sub Group",
-                          "visible": false
+                          "visible": true
                         },
                         {
                           "property": "category",
                           "title": "Category",
-                          "visible": false
+                          "visible": true
                         },
                         {
                           "property": "time_frame",
@@ -460,7 +460,7 @@
                           "title": "Last Observed"
                         },
                         {
-                          "formatString": "{0:d}",
+                          "formatString": "",
                           "property": "created_time",
                           "title": "Created Time"
                         },
@@ -468,7 +468,7 @@
                           "property": "sequence",
                           "sortProperty": "",
                           "title": "Sequence",
-                          "visible": false
+                          "visible": true
                         },
                         {
                           "property": "version",

@@ -43,13 +43,13 @@
                       "title": "Position Type"
                     },
                     {
-                      "formatString": "{0:g}",
+                      "formatString": "{0:dd/MM/yy HH:mm:ss.fff zzz}",
                       "property": "created_date_time",
                       "title": "Created Time",
                       "visible": true
                     },
                     {
-                      "formatString": "{0:d}",
+                      "formatString": "{0:dd/MM/yy HH:mm:ss.fff zzz}",
                       "property": "updated_date_time",
                       "title": "Updated Date Time",
                       "visible": false
@@ -225,12 +225,12 @@
                           "title": "Leverage"
                         },
                         {
-                          "formatString": "{0:d}",
+                          "formatString": "{0:dd/MM/yy HH:mm:ss.fff zzz}",
                           "property": "request_date_time",
                           "title": "Request Date Time"
                         },
                         {
-                          "formatString": "{0:d}",
+                          "formatString": "{0:dd/MM/yy HH:mm:ss.fff zzz}",
                           "property": "action_date_time",
                           "title": "Action Date Time"
                         },

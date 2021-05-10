@@ -63,9 +63,9 @@
             </RadzenGridColumn>
             <RadzenGridColumn TItem="CryptobotUi.Client.Model.FuturesPnlViewModel" FormatString="{0:P}" Property="pnl_percent" TextAlign="TextAlign.Right" Title="Pnl Percent" Visible="false">
             </RadzenGridColumn>
-            <RadzenGridColumn TItem="CryptobotUi.Client.Model.FuturesPnlViewModel" Format="date-time" FormatString="{0:g}" Property="entry_time" Title="Entry Time" Type="string">
+            <RadzenGridColumn TItem="CryptobotUi.Client.Model.FuturesPnlViewModel" Format="date-time" FormatString="{0:dd/MM/yy HH:mm:ss.fff zzz}" Property="entry_time" Title="Entry Time" Type="string">
             </RadzenGridColumn>
-            <RadzenGridColumn TItem="CryptobotUi.Client.Model.FuturesPnlViewModel" Format="date-time" FormatString="{0:g}" Property="exit_time" Title="Exit Time" Type="string">
+            <RadzenGridColumn TItem="CryptobotUi.Client.Model.FuturesPnlViewModel" Format="date-time" FormatString="{0:dd/MM/yy HH:mm:ss.fff zzz}" Property="exit_time" Title="Exit Time" Type="string">
             </RadzenGridColumn>
           </Columns>
           <Template Context="cryptobotUiClientModelFuturesPnlViewModel">
@@ -88,9 +88,9 @@
                 </RadzenGridColumn>
                 <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.FuturesSignalCommand" Property="leverage" Title="Leverage">
                 </RadzenGridColumn>
-                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.FuturesSignalCommand" FormatString="{0:d}" Property="request_date_time" Title="Request Time">
+                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.FuturesSignalCommand" FormatString="{0:dd/MM/yy HH:mm:ss.fff zzz}" Property="request_date_time" Title="Request Time">
                 </RadzenGridColumn>
-                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.FuturesSignalCommand" FormatString="{0:d}" Property="action_date_time" Title="Action Time">
+                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.FuturesSignalCommand" FormatString="{0:dd/MM/yy HH:mm:ss.fff zzz}" Property="action_date_time" Title="Action Time">
                 </RadzenGridColumn>
                 <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.FuturesSignalCommand" Property="strategy_name" Title="Strategy">
                 </RadzenGridColumn>

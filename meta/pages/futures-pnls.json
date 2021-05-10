@@ -241,14 +241,14 @@
                     },
                     {
                       "format": "date-time",
-                      "formatString": "{0:g}",
+                      "formatString": "{0:dd/MM/yy HH:mm:ss.fff zzz}",
                       "property": "entry_time",
                       "title": "Entry Time",
                       "type": "string"
                     },
                     {
                       "format": "date-time",
-                      "formatString": "{0:g}",
+                      "formatString": "{0:dd/MM/yy HH:mm:ss.fff zzz}",
                       "property": "exit_time",
                       "title": "Exit Time",
                       "type": "string"
@@ -342,12 +342,12 @@
                           "title": "Leverage"
                         },
                         {
-                          "formatString": "{0:d}",
+                          "formatString": "{0:dd/MM/yy HH:mm:ss.fff zzz}",
                           "property": "request_date_time",
                           "title": "Request Time"
                         },
                         {
-                          "formatString": "{0:d}",
+                          "formatString": "{0:dd/MM/yy HH:mm:ss.fff zzz}",
                           "property": "action_date_time",
                           "title": "Action Time"
                         },
