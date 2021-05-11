@@ -81,17 +81,7 @@ namespace CryptobotUi.Pages
 
         protected async System.Threading.Tasks.Task Splitbutton0Click(RadzenSplitButtonItem args)
         {
-            if (args?.Value == "csv")
-            {
-                await Cryptodb.ExportFuturesPnlsToCSV(new Query() { Filter = $@"{pnlDataGrid.Query.Filter}", OrderBy = $"{pnlDataGrid.Query.OrderBy}", Expand = "", Select = "signal_id,symbol,position_type,exchange_id,strategy_pair_name,signal_status,position_status,executed_buy_qty,pending_buy_qty,executed_sell_qty,pending_sell_qty,entry_price,close_price,pnl,pnl_percent" }, $"Futures Pnls");
-
-            }
-
-            if (args == null || args.Value == "xlsx")
-            {
-                await Cryptodb.ExportFuturesPnlsToExcel(new Query() { Filter = $@"{pnlDataGrid.Query.Filter}", OrderBy = $"{pnlDataGrid.Query.OrderBy}", Expand = "", Select = "signal_id,symbol,position_type,exchange_id,strategy_pair_name,signal_status,position_status,executed_buy_qty,pending_buy_qty,executed_sell_qty,pending_sell_qty,entry_price,close_price,pnl,pnl_percent" }, $"Futures Pnls");
-
-            }
+            await Export(args);
         }
 
         protected async System.Threading.Tasks.Task RefreshButtonClick(MouseEventArgs args)

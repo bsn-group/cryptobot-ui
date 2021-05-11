@@ -18,53 +18,19 @@
                   "events": {
                     "click": [
                       {
-                        "condition": "${event?.Value == \"csv\"}",
-                        "fileName": "Futures Pnls",
-                        "name": "cryptodb.getFuturesPnls",
+                        "name": "Export",
                         "parameters": [
                           {
-                            "name": "$filter",
-                            "value": "${pnlDataGrid.Query.Filter}"
-                          },
-                          {
-                            "name": "$orderby",
-                            "value": "${pnlDataGrid.Query.OrderBy}"
-                          },
-                          {
-                            "name": "$expand",
-                            "value": ""
-                          },
-                          {
-                            "name": "$select",
-                            "value": "signal_id,symbol,position_type,exchange_id,strategy_pair_name,signal_status,position_status,executed_buy_qty,pending_buy_qty,executed_sell_qty,pending_sell_qty,entry_price,close_price,pnl,pnl_percent"
+                            "name": "args",
+                            "type": "Radzen.Blazor.RadzenSplitButtonItem",
+                            "value": "${event}"
                           }
                         ],
-                        "type": "export"
-                      },
-                      {
-                        "condition": "${event == null || event.Value == \"xlsx\"}",
-                        "fileName": "Futures Pnls",
-                        "format": "xlsx",
-                        "name": "cryptodb.getFuturesPnls",
-                        "parameters": [
-                          {
-                            "name": "$filter",
-                            "value": "${pnlDataGrid.Query.Filter}"
-                          },
-                          {
-                            "name": "$orderby",
-                            "value": "${pnlDataGrid.Query.OrderBy}"
-                          },
-                          {
-                            "name": "$expand",
-                            "value": ""
-                          },
-                          {
-                            "name": "$select",
-                            "value": "signal_id,symbol,position_type,exchange_id,strategy_pair_name,signal_status,position_status,executed_buy_qty,pending_buy_qty,executed_sell_qty,pending_sell_qty,entry_price,close_price,pnl,pnl_percent"
-                          }
-                        ],
-                        "type": "export"
+                        "schema": {
+                          "$ref": "#/definitions/Task",
+                          "dotnetType": "System.Threading.Tasks.Task"
+                        },
+                        "type": "invoke-method"
                       }
                     ]
                   },
@@ -143,16 +109,19 @@
                       "template": "",
                       "textAlign": "right",
                       "title": "Signal Id",
-                      "visible": true
+                      "visible": true,
+                      "width": "60px"
                     },
                     {
                       "property": "symbol",
-                      "title": "Symbol"
+                      "title": "Symbol",
+                      "width": "100px"
                     },
                     {
                       "property": "position_type",
                       "title": "Position Type",
-                      "visible": true
+                      "visible": true,
+                      "width": "70px"
                     },
                     {
                       "property": "exchange_id",
@@ -161,36 +130,43 @@
                     },
                     {
                       "property": "strategy_pair_name",
-                      "title": "Strategy"
+                      "title": "Strategy",
+                      "width": ""
                     },
                     {
                       "property": "signal_status",
                       "title": "Signal Status",
-                      "visible": false
+                      "visible": true,
+                      "width": "70px"
                     },
                     {
                       "property": "position_status",
-                      "title": "Position Status"
+                      "title": "Position Status",
+                      "width": "90px"
                     },
                     {
                       "property": "executed_buy_qty",
                       "title": "Executed Buy Qty",
-                      "visible": false
+                      "visible": true,
+                      "width": ""
                     },
                     {
                       "property": "pending_buy_qty",
                       "title": "Pending Buy Qty",
-                      "visible": false
+                      "visible": false,
+                      "width": ""
                     },
                     {
                       "property": "executed_sell_qty",
                       "title": "Executed Sell Qty",
-                      "visible": false
+                      "visible": true,
+                      "width": ""
                     },
                     {
                       "property": "pending_sell_qty",
                       "title": "Pending Sell Qty",
-                      "visible": false
+                      "visible": false,
+                      "width": ""
                     },
                     {
                       "formatString": "{0:F4}",
@@ -244,14 +220,16 @@
                       "formatString": "{0:dd/MM/yy HH:mm:ss.fff zzz}",
                       "property": "entry_time",
                       "title": "Entry Time",
-                      "type": "string"
+                      "type": "string",
+                      "width": "200px"
                     },
                     {
                       "format": "date-time",
                       "formatString": "{0:dd/MM/yy HH:mm:ss.fff zzz}",
                       "property": "exit_time",
                       "title": "Exit Time",
-                      "type": "string"
+                      "type": "string",
+                      "width": "200px"
                     }
                   ],
                   "count": "${FuturesPnlsCount}",
