@@ -50,7 +50,7 @@ type AlertTradeDiff = {
     Category: string
     TimeFrame: int32
     Exchange: string
-    Price: decimal
+    AlertPrice: decimal
     AlertContracts: int32
     AlertDateTime: DateTime
     TradeId: int
@@ -158,7 +158,7 @@ type FileUploadController (logger : ILogger<FileUploadController>) =
                     Category        = j.Category
                     TimeFrame       = j.TimeFrame
                     Exchange        = j.Exchange
-                    Price           = j.Price
+                    AlertPrice           = j.Price
                     AlertContracts  = j.Contracts
                     AlertDateTime   = a.Time.LocalDateTime
                     TradeId         = t.``Trade #``
@@ -183,7 +183,7 @@ type FileUploadController (logger : ILogger<FileUploadController>) =
                     Category        = ""
                     TimeFrame       = 0
                     Exchange        = ""
-                    Price           = 0.0M
+                    AlertPrice           = 0.0M
                     AlertContracts  = 0
                     AlertDateTime   = DateTime.MinValue
                     TradeId         = 0
