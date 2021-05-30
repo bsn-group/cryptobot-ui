@@ -66,7 +66,6 @@ namespace CryptobotUi.Controllers.Cryptodb
 
             var items = this.context.ExchangeOrders
                 .Where(i => i.id == key)
-                .Include(i => i.FuturesSignalCommands)
                 .AsQueryable();
 
             items = EntityPatch.ApplyTo<Models.Cryptodb.ExchangeOrder>(Request, items);
@@ -108,7 +107,6 @@ namespace CryptobotUi.Controllers.Cryptodb
 
             var items = this.context.ExchangeOrders
                 .Where(i => i.id == key)
-                .Include(i => i.FuturesSignalCommands)
                 .AsQueryable();
 
             items = EntityPatch.ApplyTo<Models.Cryptodb.ExchangeOrder>(Request, items);
@@ -125,6 +123,7 @@ namespace CryptobotUi.Controllers.Cryptodb
             this.context.SaveChanges();
 
             var itemToReturn = this.context.ExchangeOrders.Where(i => i.id == key);
+            Request.QueryString = Request.QueryString.Add("$expand", "FuturesSignalCommand");
             this.OnAfterExchangeOrderUpdated(newItem);
             return new ObjectResult(SingleResult.Create(itemToReturn));
         }
@@ -164,6 +163,7 @@ namespace CryptobotUi.Controllers.Cryptodb
             this.context.SaveChanges();
 
             var itemToReturn = this.context.ExchangeOrders.Where(i => i.id == key);
+            Request.QueryString = Request.QueryString.Add("$expand", "FuturesSignalCommand");
             return new ObjectResult(SingleResult.Create(itemToReturn));
         }
         catch(Exception ex)
@@ -196,7 +196,18 @@ namespace CryptobotUi.Controllers.Cryptodb
             this.context.ExchangeOrders.Add(item);
             this.context.SaveChanges();
 
-            return Created($"odata/Cryptodb/ExchangeOrders/{item.id}", item);
+            var key = item.id;
+
+            var itemToReturn = this.context.ExchangeOrders.Where(i => i.id == key);
+
+            Request.QueryString = Request.QueryString.Add("$expand", "FuturesSignalCommand");
+
+            this.OnAfterExchangeOrderCreated(item);
+
+            return new ObjectResult(SingleResult.Create(itemToReturn))
+            {
+                StatusCode = 201
+            };
         }
         catch(Exception ex)
         {

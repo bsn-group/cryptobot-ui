@@ -131,14 +131,7 @@
           "x-default-sql": "nextval('exchange_order_id_seq'::regclass)",
           "x-nullable": false,
           "type": "integer",
-          "format": "int64",
-          "x-navigation": [
-            {
-              "inversePropertyName": "ExchangeOrder",
-              "name": "FuturesSignalCommands",
-              "type": "FuturesSignalCommand"
-            }
-          ]
+          "format": "int64"
         },
         "order_side": {
           "x-nullable": false,
@@ -173,10 +166,21 @@
           "type": "integer",
           "format": "int64"
         },
-        "FuturesSignalCommands": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/FuturesSignalCommand"
+        "FuturesSignalCommand": {
+          "type": "object",
+          "$ref": "#/definitions/FuturesSignalCommand"
+        },
+        "signal_command_id": {
+          "type": "integer",
+          "format": "int64",
+          "x-foreignKey": {
+            "parentTable": "futures_signal_command",
+            "parentEntityType": "FuturesSignalCommand",
+            "type": "FuturesSignalCommand",
+            "principalKey": "id",
+            "name": "FuturesSignalCommand",
+            "textProperty": "signal_action",
+            "navigationProperty": "ExchangeOrders"
           }
         }
       }
@@ -438,11 +442,22 @@
         "strategy_data"
       ],
       "properties": {
+        "market_event_id": {
+          "type": "integer",
+          "format": "int64"
+        },
         "id": {
           "x-key": true,
           "x-nullable": false,
           "type": "integer",
-          "format": "int64"
+          "format": "int64",
+          "x-navigation": [
+            {
+              "inversePropertyName": "FuturesSignalCommand",
+              "name": "ExchangeOrders",
+              "type": "ExchangeOrder"
+            }
+          ]
         },
         "FuturesSignal": {
           "type": "object",
@@ -494,23 +509,6 @@
           "type": "string",
           "format": "date-time"
         },
-        "ExchangeOrder": {
-          "type": "object",
-          "$ref": "#/definitions/ExchangeOrder"
-        },
-        "exchange_order_id": {
-          "type": "integer",
-          "format": "int64",
-          "x-foreignKey": {
-            "parentTable": "exchange_order",
-            "parentEntityType": "ExchangeOrder",
-            "type": "ExchangeOrder",
-            "principalKey": "id",
-            "name": "ExchangeOrder",
-            "textProperty": "status_reason",
-            "navigationProperty": "FuturesSignalCommands"
-          }
-        },
         "strategy_name": {
           "x-nullable": false,
           "type": "string",
@@ -525,6 +523,12 @@
           "x-nullable": false,
           "type": "string",
           "length": 8192
+        },
+        "ExchangeOrders": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExchangeOrder"
+          }
         }
       }
     },
@@ -546,6 +550,10 @@
       "properties": {
         "time_frame": {
           "x-nullable": false,
+          "type": "integer",
+          "format": "int64"
+        },
+        "exchange": {
           "type": "integer",
           "format": "int64"
         },
@@ -680,18 +688,40 @@
       "x-table": "public.strategy_conditions",
       "resource": "StrategyConditions",
       "required": [
+        "sequence",
+        "version",
+        "condition_sub_group",
         "strategy_id",
         "name",
         "time_frame",
         "last_observed",
         "category",
         "condition_group",
-        "created_time",
-        "sequence",
-        "version",
-        "condition_sub_group"
+        "created_time"
       ],
       "properties": {
+        "sequence": {
+          "x-nullable": false,
+          "type": "integer",
+          "format": "int64"
+        },
+        "version": {
+          "x-nullable": false,
+          "type": "integer",
+          "format": "int64"
+        },
+        "condition_sub_group": {
+          "x-nullable": false,
+          "type": "integer",
+          "format": "int64"
+        },
+        "id": {
+          "x-key": true,
+          "x-default-sql": "nextval('strategy_conditions_id_seq'::regclass)",
+          "x-nullable": false,
+          "type": "integer",
+          "format": "int64"
+        },
         "Strategy": {
           "type": "object",
           "$ref": "#/definitions/Strategy"
@@ -739,28 +769,6 @@
           "x-nullable": false,
           "type": "string",
           "format": "date-time"
-        },
-        "sequence": {
-          "x-nullable": false,
-          "type": "integer",
-          "format": "int64"
-        },
-        "version": {
-          "x-nullable": false,
-          "type": "integer",
-          "format": "int64"
-        },
-        "id": {
-          "x-key": true,
-          "x-default-sql": "nextval('strategy_conditions_id_seq'::regclass)",
-          "x-nullable": false,
-          "type": "integer",
-          "format": "int64"
-        },
-        "condition_sub_group": {
-          "x-nullable": false,
-          "type": "integer",
-          "format": "int64"
         }
       }
     },

@@ -21,18 +21,18 @@
                   "allowSorting": true,
                   "columns": [
                     {
-                      "formatString": "{0:g}",
+                      "property": "id",
+                      "title": "Id",
+                      "visible": true
+                    },
+                    {
+                      "formatString": "{0:dd/MM/yy HH:mm:ss.fff zzz}",
                       "property": "event_time",
                       "title": "Event Time"
                     },
                     {
                       "property": "time_frame",
                       "title": "Time Frame"
-                    },
-                    {
-                      "property": "id",
-                      "title": "Id",
-                      "visible": false
                     },
                     {
                       "property": "price",

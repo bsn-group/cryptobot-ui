@@ -65,122 +65,36 @@
                   "events": {
                     "loadData": [
                       {
-                        "name": "AppState.IsBusy",
-                        "type": "set",
-                        "value": "true",
-                        "valueType": "bool"
-                      },
-                      {
-                        "code": "args.OrderBy = \"signal_id desc\";",
-                        "type": "execute"
-                      },
-                      {
-                        "error": [
-                          {
-                            "name": "AppState.IsBusy",
-                            "type": "set",
-                            "value": "false",
-                            "valueType": "bool"
-                          },
-                          {
-                            "detail": "Unable to load FuturesSignals",
-                            "severity": "error",
-                            "summary": "Error",
-                            "type": "notify"
-                          }
-                        ],
-                        "name": "cryptodb.getFuturesSignals",
+                        "name": "OnGridLoadData",
                         "parameters": [
                           {
-                            "name": "$top",
-                            "value": "event.top"
-                          },
-                          {
-                            "name": "$skip",
-                            "value": "event.skip"
-                          },
-                          {
-                            "name": "$count",
-                            "value": "event.top != null && event.skip != null"
-                          },
-                          {
-                            "name": "$filter",
-                            "value": "${event.filter}"
-                          },
-                          {
-                            "name": "$orderby",
-                            "value": "${event.orderby}"
-                          },
-                          {
-                            "name": "$expand",
-                            "value": "Exchange"
+                            "name": "args",
+                            "type": "Radzen.LoadDataArgs",
+                            "value": "${event}"
                           }
                         ],
-                        "then": [
-                          {
-                            "name": "getFuturesSignalsResult",
-                            "type": "set",
-                            "value": "${result.Value.AsODataEnumerable()}",
-                            "valueType": "IEnumerable<CryptobotUi.Models.Cryptodb.FuturesSignal>"
-                          },
-                          {
-                            "name": "getFuturesSignalsCount",
-                            "type": "set",
-                            "value": "${result.Count}",
-                            "valueType": "int"
-                          },
-                          {
-                            "name": "AppState.IsBusy",
-                            "type": "set",
-                            "value": "false",
-                            "valueType": "bool"
-                          }
-                        ],
-                        "type": "invoke"
+                        "schema": {
+                          "$ref": "#/definitions/Task",
+                          "dotnetType": "System.Threading.Tasks.Task"
+                        },
+                        "type": "invoke-method"
                       }
                     ],
                     "rowExpand": [
                       {
-                        "name": "AppState.IsBusy",
-                        "type": "set",
-                        "value": "true",
-                        "valueType": "bool"
-                      },
-                      {
-                        "name": "master",
-                        "type": "set",
-                        "value": "${event}"
-                      },
-                      {
-                        "error": [
-                          {
-                            "name": "AppState.IsBusy",
-                            "type": "set",
-                            "value": "false",
-                            "valueType": "bool"
-                          }
-                        ],
-                        "name": "cryptodb.getFuturesSignalCommands",
+                        "name": "OnGridRowExpand",
                         "parameters": [
                           {
-                            "name": "$filter",
-                            "value": "signal_id eq ${event.signal_id}"
+                            "name": "args",
+                            "type": "CryptobotUi.Models.Cryptodb.FuturesSignal",
+                            "value": "${event}"
                           }
                         ],
-                        "then": [
-                          {
-                            "code": "event.FuturesSignalCommands = ${result}.Value",
-                            "condition": "",
-                            "type": "execute"
-                          },
-                          {
-                            "name": "AppState.IsBusy",
-                            "type": "set",
-                            "value": "false",
-                            "valueType": "bool"
-                          }
-                        ],
-                        "type": "invoke"
+                        "schema": {
+                          "$ref": "#/definitions/Task",
+                          "dotnetType": "System.Threading.Tasks.Task"
+                        },
+                        "type": "invoke-method"
                       }
                     ]
                   },
@@ -191,7 +105,7 @@
                   "template": [
                     {
                       "name": "heading1",
-                      "size": "H2",
+                      "size": "H3",
                       "text": "Commands",
                       "type": "heading"
                     },
@@ -268,6 +182,112 @@
                       "itemType": "CryptobotUi.Models.Cryptodb.FuturesSignalCommand",
                       "name": "grid1",
                       "template": "",
+                      "type": "grid"
+                    },
+                    {
+                      "name": "heading0",
+                      "size": "H3",
+                      "text": "Exchange orders",
+                      "type": "heading"
+                    },
+                    {
+                      "allowColumnResize": true,
+                      "allowFiltering": true,
+                      "allowPaging": true,
+                      "allowSorting": true,
+                      "columns": [
+                        {
+                          "property": "id",
+                          "title": "Id"
+                        },
+                        {
+                          "property": "order_side",
+                          "title": "Order Side"
+                        },
+                        {
+                          "property": "symbol",
+                          "title": "Symbol"
+                        },
+                        {
+                          "property": "executed_qty",
+                          "title": "Executed Qty"
+                        },
+                        {
+                          "property": "executed_price",
+                          "title": "Executed Price"
+                        },
+                        {
+                          "property": "status",
+                          "title": "Status"
+                        },
+                        {
+                          "property": "original_qty",
+                          "title": "Original Qty"
+                        },
+                        {
+                          "formatString": "{0:F8}",
+                          "property": "price",
+                          "title": "Price"
+                        },
+                        {
+                          "property": "status_reason",
+                          "title": "Status Reason",
+                          "visible": false
+                        },
+                        {
+                          "property": "exchange_order_id",
+                          "title": "Exchange Order Id"
+                        },
+                        {
+                          "property": "ETag",
+                          "title": "E Tag",
+                          "visible": false
+                        },
+                        {
+                          "property": "exchange_order_id_secondary",
+                          "title": "Exchange Order Id Secondary",
+                          "visible": false
+                        },
+                        {
+                          "property": "signal_id",
+                          "title": "Signal Id",
+                          "visible": false
+                        },
+                        {
+                          "property": "exchange_id",
+                          "title": "Exchange Id",
+                          "visible": false
+                        },
+                        {
+                          "property": "fee_currency",
+                          "title": "Fee Currency",
+                          "visible": false
+                        },
+                        {
+                          "property": "fee_amount",
+                          "title": "Fee Amount",
+                          "visible": false
+                        },
+                        {
+                          "formatString": "{0:dd/MM/yy HH:mm:ss.fff zzz}",
+                          "property": "created_time",
+                          "title": "Created Time"
+                        },
+                        {
+                          "formatString": "{0:dd/MM/yy HH:mm:ss.fff zzz}",
+                          "property": "updated_time",
+                          "title": "Updated Time"
+                        },
+                        {
+                          "property": "last_trade_id",
+                          "title": "Last Trade Id",
+                          "visible": false
+                        }
+                      ],
+                      "data": "${data.ExchangeOrders}",
+                      "filterMode": "advanced",
+                      "itemType": "CryptobotUi.Models.Cryptodb.ExchangeOrder",
+                      "name": "grid2",
                       "type": "grid"
                     }
                   ],

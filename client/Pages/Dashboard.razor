@@ -1,0 +1,91 @@
+﻿@page "/"
+@page "/dashboard"
+@layout MainLayout
+@inherits CryptobotUi.Pages.DashboardComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using CryptobotUi.Models.Cryptodb
+@inject Microsoft.Extensions.Localization.IStringLocalizer<Dashboard> L
+<RadzenContent Container="main">
+  <ChildContent>
+    <RadzenButton ButtonStyle="ButtonStyle.Light" Icon="refresh" style="float: right; margin-top: 0.35rem" Click="@RefreshButtonClick">
+    </RadzenButton>
+    <RadzenHeading Size="H1" Text="Dashboard">
+    </RadzenHeading>
+    <div class="row">
+      <div class="col-md-3">
+        <RadzenLabel style="display: block; margin-right: 1em" Text="From">
+        </RadzenLabel>
+        <RadzenDatePicker Name="FromDt" TValue="dynamic">
+        </RadzenDatePicker>
+      </div>
+      <div class="col-md-3">
+        <RadzenLabel style="display: block" Text="To">
+        </RadzenLabel>
+        <RadzenDatePicker Name="Datepicker1" TValue="dynamic">
+        </RadzenDatePicker>
+      </div>
+      <div class="col-md-3">
+        <RadzenLabel style="display: block" Text="Symbol">
+        </RadzenLabel>
+        <RadzenTextBox Name="Symbol">
+        </RadzenTextBox>
+      </div>
+      <div class="col-md-3">
+        <RadzenLabel style="display: block" Text="Position Type">
+        </RadzenLabel>
+        <RadzenDropDown Data="@PositionTypes" Name="Dropdown0" TValue="dynamic">
+        </RadzenDropDown>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3">
+        <RadzenLabel Text="Net profit">
+        </RadzenLabel>
+        <RadzenLabel style="margin-left: 1rem; margin-right: 1rem; width: 90.703125px" Text="@String.Format("{0:#.##} {1}", Data.NetProfit?.Value, Data.NetProfit?.Currency)">
+        </RadzenLabel>
+      </div>
+      <div class="col-md-3">
+        <RadzenLabel Text="Net profit">
+        </RadzenLabel>
+        <RadzenLabel style="margin-left: 1rem; margin-right: 1rem; width: 90.703125px" Text="@String.Format("{0:#.##} {1}", Data.NetProfit?.Value, Data.NetProfit?.Currency)">
+        </RadzenLabel>
+      </div>
+      <div class="col-md-3">
+      </div>
+      <div class="col-md-3">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3">
+      </div>
+      <div class="col-md-3">
+      </div>
+      <div class="col-md-3">
+      </div>
+      <div class="col-md-3">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3">
+      </div>
+      <div class="col-md-3">
+      </div>
+      <div class="col-md-3">
+      </div>
+      <div class="col-md-3">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3">
+      </div>
+      <div class="col-md-3">
+      </div>
+      <div class="col-md-3">
+      </div>
+      <div class="col-md-3">
+      </div>
+    </div>
+  </ChildContent>
+</RadzenContent>

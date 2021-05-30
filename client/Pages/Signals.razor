@@ -1,4 +1,4 @@
-﻿@page "/signals"
+﻿@page "/signals/{SignalId}"
 @layout MainLayout
 @inherits CryptobotUi.Pages.SignalsComponent
 
@@ -35,7 +35,7 @@
             </RadzenGridColumn>
           </Columns>
           <Template Context="cryptobotUiModelsCryptodbFuturesSignal">
-            <RadzenHeading Size="H2" Text="Commands">
+            <RadzenHeading Size="H3" Text="Commands">
             </RadzenHeading>
             <RadzenGrid @ref="grid1" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@(cryptobotUiModelsCryptodbFuturesSignal.FuturesSignalCommands)" FilterMode="FilterMode.Advanced" TItem="CryptobotUi.Models.Cryptodb.FuturesSignalCommand">
               <Columns>
@@ -67,6 +67,50 @@
                 <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.FuturesSignalCommand" Property="status" Title="Status">
                 </RadzenGridColumn>
                 <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.FuturesSignalCommand" Property="ETag" Title="E Tag" Visible="false">
+                </RadzenGridColumn>
+              </Columns>
+            </RadzenGrid>
+            <RadzenHeading Size="H3" Text="Exchange orders">
+            </RadzenHeading>
+            <RadzenGrid @ref="grid2" AllowColumnResize="true" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@(cryptobotUiModelsCryptodbFuturesSignal.ExchangeOrders)" FilterMode="FilterMode.Advanced" TItem="CryptobotUi.Models.Cryptodb.ExchangeOrder">
+              <Columns>
+                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.ExchangeOrder" Property="id" Title="Id">
+                </RadzenGridColumn>
+                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.ExchangeOrder" Property="order_side" Title="Order Side">
+                </RadzenGridColumn>
+                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.ExchangeOrder" Property="symbol" Title="Symbol">
+                </RadzenGridColumn>
+                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.ExchangeOrder" Property="executed_qty" Title="Executed Qty">
+                </RadzenGridColumn>
+                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.ExchangeOrder" Property="executed_price" Title="Executed Price">
+                </RadzenGridColumn>
+                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.ExchangeOrder" Property="status" Title="Status">
+                </RadzenGridColumn>
+                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.ExchangeOrder" Property="original_qty" Title="Original Qty">
+                </RadzenGridColumn>
+                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.ExchangeOrder" FormatString="{0:F8}" Property="price" Title="Price">
+                </RadzenGridColumn>
+                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.ExchangeOrder" Property="status_reason" Title="Status Reason" Visible="false">
+                </RadzenGridColumn>
+                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.ExchangeOrder" Property="exchange_order_id" Title="Exchange Order Id">
+                </RadzenGridColumn>
+                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.ExchangeOrder" Property="ETag" Title="E Tag" Visible="false">
+                </RadzenGridColumn>
+                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.ExchangeOrder" Property="exchange_order_id_secondary" Title="Exchange Order Id Secondary" Visible="false">
+                </RadzenGridColumn>
+                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.ExchangeOrder" Property="signal_id" Title="Signal Id" Visible="false">
+                </RadzenGridColumn>
+                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.ExchangeOrder" Property="exchange_id" Title="Exchange Id" Visible="false">
+                </RadzenGridColumn>
+                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.ExchangeOrder" Property="fee_currency" Title="Fee Currency" Visible="false">
+                </RadzenGridColumn>
+                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.ExchangeOrder" Property="fee_amount" Title="Fee Amount" Visible="false">
+                </RadzenGridColumn>
+                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.ExchangeOrder" FormatString="{0:dd/MM/yy HH:mm:ss.fff zzz}" Property="created_time" Title="Created Time">
+                </RadzenGridColumn>
+                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.ExchangeOrder" FormatString="{0:dd/MM/yy HH:mm:ss.fff zzz}" Property="updated_time" Title="Updated Time">
+                </RadzenGridColumn>
+                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.ExchangeOrder" Property="last_trade_id" Title="Last Trade Id" Visible="false">
                 </RadzenGridColumn>
               </Columns>
             </RadzenGrid>

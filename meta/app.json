@@ -37,7 +37,8 @@
     "Futures Positions",
     "Strategy Conditions",
     "MarketEvent",
-    "Signals"
+    "Signals",
+    "Dashboard"
   ],
   "pages": [
     "Add Strategy Condition",
@@ -53,7 +54,8 @@
     "Load Market Event JSON",
     "MarketEvent",
     "Raise MarketEvent",
-    "Signals"
+    "Signals",
+    "Dashboard"
   ],
   "port": 8000,
   "pwa": true,
@@ -61,7 +63,7 @@
   "serverPort": 5000,
   "serverProject": true,
   "serverVersion": "5",
-  "startPage": "Futures Pnls",
+  "startPage": "Dashboard",
   "theme": "dark",
   "title": "BSN Cryptobot",
   "wasm": true

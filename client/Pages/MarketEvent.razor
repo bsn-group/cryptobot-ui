@@ -14,11 +14,11 @@
       <div class="col-md-12">
         <RadzenGrid @ref="grid0" AllowColumnResize="true" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Count="@getMarketEventsCount" Data="@getMarketEventsResult" FilterMode="FilterMode.Advanced" TItem="CryptobotUi.Models.Cryptodb.MarketEvent" LoadData="@Grid0LoadData">
           <Columns>
-            <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.MarketEvent" FormatString="{0:g}" Property="event_time" Title="Event Time">
+            <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.MarketEvent" Property="id" Title="Id">
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.MarketEvent" FormatString="{0:dd/MM/yy HH:mm:ss.fff zzz}" Property="event_time" Title="Event Time">
             </RadzenGridColumn>
             <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.MarketEvent" Property="time_frame" Title="Time Frame">
-            </RadzenGridColumn>
-            <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.MarketEvent" Property="id" Title="Id" Visible="false">
             </RadzenGridColumn>
             <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.MarketEvent" Property="price" Title="Price">
             </RadzenGridColumn>

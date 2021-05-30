@@ -28,6 +28,11 @@ namespace CryptobotUi.Data
 
         builder.Entity<CryptobotUi.Models.Cryptodb.FuturesPnl>().HasNoKey();
         builder.Entity<CryptobotUi.Models.Cryptodb.FuturesPosition>().HasNoKey();
+        builder.Entity<CryptobotUi.Models.Cryptodb.ExchangeOrder>()
+              .HasOne(i => i.FuturesSignalCommand)
+              .WithMany(i => i.ExchangeOrders)
+              .HasForeignKey(i => i.signal_command_id)
+              .HasPrincipalKey(i => i.id);
         builder.Entity<CryptobotUi.Models.Cryptodb.FuturesSignal>()
               .HasOne(i => i.Exchange)
               .WithMany(i => i.FuturesSignals)
@@ -38,11 +43,6 @@ namespace CryptobotUi.Data
               .WithMany(i => i.FuturesSignalCommands)
               .HasForeignKey(i => i.signal_id)
               .HasPrincipalKey(i => i.signal_id);
-        builder.Entity<CryptobotUi.Models.Cryptodb.FuturesSignalCommand>()
-              .HasOne(i => i.ExchangeOrder)
-              .WithMany(i => i.FuturesSignalCommands)
-              .HasForeignKey(i => i.exchange_order_id)
-              .HasPrincipalKey(i => i.id);
         builder.Entity<CryptobotUi.Models.Cryptodb.StrategyCondition>()
               .HasOne(i => i.Strategy)
               .WithMany(i => i.StrategyConditions)

@@ -289,6 +289,13 @@
                   "filterMode": "advanced",
                   "itemType": "CryptobotUi.Models.Cryptodb.Symbol",
                   "name": "grid0",
+                  "template": [
+                    {
+                      "name": "label0",
+                      "text": "Expanded",
+                      "type": "label"
+                    }
+                  ],
                   "title": "",
                   "type": "grid"
                 }
