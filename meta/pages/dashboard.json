@@ -1,0 +1,268 @@
+{
+  "access": "Everybody",
+  "components": [
+    {
+      "components": [
+        {
+          "buttonStyle": "light",
+          "events": {
+            "click": [
+              {
+                "name": "LoadDashboard",
+                "schema": {
+                  "$ref": "#/definitions/Task",
+                  "dotnetType": "System.Threading.Tasks.Task"
+                },
+                "type": "invoke-method"
+              }
+            ]
+          },
+          "icon": "refresh",
+          "name": "refreshButton",
+          "style": {
+            "float": "right",
+            "marginTop": "0.35rem"
+          },
+          "text": "",
+          "type": "button"
+        },
+        {
+          "name": "pageTitle",
+          "size": "H1",
+          "text": "Dashboard",
+          "type": "heading"
+        },
+        {
+          "components": [
+            {
+              "class": "col-md-3",
+              "components": [
+                {
+                  "name": "label0",
+                  "style": {
+                    "display": "block",
+                    "marginRight": "1em"
+                  },
+                  "text": "From",
+                  "type": "label"
+                },
+                {
+                  "name": "fromDt",
+                  "type": "datepicker"
+                }
+              ],
+              "name": "col0",
+              "type": "col"
+            },
+            {
+              "class": "col-md-3",
+              "components": [
+                {
+                  "name": "label1",
+                  "style": {
+                    "display": "block"
+                  },
+                  "text": "To",
+                  "type": "label"
+                },
+                {
+                  "name": "datepicker1",
+                  "type": "datepicker"
+                }
+              ],
+              "name": "col1",
+              "type": "col"
+            },
+            {
+              "class": "col-md-3",
+              "components": [
+                {
+                  "name": "label2",
+                  "style": {
+                    "display": "block"
+                  },
+                  "text": "Symbol",
+                  "type": "label"
+                },
+                {
+                  "name": "symbol",
+                  "type": "textbox",
+                  "value": ""
+                }
+              ],
+              "name": "col2",
+              "type": "col"
+            },
+            {
+              "class": "col-md-3",
+              "components": [
+                {
+                  "name": "label3",
+                  "style": {
+                    "display": "block"
+                  },
+                  "text": "Position Type",
+                  "type": "label"
+                },
+                {
+                  "data": "${PositionTypes}",
+                  "name": "dropdown0",
+                  "type": "dropdown"
+                }
+              ],
+              "name": "col3",
+              "type": "col"
+            }
+          ],
+          "name": "row0",
+          "type": "row"
+        },
+        {
+          "components": [
+            {
+              "class": "col-md-3",
+              "components": [
+                {
+                  "name": "label4",
+                  "text": "Net profit",
+                  "type": "label"
+                },
+                {
+                  "name": "label5",
+                  "style": {
+                    "marginLeft": "1rem",
+                    "marginRight": "1rem",
+                    "width": "90.703125px"
+                  },
+                  "text": "@String.Format(\"{0:#.##} {1}\", Data.NetProfit?.Value, Data.NetProfit?.Currency)",
+                  "type": "label"
+                }
+              ],
+              "name": "col4",
+              "type": "col"
+            },
+            {
+              "class": "col-md-3",
+              "components": [
+                {
+                  "name": "label6",
+                  "text": "Net profit",
+                  "type": "label"
+                },
+                {
+                  "name": "label7",
+                  "style": {
+                    "marginLeft": "1rem",
+                    "marginRight": "1rem",
+                    "width": "90.703125px"
+                  },
+                  "text": "@String.Format(\"{0:#.##} {1}\", Data.NetProfit?.Value, Data.NetProfit?.Currency)",
+                  "type": "label"
+                }
+              ],
+              "name": "col5",
+              "type": "col"
+            },
+            {
+              "class": "col-md-3",
+              "name": "col6",
+              "type": "col"
+            },
+            {
+              "class": "col-md-3",
+              "name": "col7",
+              "type": "col"
+            }
+          ],
+          "name": "row1",
+          "type": "row"
+        },
+        {
+          "components": [
+            {
+              "class": "col-md-3",
+              "name": "col8",
+              "type": "col"
+            },
+            {
+              "class": "col-md-3",
+              "name": "col9",
+              "type": "col"
+            },
+            {
+              "class": "col-md-3",
+              "name": "col10",
+              "type": "col"
+            },
+            {
+              "class": "col-md-3",
+              "name": "col11",
+              "type": "col"
+            }
+          ],
+          "name": "row2",
+          "type": "row"
+        },
+        {
+          "components": [
+            {
+              "class": "col-md-3",
+              "name": "col12",
+              "type": "col"
+            },
+            {
+              "class": "col-md-3",
+              "name": "col13",
+              "type": "col"
+            },
+            {
+              "class": "col-md-3",
+              "name": "col14",
+              "type": "col"
+            },
+            {
+              "class": "col-md-3",
+              "name": "col15",
+              "type": "col"
+            }
+          ],
+          "name": "row3",
+          "type": "row"
+        },
+        {
+          "components": [
+            {
+              "class": "col-md-3",
+              "name": "col16",
+              "type": "col"
+            },
+            {
+              "class": "col-md-3",
+              "name": "col17",
+              "type": "col"
+            },
+            {
+              "class": "col-md-3",
+              "name": "col18",
+              "type": "col"
+            },
+            {
+              "class": "col-md-3",
+              "name": "col19",
+              "type": "col"
+            }
+          ],
+          "name": "row4",
+          "type": "row"
+        }
+      ],
+      "container": "main",
+      "type": "content"
+    }
+  ],
+  "events": {
+    "load": []
+  },
+  "layout": "Main",
+  "name": "Dashboard"
+}

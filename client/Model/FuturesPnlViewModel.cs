@@ -42,6 +42,8 @@ namespace CryptobotUi.Client.Model
             }
         }
 
+        public string SignalId =>  signal_id?.ToString();
+
         public event PropertyChangedEventHandler PropertyChanged;
     }
 }

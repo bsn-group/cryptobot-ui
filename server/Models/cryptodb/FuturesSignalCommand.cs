@@ -1,6 +1,7 @@
 using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -18,12 +19,20 @@ namespace CryptobotUi.Models.Cryptodb
         set;
     }
 
+    [ConcurrencyCheck]
+    public Int64? market_event_id
+    {
+      get;
+      set;
+    }
     [Key]
     public Int64 id
     {
       get;
       set;
     }
+
+    public IEnumerable<ExchangeOrder> ExchangeOrders { get; set; }
     [ConcurrencyCheck]
     public Int64 signal_id
     {
@@ -73,13 +82,6 @@ namespace CryptobotUi.Models.Cryptodb
       get;
       set;
     }
-    [ConcurrencyCheck]
-    public Int64? exchange_order_id
-    {
-      get;
-      set;
-    }
-    public ExchangeOrder ExchangeOrder { get; set; }
     [ConcurrencyCheck]
     public string strategy_name
     {

@@ -66,6 +66,7 @@ namespace CryptobotUi.Controllers.Cryptodb
 
             var items = this.context.FuturesSignalCommands
                 .Where(i => i.id == key)
+                .Include(i => i.ExchangeOrders)
                 .AsQueryable();
 
             items = EntityPatch.ApplyTo<Models.Cryptodb.FuturesSignalCommand>(Request, items);
@@ -107,6 +108,7 @@ namespace CryptobotUi.Controllers.Cryptodb
 
             var items = this.context.FuturesSignalCommands
                 .Where(i => i.id == key)
+                .Include(i => i.ExchangeOrders)
                 .AsQueryable();
 
             items = EntityPatch.ApplyTo<Models.Cryptodb.FuturesSignalCommand>(Request, items);
@@ -123,7 +125,7 @@ namespace CryptobotUi.Controllers.Cryptodb
             this.context.SaveChanges();
 
             var itemToReturn = this.context.FuturesSignalCommands.Where(i => i.id == key);
-            Request.QueryString = Request.QueryString.Add("$expand", "FuturesSignal,ExchangeOrder");
+            Request.QueryString = Request.QueryString.Add("$expand", "FuturesSignal");
             this.OnAfterFuturesSignalCommandUpdated(newItem);
             return new ObjectResult(SingleResult.Create(itemToReturn));
         }
@@ -163,7 +165,7 @@ namespace CryptobotUi.Controllers.Cryptodb
             this.context.SaveChanges();
 
             var itemToReturn = this.context.FuturesSignalCommands.Where(i => i.id == key);
-            Request.QueryString = Request.QueryString.Add("$expand", "FuturesSignal,ExchangeOrder");
+            Request.QueryString = Request.QueryString.Add("$expand", "FuturesSignal");
             return new ObjectResult(SingleResult.Create(itemToReturn));
         }
         catch(Exception ex)
@@ -200,7 +202,7 @@ namespace CryptobotUi.Controllers.Cryptodb
 
             var itemToReturn = this.context.FuturesSignalCommands.Where(i => i.id == key);
 
-            Request.QueryString = Request.QueryString.Add("$expand", "FuturesSignal,ExchangeOrder");
+            Request.QueryString = Request.QueryString.Add("$expand", "FuturesSignal");
 
             this.OnAfterFuturesSignalCommandCreated(item);
 

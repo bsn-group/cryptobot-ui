@@ -1,7 +1,6 @@
 using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -85,8 +84,6 @@ namespace CryptobotUi.Models.Cryptodb
       get;
       set;
     }
-
-    public IEnumerable<FuturesSignalCommand> FuturesSignalCommands { get; set; }
     [ConcurrencyCheck]
     public string order_side
     {
@@ -129,5 +126,12 @@ namespace CryptobotUi.Models.Cryptodb
       get;
       set;
     }
+    [ConcurrencyCheck]
+    public Int64? signal_command_id
+    {
+      get;
+      set;
+    }
+    public FuturesSignalCommand FuturesSignalCommand { get; set; }
   }
 }

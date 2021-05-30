@@ -25,7 +25,7 @@
 </RadzenHeader>
 <RadzenBody @ref="body0">
   <ChildContent>
-    <RadzenProgressBar Mode="ProgressBarMode.Indeterminate" ShowValue="true" style="border-radius: 0; display: block; height: 0.2rem; margin-bottom: 0.1rem" Value="100" Visible="@(AppState.IsBusy)">
+    <RadzenProgressBar Mode="ProgressBarMode.Indeterminate" ShowValue="false" style="border-radius: 0; display: block; height: 0.2rem; margin-bottom: 0.1rem" Value="100" Visible="@(AppState.IsBusy)">
     </RadzenProgressBar>
     <RadzenContentContainer Name="main">
     @Body
@@ -36,11 +36,13 @@
   <ChildContent>
     <RadzenPanelMenu style="height: 100%">
       <ChildContent>
+        <RadzenPanelMenuItem Path="dashboard" Text="Dashboard">
+        </RadzenPanelMenuItem>
         <RadzenPanelMenuItem Path="futures-pnls" Text="Futures PnL">
         </RadzenPanelMenuItem>
         <RadzenPanelMenuItem Path="strategies" Text="Strategies">
         </RadzenPanelMenuItem>
-        <RadzenPanelMenuItem Path="signals" Text="Signals">
+        <RadzenPanelMenuItem Path="signals/0" Text="Signals">
         </RadzenPanelMenuItem>
         <RadzenPanelMenuItem Path="market-event" Text="Market Events">
         </RadzenPanelMenuItem>

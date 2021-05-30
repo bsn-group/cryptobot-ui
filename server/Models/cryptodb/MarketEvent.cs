@@ -24,6 +24,12 @@ namespace CryptobotUi.Models.Cryptodb
       get;
       set;
     }
+    [ConcurrencyCheck]
+    public Int64? exchange
+    {
+      get;
+      set;
+    }
     [Key]
     public Int64 id
     {

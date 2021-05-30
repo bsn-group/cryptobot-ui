@@ -106,7 +106,21 @@
                     {
                       "footerTemplate": "",
                       "property": "signal_id",
-                      "template": "",
+                      "template": [
+                        {
+                          "icon": "",
+                          "name": "link0",
+                          "parameters": [
+                            {
+                              "name": "SignalId",
+                              "value": "${data.SignalId}"
+                            }
+                          ],
+                          "path": "signals",
+                          "text": "${data.SignalId}",
+                          "type": "link"
+                        }
+                      ],
                       "textAlign": "right",
                       "title": "Signal Id",
                       "visible": true,
@@ -252,6 +266,7 @@
                         "type": "invoke-method"
                       }
                     ],
+                    "rowClick": [],
                     "rowExpand": [
                       {
                         "name": "OnPnlGridRowExpand",
@@ -274,93 +289,7 @@
                   "filterMode": "advanced",
                   "itemType": "CryptobotUi.Client.Model.FuturesPnlViewModel",
                   "name": "pnlDataGrid",
-                  "template": [
-                    {
-                      "name": "heading0",
-                      "size": "H3",
-                      "text": "Commands & Orders",
-                      "type": "heading"
-                    },
-                    {
-                      "allowColumnResize": true,
-                      "allowFiltering": true,
-                      "allowPaging": true,
-                      "allowSorting": true,
-                      "columns": [
-                        {
-                          "property": "ETag",
-                          "title": "E Tag",
-                          "visible": false
-                        },
-                        {
-                          "property": "id",
-                          "title": "Id"
-                        },
-                        {
-                          "filterProperty": "FuturesSignal.symbol",
-                          "property": "signal_id",
-                          "sortProperty": "FuturesSignal.symbol",
-                          "template": "${data.FuturesSignal?.symbol}",
-                          "title": "Futures Signal",
-                          "visible": false
-                        },
-                        {
-                          "formatString": "{0:F8}",
-                          "property": "price",
-                          "textAlign": "right",
-                          "title": "Price"
-                        },
-                        {
-                          "formatString": "{0:F8}",
-                          "property": "quantity",
-                          "title": "Quantity"
-                        },
-                        {
-                          "property": "leverage",
-                          "title": "Leverage"
-                        },
-                        {
-                          "formatString": "{0:dd/MM/yy HH:mm:ss.fff zzz}",
-                          "property": "request_date_time",
-                          "title": "Request Time"
-                        },
-                        {
-                          "formatString": "{0:dd/MM/yy HH:mm:ss.fff zzz}",
-                          "property": "action_date_time",
-                          "title": "Action Time"
-                        },
-                        {
-                          "property": "strategy_name",
-                          "title": "Strategy"
-                        },
-                        {
-                          "property": "strategy_hash",
-                          "title": "Strategy Hash",
-                          "visible": false
-                        },
-                        {
-                          "property": "strategy_data",
-                          "title": "Strategy Data",
-                          "visible": false
-                        },
-                        {
-                          "property": "signal_action",
-                          "title": "Action"
-                        },
-                        {
-                          "property": "status",
-                          "title": "Status"
-                        }
-                      ],
-                      "count": "${data.CommandCount}",
-                      "data": "${data.Commands}",
-                      "filterCaseSensitivity": "caseInsensitive",
-                      "filterMode": "advanced",
-                      "itemType": "CryptobotUi.Models.Cryptodb.FuturesSignalCommand",
-                      "name": "grid0",
-                      "type": "grid"
-                    }
-                  ],
+                  "template": "",
                   "title": "",
                   "type": "grid"
                 }

@@ -10,6 +10,7 @@ namespace CryptobotUi
         {
             builder.Services.AddSingleton(new AppState());
             builder.Services.AddScoped<MarketEventClient>();
+            builder.Services.AddScoped<DashboardServiceClient>();
         }
     }
 }

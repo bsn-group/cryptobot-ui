@@ -1,5 +1,4 @@
-﻿@page "/"
-@page "/futures-pnls"
+﻿@page "/futures-pnls"
 @layout MainLayout
 @inherits CryptobotUi.Pages.FuturesPnlsComponent
 
@@ -28,6 +27,10 @@
         <RadzenGrid @ref="pnlDataGrid" AllowColumnResize="true" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Count="@FuturesPnlsCount" Data="@FuturesPnls" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" FilterMode="FilterMode.Advanced" TItem="CryptobotUi.Client.Model.FuturesPnlViewModel" LoadData="@PnlDataGridLoadData" RowExpand="@PnlDataGridRowExpand">
           <Columns>
             <RadzenGridColumn TItem="CryptobotUi.Client.Model.FuturesPnlViewModel" Property="signal_id" TextAlign="TextAlign.Right" Title="Signal Id" Width="60px">
+              <Template Context="cryptobotUiClientModelFuturesPnlViewModel">
+                <RadzenLink Path="@($"signals/{cryptobotUiClientModelFuturesPnlViewModel.SignalId}")" Text="@(cryptobotUiClientModelFuturesPnlViewModel.SignalId)">
+                </RadzenLink>
+              </Template>
             </RadzenGridColumn>
             <RadzenGridColumn TItem="CryptobotUi.Client.Model.FuturesPnlViewModel" Property="symbol" Title="Symbol" Width="100px">
             </RadzenGridColumn>
@@ -68,43 +71,6 @@
             <RadzenGridColumn TItem="CryptobotUi.Client.Model.FuturesPnlViewModel" Format="date-time" FormatString="{0:dd/MM/yy HH:mm:ss.fff zzz}" Property="exit_time" Title="Exit Time" Width="200px" Type="string">
             </RadzenGridColumn>
           </Columns>
-          <Template Context="cryptobotUiClientModelFuturesPnlViewModel">
-            <RadzenHeading Size="H3" Text="Commands & Orders">
-            </RadzenHeading>
-            <RadzenGrid @ref="grid0" AllowColumnResize="true" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Count="@(cryptobotUiClientModelFuturesPnlViewModel.CommandCount)" Data="@(cryptobotUiClientModelFuturesPnlViewModel.Commands)" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" FilterMode="FilterMode.Advanced" TItem="CryptobotUi.Models.Cryptodb.FuturesSignalCommand">
-              <Columns>
-                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.FuturesSignalCommand" Property="ETag" Title="E Tag" Visible="false">
-                </RadzenGridColumn>
-                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.FuturesSignalCommand" Property="id" Title="Id">
-                </RadzenGridColumn>
-                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.FuturesSignalCommand" FilterProperty="FuturesSignal.symbol" Property="signal_id" SortProperty="FuturesSignal.symbol" Title="Futures Signal" Visible="false">
-                  <Template Context="data">
-                  @(data.FuturesSignal?.symbol)
-                  </Template>
-                </RadzenGridColumn>
-                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.FuturesSignalCommand" FormatString="{0:F8}" Property="price" TextAlign="TextAlign.Right" Title="Price">
-                </RadzenGridColumn>
-                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.FuturesSignalCommand" FormatString="{0:F8}" Property="quantity" Title="Quantity">
-                </RadzenGridColumn>
-                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.FuturesSignalCommand" Property="leverage" Title="Leverage">
-                </RadzenGridColumn>
-                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.FuturesSignalCommand" FormatString="{0:dd/MM/yy HH:mm:ss.fff zzz}" Property="request_date_time" Title="Request Time">
-                </RadzenGridColumn>
-                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.FuturesSignalCommand" FormatString="{0:dd/MM/yy HH:mm:ss.fff zzz}" Property="action_date_time" Title="Action Time">
-                </RadzenGridColumn>
-                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.FuturesSignalCommand" Property="strategy_name" Title="Strategy">
-                </RadzenGridColumn>
-                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.FuturesSignalCommand" Property="strategy_hash" Title="Strategy Hash" Visible="false">
-                </RadzenGridColumn>
-                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.FuturesSignalCommand" Property="strategy_data" Title="Strategy Data" Visible="false">
-                </RadzenGridColumn>
-                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.FuturesSignalCommand" Property="signal_action" Title="Action">
-                </RadzenGridColumn>
-                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.FuturesSignalCommand" Property="status" Title="Status">
-                </RadzenGridColumn>
-              </Columns>
-            </RadzenGrid>
-          </Template>
         </RadzenGrid>
       </div>
     </div>

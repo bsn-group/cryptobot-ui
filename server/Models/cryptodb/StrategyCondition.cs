@@ -19,6 +19,30 @@ namespace CryptobotUi.Models.Cryptodb
     }
 
     [ConcurrencyCheck]
+    public Int64 sequence
+    {
+      get;
+      set;
+    }
+    [ConcurrencyCheck]
+    public Int64 version
+    {
+      get;
+      set;
+    }
+    [ConcurrencyCheck]
+    public Int64 condition_sub_group
+    {
+      get;
+      set;
+    }
+    [Key]
+    public Int64 id
+    {
+      get;
+      set;
+    }
+    [ConcurrencyCheck]
     public Int64 strategy_id
     {
       get;
@@ -57,30 +81,6 @@ namespace CryptobotUi.Models.Cryptodb
     }
     [ConcurrencyCheck]
     public DateTime created_time
-    {
-      get;
-      set;
-    }
-    [ConcurrencyCheck]
-    public Int64 sequence
-    {
-      get;
-      set;
-    }
-    [ConcurrencyCheck]
-    public Int64 version
-    {
-      get;
-      set;
-    }
-    [Key]
-    public Int64 id
-    {
-      get;
-      set;
-    }
-    [ConcurrencyCheck]
-    public Int64 condition_sub_group
     {
       get;
       set;
