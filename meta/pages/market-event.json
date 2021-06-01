@@ -122,56 +122,19 @@
                   "events": {
                     "loadData": [
                       {
-                        "code": "args.OrderBy = string.IsNullOrWhiteSpace(args.OrderBy) ? \"event_time desc\" : args.OrderBy;",
-                        "type": "execute"
-                      },
-                      {
-                        "error": [
-                          {
-                            "detail": "Unable to load MarketEvents",
-                            "severity": "error",
-                            "summary": "Error",
-                            "type": "notify"
-                          }
-                        ],
-                        "name": "cryptodb.getMarketEvents",
+                        "name": "OnGridLoadData",
                         "parameters": [
                           {
-                            "name": "$top",
-                            "value": "event.top"
-                          },
-                          {
-                            "name": "$skip",
-                            "value": "event.skip"
-                          },
-                          {
-                            "name": "$count",
-                            "value": "event.top != null && event.skip != null"
-                          },
-                          {
-                            "name": "$filter",
-                            "value": "${event.filter}"
-                          },
-                          {
-                            "name": "$orderby",
-                            "value": "${event.orderby}"
+                            "name": "args",
+                            "type": "Radzen.LoadDataArgs",
+                            "value": "${event}"
                           }
                         ],
-                        "then": [
-                          {
-                            "name": "getMarketEventsResult",
-                            "type": "set",
-                            "value": "${result.Value.AsODataEnumerable()}",
-                            "valueType": "IEnumerable<CryptobotUi.Models.Cryptodb.MarketEvent>"
-                          },
-                          {
-                            "name": "getMarketEventsCount",
-                            "type": "set",
-                            "value": "${result.Count}",
-                            "valueType": "int"
-                          }
-                        ],
-                        "type": "invoke"
+                        "schema": {
+                          "$ref": "#/definitions/Task",
+                          "dotnetType": "System.Threading.Tasks.Task"
+                        },
+                        "type": "invoke-method"
                       }
                     ],
                     "rowSelect": []

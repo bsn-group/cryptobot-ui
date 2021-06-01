@@ -37,7 +37,7 @@
           <Template Context="cryptobotUiModelsCryptodbFuturesSignal">
             <RadzenHeading Size="H3" Text="Commands">
             </RadzenHeading>
-            <RadzenGrid @ref="grid1" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@(cryptobotUiModelsCryptodbFuturesSignal.FuturesSignalCommands)" FilterMode="FilterMode.Advanced" TItem="CryptobotUi.Models.Cryptodb.FuturesSignalCommand">
+            <RadzenGrid @ref="grid1" AllowColumnResize="true" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@(cryptobotUiModelsCryptodbFuturesSignal.FuturesSignalCommands)" FilterMode="FilterMode.Advanced" TItem="CryptobotUi.Models.Cryptodb.FuturesSignalCommand">
               <Columns>
                 <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.FuturesSignalCommand" Property="id" Title="Id">
                 </RadzenGridColumn>
