@@ -7,6 +7,7 @@ using Radzen.Blazor;
 using Microsoft.AspNetCore.Components;
 using CryptobotUi.Client.Model;
 using CryptobotUi.Models.Cryptodb;
+using CryptobotUi.Client.Model.Extensions;
 
 namespace CryptobotUi.Pages
 {
@@ -33,10 +34,22 @@ namespace CryptobotUi.Pages
                 // master = args;
 
                 var commands = await Cryptodb.GetFuturesSignalCommands(filter:$"signal_id eq {args.signal_id}");
-                args.FuturesSignalCommands = commands.Value;
+                args.FuturesSignalCommands = 
+                    commands.Value
+                    .Select(c => {
+                        c.action_date_time = c.action_date_time.ToLocalTime();
+                        c.request_date_time = c.request_date_time.ToLocalTime();
+                        return c;
+                    });
                 
                 var orders = await Cryptodb.GetExchangeOrders(filter:$"signal_id eq {args.signal_id}");
-                args.ExchangeOrders = orders.Value;
+                args.ExchangeOrders = 
+                    orders.Value
+                    .Select(o => {
+                        o.created_time = o.created_time.ToLocalTime();
+                        o.updated_time = o.updated_time.ToLocalTime();
+                        return o;
+                    });
             }
             catch (System.Exception ex)
             {
@@ -65,7 +78,14 @@ namespace CryptobotUi.Pages
                     : args.Filter;
 
                 var cryptodbGetFuturesSignalsResult = await Cryptodb.GetFuturesSignals(filter:$"{args.Filter}", orderby:$"{args.OrderBy}", expand:$"Exchange", top:args.Top, skip:args.Skip, count:args.Top != null && args.Skip != null);
-                getFuturesSignalsResult = cryptodbGetFuturesSignalsResult.Value.AsODataEnumerable();
+                getFuturesSignalsResult = 
+                    cryptodbGetFuturesSignalsResult.Value
+                    .Select(c => {
+                        c.created_date_time = c.created_date_time.ToLocalTime();
+                        c.updated_date_time = c.updated_date_time.ToLocalTime();
+                        return c;
+                    })
+                    .AsODataEnumerable();
                 getFuturesSignalsCount = cryptodbGetFuturesSignalsResult.Count;
 
                 if (getFuturesSignalsCount > 0)

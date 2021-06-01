@@ -110,6 +110,7 @@
                       "type": "heading"
                     },
                     {
+                      "allowColumnResize": true,
                       "allowFiltering": true,
                       "allowPaging": true,
                       "allowSorting": true,
