@@ -138,5 +138,11 @@ namespace CryptobotUi.Models.Cryptodb
       get;
       set;
     }
+    [ConcurrencyCheck]
+    public decimal? position_size
+    {
+      get;
+      set;
+    }
   }
 }

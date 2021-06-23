@@ -61,6 +61,18 @@
               </div>
             </div>
             <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Component="exchange" style="width: 100%" Text="Exchange">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenDropDown Data="@exchanges" style="display: block" TextProperty="name" @bind-Value="@(strategy.exchange_id)" ValueProperty="id" Name="Exchange" Change="@ExchangeChange">
+                </RadzenDropDown>
+                <RadzenRequiredValidator Component="Exchange" style="position: absolute" Text="exchange is required">
+                </RadzenRequiredValidator>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem" class="row">
               <div class="col-md-12">
                 <RadzenGrid @ref="conditionsGrid" AllowColumnResize="true" AllowSorting="false" Data="@(strategy.StrategyConditions)" EditMode="DataGridEditMode.Single" EmptyText="No conditions yet. Click (+) to add a new condition." TItem="CryptobotUi.Models.Cryptodb.StrategyCondition">
                   <Columns>

@@ -121,6 +121,8 @@ namespace CryptobotUi.Pages
             strategy = cryptodbGetStrategyByidResult;
 
             canEdit = cryptodbGetStrategyByidResult != null;
+
+            await LoadInitData();
         }
 
         protected async System.Threading.Tasks.Task CloseButtonClick(MouseEventArgs args)

@@ -4261,8 +4261,8 @@ p-button[type] {
   .rz-textbox:disabled::placeholder, .rz-textarea:disabled::placeholder, .mask:disabled::placeholder, .rz-dropdown:disabled::placeholder, .rz-multiselect:disabled::placeholder, .rz-calendar .rz-inputtext:disabled::placeholder, .rz-spinner:disabled::placeholder, .rz-lookup-search input:disabled::placeholder, .rz-colorpicker:disabled::placeholder, .rz-chkbox-box.rz-state-disabled::placeholder, .rz-radiobutton-box.rz-state-disabled::placeholder, .rz-state-disabled.rz-dropdown::placeholder, .rz-state-disabled.rz-multiselect::placeholder, .rz-autocomplete-input:disabled::placeholder, .rz-listbox.rz-state-disabled::placeholder, .rz-calendar.rz-state-disabled .rz-inputtext::placeholder, .rz-spinner.rz-state-disabled::placeholder {
     color: #868e96; }
   .rz-textbox:disabled .rz-inputtext, .rz-textarea:disabled .rz-inputtext, .mask:disabled .rz-inputtext, .rz-dropdown:disabled .rz-inputtext, .rz-multiselect:disabled .rz-inputtext, .rz-calendar .rz-inputtext:disabled .rz-inputtext, .rz-spinner:disabled .rz-inputtext, .rz-lookup-search input:disabled .rz-inputtext, .rz-colorpicker:disabled .rz-inputtext, .rz-chkbox-box.rz-state-disabled .rz-inputtext, .rz-radiobutton-box.rz-state-disabled .rz-inputtext, .rz-state-disabled.rz-dropdown .rz-inputtext, .rz-state-disabled.rz-multiselect .rz-inputtext, .rz-autocomplete-input:disabled .rz-inputtext, .rz-listbox.rz-state-disabled .rz-inputtext, .rz-calendar.rz-state-disabled .rz-inputtext .rz-inputtext, .rz-spinner.rz-state-disabled .rz-inputtext {
-    background-color: transparent;
-    color: inherit; }
+    background-color: rgba(136, 152, 155, 0.06);
+    color: #868e96; }
 
 input {
   color: #ffffff;
@@ -5714,18 +5714,22 @@ ul.rz-profile-menu {
 .rz-datatable-thead .rz-fileupload-row .rz-button .rzi-times, .rz-fileupload-row .rz-button .rz-datatable-thead .rzi-times,
 .rz-datatable-thead .rz-fileupload-row .rz-paginator-element .rzi-times, .rz-fileupload-row .rz-paginator-element .rz-datatable-thead .rzi-times,
 .rz-datatable-thead .rz-fileupload-row .rz-button .rz-icon-trash, .rz-fileupload-row .rz-button .rz-datatable-thead .rz-icon-trash,
-.rz-datatable-thead .rz-fileupload-row .rz-paginator-element .rz-icon-trash, .rz-fileupload-row .rz-paginator-element .rz-datatable-thead .rz-icon-trash, .rz-datatable-thead .rz-datatable .rzi-chevron-circle-right, .rz-datatable .rz-datatable-thead .rzi-chevron-circle-right, .rz-datatable-thead .rz-datatable .rzi-chevron-circle-down, .rz-datatable .rz-datatable-thead .rzi-chevron-circle-down, .rz-datatable-thead .rz-sortable-column .rzi-grid-sort, .rz-sortable-column .rz-datatable-thead .rzi-grid-sort, .rz-datatable-thead .rz-datatable-header .rzi-plus, .rz-datatable-header .rz-datatable-thead .rzi-plus, .rz-datatable-thead .rz-datatable-loading-content .rzi-circle-o-notch, .rz-datatable-loading-content .rz-datatable-thead .rzi-circle-o-notch {
+.rz-datatable-thead .rz-fileupload-row .rz-paginator-element .rz-icon-trash, .rz-fileupload-row .rz-paginator-element .rz-datatable-thead .rz-icon-trash, .rz-datatable-thead .rz-datatable .rzi-chevron-circle-right, .rz-datatable .rz-datatable-thead .rzi-chevron-circle-right, .rz-datatable-thead .rz-datatable .rzi-chevron-circle-down, .rz-datatable .rz-datatable-thead .rzi-chevron-circle-down, .rz-datatable-thead .rz-sortable-column .rzi-grid-sort, .rz-sortable-column .rz-datatable-thead .rzi-grid-sort, .rz-datatable-thead .rz-datatable-header .rzi-plus, .rz-datatable-header .rz-datatable-thead .rzi-plus, .rz-datatable-thead .rz-datatable-loading-content .rzi-circle-o-notch, .rz-datatable-loading-content .rz-datatable-thead .rzi-circle-o-notch, .rz-grid-table thead .rzi, .rz-grid-table thead .rz-menuitem .rz-menuitem-icon, .rz-menuitem .rz-grid-table thead .rz-menuitem-icon, .rz-grid-table thead .rz-fileupload-row .rz-button .rzi-close, .rz-fileupload-row .rz-button .rz-grid-table thead .rzi-close, .rz-grid-table thead .rz-fileupload-row .rz-paginator-element .rzi-close, .rz-fileupload-row .rz-paginator-element .rz-grid-table thead .rzi-close,
+.rz-grid-table thead .rz-fileupload-row .rz-button .rzi-times, .rz-fileupload-row .rz-button .rz-grid-table thead .rzi-times,
+.rz-grid-table thead .rz-fileupload-row .rz-paginator-element .rzi-times, .rz-fileupload-row .rz-paginator-element .rz-grid-table thead .rzi-times,
+.rz-grid-table thead .rz-fileupload-row .rz-button .rz-icon-trash, .rz-fileupload-row .rz-button .rz-grid-table thead .rz-icon-trash,
+.rz-grid-table thead .rz-fileupload-row .rz-paginator-element .rz-icon-trash, .rz-fileupload-row .rz-paginator-element .rz-grid-table thead .rz-icon-trash, .rz-grid-table thead .rz-datatable .rzi-chevron-circle-right, .rz-datatable .rz-grid-table thead .rzi-chevron-circle-right, .rz-grid-table thead .rz-datatable .rzi-chevron-circle-down, .rz-datatable .rz-grid-table thead .rzi-chevron-circle-down, .rz-grid-table thead .rz-sortable-column .rzi-grid-sort, .rz-sortable-column .rz-grid-table thead .rzi-grid-sort, .rz-grid-table thead .rz-datatable-header .rzi-plus, .rz-datatable-header .rz-grid-table thead .rzi-plus, .rz-grid-table thead .rz-datatable-loading-content .rzi-circle-o-notch, .rz-datatable-loading-content .rz-grid-table thead .rzi-circle-o-notch {
   color: #ffffff; }
 
-.rz-datatable-thead th {
+.rz-datatable-thead th, .rz-grid-table thead th {
   background-color: #2f3d43;
   padding: 0.5rem 0 0 0;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis; }
-  .rz-datatable-thead th:not(:last-child) {
+  .rz-datatable-thead th:not(:last-child), .rz-grid-table thead th:not(:last-child) {
     border-right: 1px solid #45565d; }
-  .rz-datatable-thead th .rz-column-title {
+  .rz-datatable-thead th .rz-column-title, .rz-grid-table thead th .rz-column-title {
     display: inline-block;
     font-size: 0.75rem;
     text-transform: uppercase;
@@ -5733,7 +5737,7 @@ ul.rz-profile-menu {
     padding: 0 0 0.625rem 0.625rem;
     font-weight: normal; }
 
-.rz-datatable-tfoot td {
+.rz-datatable-tfoot td, .rz-grid-table tfoot td {
   background-color: #2f3d43;
   font-size: 0.875rem;
   color: #ffffff;
@@ -5741,7 +5745,7 @@ ul.rz-profile-menu {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis; }
-  .rz-datatable-tfoot td:not(:last-child) {
+  .rz-datatable-tfoot td:not(:last-child), .rz-grid-table tfoot td:not(:last-child) {
     border-right: 1px solid #45565d; }
 
 .rz-datatable-scrollable-header {
@@ -5788,26 +5792,26 @@ ul.rz-profile-menu {
 .rz-datatable-even > td {
   background-color: #5d717b; }
 
-.rz-datatable-data .rz-cell-data .rz-button-sm, .rz-datatable-data .rz-cell-data .rz-fileupload .rz-button, .rz-fileupload .rz-datatable-data .rz-cell-data .rz-button, .rz-datatable-data .rz-cell-data .rz-paginator-element {
+.rz-datatable-data .rz-cell-data .rz-button-sm, .rz-datatable-data .rz-cell-data .rz-fileupload .rz-button, .rz-fileupload .rz-datatable-data .rz-cell-data .rz-button, .rz-datatable-data .rz-cell-data .rz-paginator-element, .rz-grid-table .rz-cell-data .rz-button-sm, .rz-grid-table .rz-cell-data .rz-fileupload .rz-button, .rz-fileupload .rz-grid-table .rz-cell-data .rz-button, .rz-grid-table .rz-cell-data .rz-paginator-element {
   line-height: 1.25rem;
   padding: 0 0.6875rem;
   height: 1.25rem;
   font-size: 0.75rem; }
-  .rz-datatable-data .rz-cell-data .rz-button-sm .rz-button-icon-left, .rz-datatable-data .rz-cell-data .rz-fileupload .rz-button .rz-button-icon-left, .rz-fileupload .rz-datatable-data .rz-cell-data .rz-button .rz-button-icon-left, .rz-datatable-data .rz-cell-data .rz-paginator-element .rz-button-icon-left {
+  .rz-datatable-data .rz-cell-data .rz-button-sm .rz-button-icon-left, .rz-datatable-data .rz-cell-data .rz-fileupload .rz-button .rz-button-icon-left, .rz-fileupload .rz-datatable-data .rz-cell-data .rz-button .rz-button-icon-left, .rz-datatable-data .rz-cell-data .rz-paginator-element .rz-button-icon-left, .rz-grid-table .rz-cell-data .rz-button-sm .rz-button-icon-left, .rz-grid-table .rz-cell-data .rz-fileupload .rz-button .rz-button-icon-left, .rz-fileupload .rz-grid-table .rz-cell-data .rz-button .rz-button-icon-left, .rz-grid-table .rz-cell-data .rz-paginator-element .rz-button-icon-left {
     font-size: 0.75rem;
     line-height: 1.25rem;
     width: 0.75rem; }
-  .rz-datatable-data .rz-cell-data .rz-button-sm .rz-button-text, .rz-datatable-data .rz-cell-data .rz-fileupload .rz-button .rz-button-text, .rz-fileupload .rz-datatable-data .rz-cell-data .rz-button .rz-button-text, .rz-datatable-data .rz-cell-data .rz-paginator-element .rz-button-text {
+  .rz-datatable-data .rz-cell-data .rz-button-sm .rz-button-text, .rz-datatable-data .rz-cell-data .rz-fileupload .rz-button .rz-button-text, .rz-fileupload .rz-datatable-data .rz-cell-data .rz-button .rz-button-text, .rz-datatable-data .rz-cell-data .rz-paginator-element .rz-button-text, .rz-grid-table .rz-cell-data .rz-button-sm .rz-button-text, .rz-grid-table .rz-cell-data .rz-fileupload .rz-button .rz-button-text, .rz-fileupload .rz-grid-table .rz-cell-data .rz-button .rz-button-text, .rz-grid-table .rz-cell-data .rz-paginator-element .rz-button-text {
     line-height: 1.25rem; }
-  .rz-datatable-data .rz-cell-data .rz-button-sm.rz-button-icon-only, .rz-datatable-data .rz-cell-data .rz-fileupload .rz-button-icon-only.rz-button, .rz-fileupload .rz-datatable-data .rz-cell-data .rz-button-icon-only.rz-button, .rz-datatable-data .rz-cell-data .rz-fileupload .rz-paginator-element, .rz-fileupload .rz-datatable-data .rz-cell-data .rz-paginator-element, .rz-datatable-data .rz-cell-data .rz-paginator-element {
+  .rz-datatable-data .rz-cell-data .rz-button-sm.rz-button-icon-only, .rz-datatable-data .rz-cell-data .rz-fileupload .rz-button-icon-only.rz-button, .rz-fileupload .rz-datatable-data .rz-cell-data .rz-button-icon-only.rz-button, .rz-datatable-data .rz-cell-data .rz-fileupload .rz-paginator-element, .rz-fileupload .rz-datatable-data .rz-cell-data .rz-paginator-element, .rz-datatable-data .rz-cell-data .rz-paginator-element, .rz-grid-table .rz-cell-data .rz-button-sm.rz-button-icon-only, .rz-grid-table .rz-cell-data .rz-fileupload .rz-button-icon-only.rz-button, .rz-fileupload .rz-grid-table .rz-cell-data .rz-button-icon-only.rz-button, .rz-grid-table .rz-cell-data .rz-fileupload .rz-paginator-element, .rz-fileupload .rz-grid-table .rz-cell-data .rz-paginator-element, .rz-grid-table .rz-cell-data .rz-paginator-element {
     padding: 0 0.25rem; }
 
-.rz-datatable-data td {
+.rz-datatable-data td, .rz-grid-table td {
   padding: 0.5rem 0.625rem 0.5rem 0.625rem;
   border-bottom: 1px solid #45565d; }
-  .rz-datatable-data td:not(:last-child) {
+  .rz-datatable-data td:not(:last-child), .rz-grid-table td:not(:last-child) {
     border-right: 1px solid #45565d; }
-  .rz-datatable-data td .rz-cell-data {
+  .rz-datatable-data td .rz-cell-data, .rz-grid-table td .rz-cell-data {
     color: #ffffff;
     font-size: 0.875rem;
     display: block;
@@ -5815,16 +5819,16 @@ ul.rz-profile-menu {
     text-overflow: ellipsis;
     white-space: nowrap; }
 
-.rz-datatable-data tr td:first-child {
+.rz-datatable-data tr td:first-child, .rz-grid-table tr td:first-child {
   border-left: none; }
 
-.rz-datatable-data tr td:last-child {
+.rz-datatable-data tr td:last-child, .rz-grid-table tr td:last-child {
   border-right: none; }
 
-.rz-datatable-data tr:first-child td {
+.rz-datatable-data tr:first-child td, .rz-grid-table tr:first-child td {
   border-top: none; }
 
-.rz-datatable-data tr:last-child td {
+.rz-datatable-data tr:last-child td, .rz-grid-table tr:last-child td {
   border-bottom: none; }
 
 .rz-datatable-reflow .rz-datatable-data td > .rz-column-title {
@@ -6087,6 +6091,54 @@ ul.rz-profile-menu {
 
 .rz-grid-filter-active {
   color: #479cc8 !important; }
+
+.rz-data-grid {
+  display: flex;
+  flex-direction: column; }
+
+.rz-data-grid-data {
+  overflow: auto;
+  flex: 1; }
+
+.rz-grid-table td, .rz-grid-table th {
+  padding: .5rem; }
+
+.rz-grid-table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 1; }
+
+.rz-grid-table thead tr:nth-of-type(2) th {
+  top: 35px; }
+
+.rz-grid-table-fixed {
+  table-layout: fixed; }
+  .rz-grid-table-fixed .rz-frozen-cell {
+    position: -webkit-sticky;
+    position: sticky;
+    background: #2f3d43;
+    z-index: 1; }
+
+.rz-grid-table tfoot, .rz-grid-table tfoot td {
+  position: sticky;
+  bottom: 0;
+  z-index: 1000; }
+
+.rz-grid-table {
+  overflow: auto;
+  width: 100%;
+  position: relative;
+  border-collapse: separate;
+  border-spacing: 0; }
+  .rz-grid-table th {
+    white-space: nowrap;
+    overflow: hidden; }
+  .rz-grid-table td {
+    white-space: nowrap;
+    overflow: hidden; }
+
+.rz-grid-table tbody > ::deep div {
+  display: table-row; }
 
 .rz-paginator {
   display: flex;
@@ -6618,7 +6670,7 @@ ul.rz-profile-menu {
   height: 100%;
   top: 0;
   bottom: 0;
-  z-index: 1000;
+  z-index: 1001;
   align-items: center;
   justify-content: center; }
   .rz-dialog-wrapper .rz-dialog {

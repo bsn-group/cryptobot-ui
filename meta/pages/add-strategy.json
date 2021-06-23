@@ -1,4 +1,5 @@
 {
+  "access": [],
   "components": [
     {
       "components": [
@@ -252,6 +253,72 @@
                     {
                       "components": [
                         {
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "component": "exchange",
+                              "name": "exchange_label",
+                              "style": {
+                                "width": "100%"
+                              },
+                              "text": "Exchange",
+                              "type": "label"
+                            }
+                          ],
+                          "name": "col3",
+                          "type": "col"
+                        },
+                        {
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "data": "${exchanges}",
+                              "events": {
+                                "change": [
+                                  {
+                                    "name": "SetName",
+                                    "schema": {
+                                      "$ref": "#/definitions/Void",
+                                      "dotnetType": "void"
+                                    },
+                                    "type": "invoke-method"
+                                  }
+                                ]
+                              },
+                              "name": "exchange",
+                              "style": {
+                                "display": "block"
+                              },
+                              "template": "",
+                              "textProperty": "name",
+                              "type": "dropdown",
+                              "value": "${strategy.exchange_id}",
+                              "valueProperty": "id",
+                              "valueType": "long?"
+                            },
+                            {
+                              "component": "exchange",
+                              "name": "requiredValidator0",
+                              "style": {
+                                "position": "absolute"
+                              },
+                              "text": "exchange is required",
+                              "type": "required-validator"
+                            }
+                          ],
+                          "name": "col4",
+                          "type": "col"
+                        }
+                      ],
+                      "name": "row0",
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "type": "row"
+                    },
+                    {
+                      "components": [
+                        {
                           "class": "col-md-12",
                           "components": [
                             {
@@ -441,6 +508,14 @@
             "type": "set",
             "value": "${result.Value.AsODataEnumerable()}",
             "valueType": "IEnumerable<CryptobotUi.Models.Cryptodb.Symbol>"
+          },
+          {
+            "name": "LoadExchanges",
+            "schema": {
+              "$ref": "#/definitions/Task",
+              "dotnetType": "System.Threading.Tasks.Task"
+            },
+            "type": "invoke-method"
           }
         ],
         "type": "invoke"
@@ -448,6 +523,5 @@
     ]
   },
   "layout": "Main",
-  "name": "Add Strategy",
-  "access": []
+  "name": "Add Strategy"
 }

@@ -269,6 +269,10 @@
         "pnl_percent": {
           "type": "number",
           "format": "decimal"
+        },
+        "position_size": {
+          "type": "number",
+          "format": "decimal"
         }
       }
     },
@@ -623,6 +627,10 @@
         "created_time"
       ],
       "properties": {
+        "exchange_id": {
+          "type": "integer",
+          "format": "int64"
+        },
         "name": {
           "x-nullable": false,
           "type": "string",

@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Data;
+using System.Globalization;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
@@ -155,6 +156,10 @@ namespace CryptobotUi
                         }
                         else if (IsNumeric(typeCode))
                         {
+                            if (value != null)
+                            {
+                                stringValue = Convert.ToString(value, CultureInfo.InvariantCulture);
+                            }
                             cell.CellValue = new CellValue(stringValue);
                             cell.DataType = new EnumValue<CellValues>(CellValues.Number);
                         }

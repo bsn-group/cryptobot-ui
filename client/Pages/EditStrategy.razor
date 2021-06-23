@@ -30,117 +30,119 @@
     </div>
     <div class="row">
       <div class="col-md-12">
-        <RadzenTemplateForm TItem="CryptobotUi.Models.Cryptodb.Strategy" Data="@strategy" Visible="@(strategy != null && canEdit)" Submit="@Form0Submit">
+        <RadzenTemplateForm Data="@strategy" TItem="CryptobotUi.Models.Cryptodb.Strategy" Visible="@(strategy != null && canEdit)" Submit="@Form0Submit">
           <ChildContent>
             <div style="margin-bottom: 1rem" class="row">
               <div class="col-md-3">
-                <RadzenLabel Text="Name" Component="name" style="width: 100%">
+                <RadzenLabel Component="name" style="width: 100%" Text="Name">
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
                 <RadzenTextBox MaxLength="255" style="display: block; width: 100%" @bind-Value="@(strategy.name)" Name="Name">
                 </RadzenTextBox>
-                <RadzenRequiredValidator Component="Name" Text="name is required" style="position: absolute">
+                <RadzenRequiredValidator Component="Name" style="position: absolute" Text="name is required">
                 </RadzenRequiredValidator>
               </div>
             </div>
             <div style="margin-bottom: 1rem" class="row">
               <div class="col-md-3">
-                <RadzenLabel Text="Symbol" Component="symbol" style="width: 100%">
+                <RadzenLabel Component="symbol" style="width: 100%" Text="Symbol">
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenTextBox style="display: block; width: 100%" @bind-Value="@(strategy.symbol)" Name="Symbol">
-                </RadzenTextBox>
-                <RadzenRequiredValidator Component="Symbol" Text="symbol is required" style="position: absolute">
+                <RadzenDropDown AllowFiltering="true" AllowVirtualization="true" Data="@symbols" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" style="display: block; width: 100%" TextProperty="name" @bind-Value="@(strategy.symbol)" ValueProperty="name" Name="Symbols">
+                </RadzenDropDown>
+                <RadzenRequiredValidator Component="Symbols" style="position: absolute" Text="symbol is required">
                 </RadzenRequiredValidator>
               </div>
             </div>
             <div style="margin-bottom: 1rem" class="row">
               <div class="col-md-3">
-                <RadzenLabel Text="Updated Time" Component="updated_time" style="width: 100%">
+                <RadzenLabel Component="position_type" style="width: 100%" Text="Position Type">
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenDatePicker style="display: block; width: 100%" @bind-Value="@(strategy.updated_time)" Name="Updated_time">
+                <RadzenDropDown AllowFiltering="true" AllowVirtualization="true" Data="@positionTypes" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" style="display: block; width: 100%" TextProperty="Name" @bind-Value="@(strategy.position_type)" ValueProperty="Name" Name="Position_type">
+                </RadzenDropDown>
+                <RadzenRequiredValidator Component="Position_type" style="position: absolute" Text="position_type is required">
+                </RadzenRequiredValidator>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Component="status" style="width: 100%" Text="Status">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenDropDown AllowFiltering="true" AllowVirtualization="true" Data="@statuses" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" style="display: block; width: 100%" TextProperty="Name" @bind-Value="@(strategy.status)" ValueProperty="Name" Name="Status">
+                </RadzenDropDown>
+                <RadzenRequiredValidator Component="Status" style="position: absolute" Text="status is required">
+                </RadzenRequiredValidator>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Component="ETag" style="width: 100%" Text="Exchange">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenDropDown AllowFiltering="true" AllowVirtualization="true" Data="@exchanges" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" style="display: block; width: 100%" TextProperty="name" @bind-Value="@(strategy.exchange_id)" ValueProperty="id" Name="Exchanges">
+                </RadzenDropDown>
+                <RadzenRequiredValidator Component="Exchanges" style="position: absolute" Text="exchange is required">
+                </RadzenRequiredValidator>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Component="exchange_type" style="width: 100%" Text="Exchange Type">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenDropDown AllowFiltering="true" AllowVirtualization="true" Data="@exchangeTypes" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" style="display: block; width: 100%" TextProperty="Name" @bind-Value="@(strategy.exchange_type)" ValueProperty="Name" Name="Exchange_type">
+                </RadzenDropDown>
+                <RadzenRequiredValidator Component="Exchange_type" style="position: absolute" Text="exchange_type is required">
+                </RadzenRequiredValidator>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Component="updated_time" style="width: 100%" Text="Updated Time">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenDatePicker DateFormat="yyyy-MM-dd HH:mm:ss" style="display: block; width: 100%" @bind-Value="@(strategy.updated_time)" Name="Updated_time">
                 </RadzenDatePicker>
-                <RadzenRequiredValidator Component="Updated_time" Text="updated_time is required" style="position: absolute">
+                <RadzenRequiredValidator Component="Updated_time" style="position: absolute" Text="updated_time is required">
                 </RadzenRequiredValidator>
               </div>
             </div>
             <div style="margin-bottom: 1rem" class="row">
               <div class="col-md-3">
-                <RadzenLabel Text="Version" Component="version" style="width: 100%">
-                </RadzenLabel>
-              </div>
-              <div class="col-md-9">
-                <RadzenNumeric style="display: block; width: 100%" @bind-Value="@(strategy.version)" Name="Version">
-                </RadzenNumeric>
-                <RadzenRequiredValidator Component="Version" Text="version is required" style="position: absolute">
-                </RadzenRequiredValidator>
-              </div>
-            </div>
-            <div style="margin-bottom: 1rem" class="row">
-              <div class="col-md-3">
-                <RadzenLabel Text="Exchange Type" Component="exchange_type" style="width: 100%">
-                </RadzenLabel>
-              </div>
-              <div class="col-md-9">
-                <RadzenTextBox MaxLength="255" style="display: block; width: 100%" @bind-Value="@(strategy.exchange_type)" Name="Exchange_type">
-                </RadzenTextBox>
-                <RadzenRequiredValidator Component="Exchange_type" Text="exchange_type is required" style="position: absolute">
-                </RadzenRequiredValidator>
-              </div>
-            </div>
-            <div style="margin-bottom: 1rem" class="row">
-              <div class="col-md-3">
-                <RadzenLabel Text="Id" Component="id" style="width: 100%">
+                <RadzenLabel Component="id" style="width: 100%" Text="Id">
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
                 <RadzenNumeric style="display: block; width: 100%" @bind-Value="@(strategy.id)" Name="Id">
                 </RadzenNumeric>
-                <RadzenRequiredValidator Component="Id" Text="id is required" style="position: absolute">
+                <RadzenRequiredValidator Component="Id" style="position: absolute" Text="id is required">
                 </RadzenRequiredValidator>
               </div>
             </div>
             <div style="margin-bottom: 1rem" class="row">
               <div class="col-md-3">
-                <RadzenLabel Text="Position Type" Component="position_type" style="width: 100%">
+                <RadzenLabel Component="version" style="width: 100%" Text="Version">
                 </RadzenLabel>
               </div>
               <div class="col-md-9">
-                <RadzenTextBox MaxLength="255" style="display: block; width: 100%" @bind-Value="@(strategy.position_type)" Name="Position_type">
-                </RadzenTextBox>
-                <RadzenRequiredValidator Component="Position_type" Text="position_type is required" style="position: absolute">
+                <RadzenNumeric style="display: block; width: 100%" @bind-Value="@(strategy.version)" Name="Version">
+                </RadzenNumeric>
+                <RadzenRequiredValidator Component="Version" style="position: absolute" Text="version is required">
                 </RadzenRequiredValidator>
-              </div>
-            </div>
-            <div style="margin-bottom: 1rem" class="row">
-              <div class="col-md-3">
-                <RadzenLabel Text="Status" Component="status" style="width: 100%">
-                </RadzenLabel>
-              </div>
-              <div class="col-md-9">
-                <RadzenTextBox MaxLength="54" style="display: block; width: 100%" @bind-Value="@(strategy.status)" Name="Status">
-                </RadzenTextBox>
-                <RadzenRequiredValidator Component="Status" Text="status is required" style="position: absolute">
-                </RadzenRequiredValidator>
-              </div>
-            </div>
-            <div style="margin-bottom: 1rem" class="row">
-              <div class="col-md-3">
-                <RadzenLabel Text="E Tag" Component="ETag" style="width: 100%">
-                </RadzenLabel>
-              </div>
-              <div class="col-md-9">
-                <RadzenTextBox style="width: 100%" @bind-Value="@(strategy.ETag)" Name="ETag">
-                </RadzenTextBox>
               </div>
             </div>
             <div class="row">
               <div class="col offset-sm-3">
-                <RadzenButton ButtonType="ButtonType.Submit" Icon="save" Text="Save" ButtonStyle="ButtonStyle.Primary">
+                <RadzenButton ButtonStyle="ButtonStyle.Primary" ButtonType="ButtonType.Submit" Icon="save" Text="Save">
                 </RadzenButton>
                 <RadzenButton ButtonStyle="ButtonStyle.Light" style="margin-left: 1rem" Text="Cancel" Click="@Button4Click">
                 </RadzenButton>

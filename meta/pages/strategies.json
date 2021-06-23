@@ -150,6 +150,12 @@
                       "title": "Symbol"
                     },
                     {
+                      "format": "int64",
+                      "property": "exchange_id",
+                      "title": "Exchange Id",
+                      "type": "integer"
+                    },
+                    {
                       "property": "exchange_type",
                       "title": "Exchange Type"
                     },
@@ -162,7 +168,7 @@
                       "title": "Status"
                     },
                     {
-                      "formatString": "{0:g}",
+                      "formatString": "{0:dd/MM/yy HH:mm:ss.fff zzz}",
                       "property": "updated_time",
                       "title": "Updated Time"
                     },

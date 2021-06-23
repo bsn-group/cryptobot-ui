@@ -96,6 +96,8 @@ namespace CryptobotUi.Pages
 
             var cryptodbGetSymbolsResult = await Cryptodb.GetSymbols();
             getSymbolsResult = cryptodbGetSymbolsResult.Value.AsODataEnumerable();
+
+            await LoadExchanges();
         }
 
         protected async System.Threading.Tasks.Task Form0Submit(CryptobotUi.Models.Cryptodb.Strategy args)
@@ -114,6 +116,11 @@ namespace CryptobotUi.Pages
         }
 
         protected async System.Threading.Tasks.Task PositionTypeChange(dynamic args)
+        {
+            SetName();
+        }
+
+        protected async System.Threading.Tasks.Task ExchangeChange(dynamic args)
         {
             SetName();
         }
