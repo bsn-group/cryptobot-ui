@@ -12,7 +12,7 @@
     </RadzenHeading>
     <div class="row">
       <div class="col-md-12">
-        <RadzenGrid @ref="grid0" AllowColumnResize="true" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Count="@getFuturesSignalsCount" Data="@getFuturesSignalsResult" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" FilterMode="Radzen.FilterMode.Advanced" TItem="CryptobotUi.Models.Cryptodb.Signal" LoadData="@Grid0LoadData" RowExpand="@Grid0RowExpand">
+        <RadzenGrid @ref="grid0" AllowColumnResize="true" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Count="@getSignalsCount" Data="@getSignalsResult" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" FilterMode="Radzen.FilterMode.Advanced" TItem="CryptobotUi.Models.Cryptodb.Signal" LoadData="@Grid0LoadData" RowExpand="@Grid0RowExpand">
           <Columns>
             <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.Signal" Property="signal_id" Title="Signal Id">
             </RadzenGridColumn>
@@ -41,7 +41,7 @@
               <Columns>
                 <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.SignalCommand" Property="id" Title="Id">
                 </RadzenGridColumn>
-                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.SignalCommand" FilterProperty="FuturesSignal.symbol" Property="signal_id" SortProperty="FuturesSignal.symbol" Title="Signal" Visible="false">
+                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.SignalCommand" FilterProperty="Signal.symbol" Property="signal_id" SortProperty="Signal.symbol" Title="Signal" Visible="false">
                   <Template Context="data">
                   @(data.Signal?.symbol)
                   </Template>

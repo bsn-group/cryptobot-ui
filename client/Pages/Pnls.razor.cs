@@ -12,51 +12,51 @@ namespace CryptobotUi.Pages
 {
     public partial class PnlsComponent
     {
-        private IEnumerable<FuturesPnlViewModel> futuresPnls;
-        private int futuresPnlsCount;
+        private IEnumerable<PnlViewModel> pnls;
+        private int pnlsCount;
 
         [Inject]
         protected AppState AppState { get; set; }
 
-        protected IEnumerable<CryptobotUi.Client.Model.FuturesPnlViewModel> FuturesPnls
+        protected IEnumerable<CryptobotUi.Client.Model.PnlViewModel> Pnls
         {
-            get => futuresPnls;
+            get => pnls;
             set
             {
-                if (!object.Equals(futuresPnls, value))
+                if (!object.Equals(pnls, value))
                 {
-                    var args = new PropertyChangedEventArgs(){ Name = nameof(FuturesPnls), NewValue = value, OldValue = futuresPnls };
-                    futuresPnls = value;
+                    var args = new PropertyChangedEventArgs() { Name = nameof(Pnls), NewValue = value, OldValue = pnls };
+                    pnls = value;
                     OnPropertyChanged(args);
                     Reload();
                 }
             }
         }
 
-        protected int FuturesPnlsCount
+        protected int PnlsCount
         {
-            get => futuresPnlsCount;
+            get => pnlsCount;
             set
             {
-                if (!object.Equals(futuresPnlsCount, value))
+                if (!object.Equals(pnlsCount, value))
                 {
-                    var args = new PropertyChangedEventArgs(){ Name = nameof(FuturesPnlsCount), NewValue = value, OldValue = futuresPnlsCount };
-                    futuresPnlsCount = value;
+                    var args = new PropertyChangedEventArgs() { Name = nameof(PnlsCount), NewValue = value, OldValue = pnlsCount };
+                    pnlsCount = value;
                     OnPropertyChanged(args);
                     Reload();
                 }
             }
         }
 
-        private CryptobotUi.Client.Model.FuturesPnlViewModel selectedPnl;
-        public CryptobotUi.Client.Model.FuturesPnlViewModel SelectedPnl
+        private CryptobotUi.Client.Model.PnlViewModel selectedPnl;
+        public CryptobotUi.Client.Model.PnlViewModel SelectedPnl
         {
             get => selectedPnl;
-            set 
+            set
             {
                 if (!object.Equals(selectedPnl, value))
                 {
-                    var args = new PropertyChangedEventArgs(){ Name = nameof(SelectedPnl), NewValue = value, OldValue = selectedPnl };
+                    var args = new PropertyChangedEventArgs() { Name = nameof(SelectedPnl), NewValue = value, OldValue = selectedPnl };
                     selectedPnl = value;
                     OnPropertyChanged(args);
                     Reload();
@@ -64,11 +64,11 @@ namespace CryptobotUi.Pages
                 selectedPnl = value;
             }
         }
-        
 
-        private FuturesPnlViewModel ToFuturesPnlVM(Pnl pnl)
+
+        private PnlViewModel ToPnlVM(Pnl pnl)
         {
-            return new FuturesPnlViewModel
+            return new PnlViewModel
             {
                 close_price = pnl.close_price,
                 entry_price = pnl.entry_price,
@@ -101,12 +101,12 @@ namespace CryptobotUi.Pages
 
                 var pnlsResult = await Cryptodb.GetPnls(filter: $@"(contains(symbol,""{search}"") or contains(position_type,""{search}"") or contains(strategy_pair_name,""{search}"") or contains(signal_status,""{search}"") or contains(position_status,""{search}"")) and {(string.IsNullOrEmpty(args.Filter) ? "true" : args.Filter)}", orderby: $"{args.OrderBy}", top: args.Top, skip: args.Skip, count: args.Top != null && args.Skip != null);
 
-                FuturesPnls = pnlsResult.Value.Select(ToFuturesPnlVM).AsODataEnumerable();
-                FuturesPnlsCount = pnlsResult.Count;
+                Pnls = pnlsResult.Value.Select(ToPnlVM).AsODataEnumerable();
+                PnlsCount = pnlsResult.Count;
             }
             catch (System.Exception ex)
             {
-                NotificationService.Notify(new NotificationMessage { Severity = NotificationSeverity.Error, Summary = $"Error", Detail = $"Unable to load FuturesPnls: {ex.Message}" });
+                NotificationService.Notify(new NotificationMessage { Severity = NotificationSeverity.Error, Summary = $"Error", Detail = $"Unable to load Pnls: {ex.Message}" });
             }
             finally
             {
@@ -118,18 +118,16 @@ namespace CryptobotUi.Pages
         {
             if (args?.Value == "csv")
             {
-                await Cryptodb.ExportPnlsToCSV(new Query() { Filter = $@"{pnlDataGrid.Query.Filter}", OrderBy = $"{pnlDataGrid.Query.OrderBy}", Expand = "", Select = "signal_id,symbol,position_type,exchange_id,strategy_pair_name,signal_status,position_status,executed_buy_qty,pending_buy_qty,executed_sell_qty,pending_sell_qty,entry_price,close_price,pnl,pnl_percent,entry_time,exit_time" }, $"Futures Pnls");
-
+                await Cryptodb.ExportPnlsToCSV(new Query() { Filter = $@"{pnlDataGrid.Query.Filter}", OrderBy = $"{pnlDataGrid.Query.OrderBy}", Expand = "", Select = "signal_id,symbol,position_type,exchange_id,strategy_pair_name,signal_status,position_status,executed_buy_qty,pending_buy_qty,executed_sell_qty,pending_sell_qty,entry_price,close_price,pnl,pnl_percent,entry_time,exit_time" }, $"Pnls");
             }
 
             if (args == null || args.Value == "xlsx")
             {
-                await Cryptodb.ExportPnlsToExcel(new Query() { Filter = $@"{pnlDataGrid.Query.Filter}", OrderBy = $"{pnlDataGrid.Query.OrderBy}", Expand = "", Select = "signal_id,symbol,position_type,exchange_id,strategy_pair_name,signal_status,position_status,executed_buy_qty,pending_buy_qty,executed_sell_qty,pending_sell_qty,entry_price,close_price,pnl,pnl_percent,entry_time,exit_time" }, $"Futures Pnls");
-
+                await Cryptodb.ExportPnlsToExcel(new Query() { Filter = $@"{pnlDataGrid.Query.Filter}", OrderBy = $"{pnlDataGrid.Query.OrderBy}", Expand = "", Select = "signal_id,symbol,position_type,exchange_id,strategy_pair_name,signal_status,position_status,executed_buy_qty,pending_buy_qty,executed_sell_qty,pending_sell_qty,entry_price,close_price,pnl,pnl_percent,entry_time,exit_time" }, $"Pnls");
             }
         }
 
-        protected async Task OnPnlGridRowExpand(FuturesPnlViewModel pnl)
+        protected async Task OnPnlGridRowExpand(PnlViewModel pnl)
         {
             await OnCommandsGridLoadData(new LoadDataArgs
             {
@@ -138,7 +136,7 @@ namespace CryptobotUi.Pages
             }, pnl); // looks like commandsGrid is null at this point - so we can't call .Reload() on it directly
         }
 
-        protected async Task OnCommandsGridLoadData(LoadDataArgs args, FuturesPnlViewModel pnl)
+        protected async Task OnCommandsGridLoadData(LoadDataArgs args, PnlViewModel pnl)
         {
             try
             {

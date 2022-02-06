@@ -46,7 +46,7 @@ namespace CryptobotUi.Pages
 
         [Inject]
         protected CryptodbService Cryptodb { get; set; }
-        protected RadzenGrid<CryptobotUi.Client.Model.FuturesPnlViewModel> pnlDataGrid;
+        protected RadzenGrid<CryptobotUi.Client.Model.PnlViewModel> pnlDataGrid;
 
         string _search;
         protected string search
@@ -93,7 +93,7 @@ namespace CryptobotUi.Pages
             await OnPnlGridLoadData(args);
         }
 
-        protected async System.Threading.Tasks.Task PnlDataGridRowExpand(CryptobotUi.Client.Model.FuturesPnlViewModel args)
+        protected async System.Threading.Tasks.Task PnlDataGridRowExpand(CryptobotUi.Client.Model.PnlViewModel args)
         {
             await OnPnlGridRowExpand(args);
         }

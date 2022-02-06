@@ -61,8 +61,8 @@ namespace CryptobotUi.Pages
             }
         }
 
-        protected IEnumerable<Signal> getFuturesSignalsResult;
-        protected int getFuturesSignalsCount;
+        protected IEnumerable<Signal> getSignalsResult;
+        protected int getSignalsCount;
 
         protected async System.Threading.Tasks.Task OnGridLoadData(LoadDataArgs args)
         {
@@ -77,21 +77,21 @@ namespace CryptobotUi.Pages
                     ? $"signal_id eq {SignalIdRouteParameter}"
                     : args.Filter;
 
-                var cryptodbGetFuturesSignalsResult = await Cryptodb.GetSignals(filter:$"{args.Filter}", orderby:$"{args.OrderBy}", expand:$"Exchange", top:args.Top, skip:args.Skip, count:args.Top != null && args.Skip != null);
-                getFuturesSignalsResult = 
-                    cryptodbGetFuturesSignalsResult.Value
+                var cryptodbGetSignalsResult = await Cryptodb.GetSignals(filter:$"{args.Filter}", orderby:$"{args.OrderBy}", expand:$"Exchange", top:args.Top, skip:args.Skip, count:args.Top != null && args.Skip != null);
+                getSignalsResult = 
+                    cryptodbGetSignalsResult.Value
                     .Select(c => {
                         c.created_date_time = c.created_date_time.ToLocalTime();
                         c.updated_date_time = c.updated_date_time.ToLocalTime();
                         return c;
                     })
                     .AsODataEnumerable();
-                getFuturesSignalsCount = cryptodbGetFuturesSignalsResult.Count;
+                getSignalsCount = cryptodbGetSignalsResult.Count;
 
-                if (getFuturesSignalsCount > 0)
+                if (getSignalsCount > 0)
                 {
                     // expand the row
-                    var signal = getFuturesSignalsResult.FirstOrDefault(s => s.signal_id == SignalIdRouteParameter);
+                    var signal = getSignalsResult.FirstOrDefault(s => s.signal_id == SignalIdRouteParameter);
                     if (signal != null) 
                     {
                         await grid0.ExpandRow(signal);
@@ -103,7 +103,7 @@ namespace CryptobotUi.Pages
                 NotificationService.Notify(new NotificationMessage{
                     Severity = NotificationSeverity.Error,
                     Summary = $"Error",
-                    Detail = $"Unable to load FuturesSignals: {ex}"
+                    Detail = $"Unable to load Signals: {ex}"
                 });
                 JSRuntime.Log($"Error loading signals: {ex}. Type of signalid {this.SignalId?.GetType()?.Name}");
             }

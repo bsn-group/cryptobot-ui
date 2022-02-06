@@ -60,8 +60,8 @@
                       "visible": false
                     }
                   ],
-                  "count": "${getFuturesSignalsCount}",
-                  "data": "${getFuturesSignalsResult}",
+                  "count": "${getSignalsCount}",
+                  "data": "${getSignalsResult}",
                   "events": {
                     "loadData": [
                       {
@@ -86,7 +86,7 @@
                         "parameters": [
                           {
                             "name": "args",
-                            "type": "CryptobotUi.Models.Cryptodb.FuturesSignal",
+                            "type": "CryptobotUi.Models.Cryptodb.Signal",
                             "value": "${event}"
                           }
                         ],
@@ -100,7 +100,7 @@
                   },
                   "filterCaseSensitivity": "caseInsensitive",
                   "filterMode": "advanced",
-                  "itemType": "CryptobotUi.Models.Cryptodb.FuturesSignal",
+                  "itemType": "CryptobotUi.Models.Cryptodb.Signal",
                   "name": "grid0",
                   "template": [
                     {
@@ -120,10 +120,10 @@
                           "title": "Id"
                         },
                         {
-                          "filterProperty": "FuturesSignal.symbol",
+                          "filterProperty": "Signal.symbol",
                           "property": "signal_id",
-                          "sortProperty": "FuturesSignal.symbol",
-                          "template": "${data.FuturesSignal?.symbol}",
+                          "sortProperty": "Signal.symbol",
+                          "template": "${data.Signal?.symbol}",
                           "title": "Signal",
                           "visible": false
                         },
@@ -177,10 +177,10 @@
                           "visible": false
                         }
                       ],
-                      "data": "${data.FuturesSignalCommands}",
+                      "data": "${data.SignalCommands}",
                       "events": {},
                       "filterMode": "advanced",
-                      "itemType": "CryptobotUi.Models.Cryptodb.FuturesSignalCommand",
+                      "itemType": "CryptobotUi.Models.Cryptodb.SignalCommand",
                       "name": "grid1",
                       "template": "",
                       "type": "grid"

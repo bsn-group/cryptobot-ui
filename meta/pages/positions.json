@@ -174,7 +174,7 @@
                     ]
                   },
                   "filterMode": "advanced",
-                  "itemType": "CryptobotUi.Models.Cryptodb.FuturesPosition",
+                  "itemType": "CryptobotUi.Models.Cryptodb.Position",
                   "name": "grid0",
                   "title": "",
                   "type": "grid"

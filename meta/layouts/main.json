@@ -80,8 +80,8 @@
               "visible": true
             },
             {
-              "path": "futures-pnls",
-              "text": "Futures PnL"
+              "path": "pnls",
+              "text": "View PnL"
             },
             {
               "path": "strategies",

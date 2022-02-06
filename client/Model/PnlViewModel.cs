@@ -4,7 +4,7 @@ using System.ComponentModel;
 
 namespace CryptobotUi.Client.Model
 {
-    public class FuturesPnlViewModel : Pnl, INotifyPropertyChanged
+    public class PnlViewModel : Pnl, INotifyPropertyChanged
     {
         private IEnumerable<SignalCommand> commands;
         private int commandCount;
