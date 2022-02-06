@@ -7,8 +7,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CryptobotUi.Models.Cryptodb
 {
-  [Table("futures_signal_command", Schema = "public")]
-  public partial class FuturesSignalCommand
+  [Table("signal", Schema = "public")]
+  public partial class Signal
   {
     [NotMapped]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
@@ -19,83 +19,54 @@ namespace CryptobotUi.Models.Cryptodb
         set;
     }
 
-    [ConcurrencyCheck]
-    public Int64? market_event_id
-    {
-      get;
-      set;
-    }
     [Key]
-    public Int64 id
-    {
-      get;
-      set;
-    }
-
-    public IEnumerable<ExchangeOrder> ExchangeOrders { get; set; }
-    [ConcurrencyCheck]
     public Int64 signal_id
     {
       get;
       set;
     }
-    public FuturesSignal FuturesSignal { get; set; }
+
+    public IEnumerable<SignalCommand> SignalCommands { get; set; }
     [ConcurrencyCheck]
-    public decimal price
+    public DateTime created_date_time
     {
       get;
       set;
     }
     [ConcurrencyCheck]
-    public decimal? quantity
+    public DateTime? updated_date_time
     {
       get;
       set;
     }
     [ConcurrencyCheck]
-    public int leverage
+    public Int64 exchange_id
+    {
+      get;
+      set;
+    }
+    public Exchange Exchange { get; set; }
+    [ConcurrencyCheck]
+    public Int64 strategy_pair_id
+    {
+      get;
+      set;
+    }
+    public Strategy Strategy { get; set; }
+    [ConcurrencyCheck]
+    public string symbol
     {
       get;
       set;
     }
     [ConcurrencyCheck]
-    public string signal_action
+    public string strategy_pair_name
     {
       get;
       set;
     }
     [ConcurrencyCheck]
-    public string status
-    {
-      get;
-      set;
-    }
-    [ConcurrencyCheck]
-    public DateTime request_date_time
-    {
-      get;
-      set;
-    }
-    [ConcurrencyCheck]
-    public DateTime? action_date_time
-    {
-      get;
-      set;
-    }
-    [ConcurrencyCheck]
-    public string strategy_name
-    {
-      get;
-      set;
-    }
-    [ConcurrencyCheck]
-    public string strategy_hash
-    {
-      get;
-      set;
-    }
-    [ConcurrencyCheck]
-    public string strategy_data
+    public string position_type
     {
       get;
       set;

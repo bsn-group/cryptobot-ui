@@ -6,11 +6,14 @@ using Microsoft.Data.SqlClient;
 using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 using Microsoft.AspNetCore.Mvc;
+
 using Microsoft.AspNet.OData;
 using Microsoft.AspNet.OData.Routing;
+using Microsoft.AspNet.OData.Query;
+
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using Microsoft.AspNet.OData.Query;
+
 
 
 
@@ -20,41 +23,47 @@ namespace CryptobotUi.Controllers.Cryptodb
   using Data;
   using Models.Cryptodb;
 
-  [ODataRoutePrefix("odata/cryptodb/FuturesSignalCommands")]
-  [Route("mvc/odata/cryptodb/FuturesSignalCommands")]
-  public partial class FuturesSignalCommandsController : ODataController
+  [ODataRoutePrefix("odata/cryptodb/SignalCommands")]
+  [Route("mvc/odata/cryptodb/SignalCommands")]
+  public partial class SignalCommandsController : ODataController
   {
     private Data.CryptodbContext context;
 
-    public FuturesSignalCommandsController(Data.CryptodbContext context)
+    public SignalCommandsController(Data.CryptodbContext context)
     {
       this.context = context;
     }
-    // GET /odata/Cryptodb/FuturesSignalCommands
+    // GET /odata/Cryptodb/SignalCommands
     [EnableQuery(MaxExpansionDepth=10,MaxAnyAllExpressionDepth=10,MaxNodeCount=1000)]
     [HttpGet]
-    public IEnumerable<Models.Cryptodb.FuturesSignalCommand> GetFuturesSignalCommands()
+    public IEnumerable<Models.Cryptodb.SignalCommand> GetSignalCommands()
     {
-      var items = this.context.FuturesSignalCommands.AsQueryable<Models.Cryptodb.FuturesSignalCommand>();
-      this.OnFuturesSignalCommandsRead(ref items);
+      var items = this.context.SignalCommands.AsQueryable<Models.Cryptodb.SignalCommand>();
+      this.OnSignalCommandsRead(ref items);
 
       return items;
     }
 
-    partial void OnFuturesSignalCommandsRead(ref IQueryable<Models.Cryptodb.FuturesSignalCommand> items);
+    partial void OnSignalCommandsRead(ref IQueryable<Models.Cryptodb.SignalCommand> items);
+
+    partial void OnSignalCommandGet(ref SingleResult<Models.Cryptodb.SignalCommand> item);
 
     [EnableQuery(MaxExpansionDepth=10,MaxAnyAllExpressionDepth=10,MaxNodeCount=1000)]
     [HttpGet("{id}")]
-    public SingleResult<FuturesSignalCommand> GetFuturesSignalCommand(Int64 key)
+    public SingleResult<SignalCommand> GetSignalCommand(Int64 key)
     {
-        var items = this.context.FuturesSignalCommands.Where(i=>i.id == key);
-        return SingleResult.Create(items);
+        var items = this.context.SignalCommands.Where(i=>i.id == key);
+        var result = SingleResult.Create(items);
+
+        OnSignalCommandGet(ref result);
+
+        return result;
     }
-    partial void OnFuturesSignalCommandDeleted(Models.Cryptodb.FuturesSignalCommand item);
-    partial void OnAfterFuturesSignalCommandDeleted(Models.Cryptodb.FuturesSignalCommand item);
+    partial void OnSignalCommandDeleted(Models.Cryptodb.SignalCommand item);
+    partial void OnAfterSignalCommandDeleted(Models.Cryptodb.SignalCommand item);
 
     [HttpDelete("{id}")]
-    public IActionResult DeleteFuturesSignalCommand(Int64 key)
+    public IActionResult DeleteSignalCommand(Int64 key)
     {
         try
         {
@@ -64,12 +73,12 @@ namespace CryptobotUi.Controllers.Cryptodb
             }
 
 
-            var items = this.context.FuturesSignalCommands
+            var items = this.context.SignalCommands
                 .Where(i => i.id == key)
                 .Include(i => i.ExchangeOrders)
                 .AsQueryable();
 
-            items = EntityPatch.ApplyTo<Models.Cryptodb.FuturesSignalCommand>(Request, items);
+            items = EntityPatch.ApplyTo<Models.Cryptodb.SignalCommand>(Request, items);
 
             var item = items.FirstOrDefault();
 
@@ -78,10 +87,10 @@ namespace CryptobotUi.Controllers.Cryptodb
                 return StatusCode((int)HttpStatusCode.PreconditionFailed);
             }
 
-            this.OnFuturesSignalCommandDeleted(item);
-            this.context.FuturesSignalCommands.Remove(item);
+            this.OnSignalCommandDeleted(item);
+            this.context.SignalCommands.Remove(item);
             this.context.SaveChanges();
-            this.OnAfterFuturesSignalCommandDeleted(item);
+            this.OnAfterSignalCommandDeleted(item);
 
             return new NoContentResult();
         }
@@ -92,12 +101,12 @@ namespace CryptobotUi.Controllers.Cryptodb
         }
     }
 
-    partial void OnFuturesSignalCommandUpdated(Models.Cryptodb.FuturesSignalCommand item);
-    partial void OnAfterFuturesSignalCommandUpdated(Models.Cryptodb.FuturesSignalCommand item);
+    partial void OnSignalCommandUpdated(Models.Cryptodb.SignalCommand item);
+    partial void OnAfterSignalCommandUpdated(Models.Cryptodb.SignalCommand item);
 
     [HttpPut("{id}")]
     [EnableQuery(MaxExpansionDepth=10,MaxAnyAllExpressionDepth=10,MaxNodeCount=1000)]
-    public IActionResult PutFuturesSignalCommand(Int64 key, [FromBody]Models.Cryptodb.FuturesSignalCommand newItem)
+    public IActionResult PutSignalCommand(Int64 key, [FromBody]Models.Cryptodb.SignalCommand newItem)
     {
         try
         {
@@ -106,12 +115,12 @@ namespace CryptobotUi.Controllers.Cryptodb
                 return BadRequest(ModelState);
             }
 
-            var items = this.context.FuturesSignalCommands
+            var items = this.context.SignalCommands
                 .Where(i => i.id == key)
                 .Include(i => i.ExchangeOrders)
                 .AsQueryable();
 
-            items = EntityPatch.ApplyTo<Models.Cryptodb.FuturesSignalCommand>(Request, items);
+            items = EntityPatch.ApplyTo<Models.Cryptodb.SignalCommand>(Request, items);
 
             var item = items.FirstOrDefault();
 
@@ -120,13 +129,13 @@ namespace CryptobotUi.Controllers.Cryptodb
                 return StatusCode((int)HttpStatusCode.PreconditionFailed);
             }
 
-            this.OnFuturesSignalCommandUpdated(newItem);
-            this.context.FuturesSignalCommands.Update(newItem);
+            this.OnSignalCommandUpdated(newItem);
+            this.context.SignalCommands.Update(newItem);
             this.context.SaveChanges();
 
-            var itemToReturn = this.context.FuturesSignalCommands.Where(i => i.id == key);
-            Request.QueryString = Request.QueryString.Add("$expand", "FuturesSignal");
-            this.OnAfterFuturesSignalCommandUpdated(newItem);
+            var itemToReturn = this.context.SignalCommands.Where(i => i.id == key);
+            Request.QueryString = Request.QueryString.Add("$expand", "StrategyCondition,Signal");
+            this.OnAfterSignalCommandUpdated(newItem);
             return new ObjectResult(SingleResult.Create(itemToReturn));
         }
         catch(Exception ex)
@@ -138,7 +147,7 @@ namespace CryptobotUi.Controllers.Cryptodb
 
     [HttpPatch("{id}")]
     [EnableQuery(MaxExpansionDepth=10,MaxAnyAllExpressionDepth=10,MaxNodeCount=1000)]
-    public IActionResult PatchFuturesSignalCommand(Int64 key, [FromBody]Delta<Models.Cryptodb.FuturesSignalCommand> patch)
+    public IActionResult PatchSignalCommand(Int64 key, [FromBody]Delta<Models.Cryptodb.SignalCommand> patch)
     {
         try
         {
@@ -147,9 +156,9 @@ namespace CryptobotUi.Controllers.Cryptodb
                 return BadRequest(ModelState);
             }
 
-            var items = this.context.FuturesSignalCommands.Where(i => i.id == key);
+            var items = this.context.SignalCommands.Where(i => i.id == key);
 
-            items = EntityPatch.ApplyTo<Models.Cryptodb.FuturesSignalCommand>(Request, items);
+            items = EntityPatch.ApplyTo<Models.Cryptodb.SignalCommand>(Request, items);
 
             var item = items.FirstOrDefault();
 
@@ -160,12 +169,12 @@ namespace CryptobotUi.Controllers.Cryptodb
 
             patch.Patch(item);
 
-            this.OnFuturesSignalCommandUpdated(item);
-            this.context.FuturesSignalCommands.Update(item);
+            this.OnSignalCommandUpdated(item);
+            this.context.SignalCommands.Update(item);
             this.context.SaveChanges();
 
-            var itemToReturn = this.context.FuturesSignalCommands.Where(i => i.id == key);
-            Request.QueryString = Request.QueryString.Add("$expand", "FuturesSignal");
+            var itemToReturn = this.context.SignalCommands.Where(i => i.id == key);
+            Request.QueryString = Request.QueryString.Add("$expand", "StrategyCondition,Signal");
             return new ObjectResult(SingleResult.Create(itemToReturn));
         }
         catch(Exception ex)
@@ -175,12 +184,12 @@ namespace CryptobotUi.Controllers.Cryptodb
         }
     }
 
-    partial void OnFuturesSignalCommandCreated(Models.Cryptodb.FuturesSignalCommand item);
-    partial void OnAfterFuturesSignalCommandCreated(Models.Cryptodb.FuturesSignalCommand item);
+    partial void OnSignalCommandCreated(Models.Cryptodb.SignalCommand item);
+    partial void OnAfterSignalCommandCreated(Models.Cryptodb.SignalCommand item);
 
     [HttpPost]
     [EnableQuery(MaxExpansionDepth=10,MaxAnyAllExpressionDepth=10,MaxNodeCount=1000)]
-    public IActionResult Post([FromBody] Models.Cryptodb.FuturesSignalCommand item)
+    public IActionResult Post([FromBody] Models.Cryptodb.SignalCommand item)
     {
         try
         {
@@ -194,17 +203,17 @@ namespace CryptobotUi.Controllers.Cryptodb
                 return BadRequest();
             }
 
-            this.OnFuturesSignalCommandCreated(item);
-            this.context.FuturesSignalCommands.Add(item);
+            this.OnSignalCommandCreated(item);
+            this.context.SignalCommands.Add(item);
             this.context.SaveChanges();
 
             var key = item.id;
 
-            var itemToReturn = this.context.FuturesSignalCommands.Where(i => i.id == key);
+            var itemToReturn = this.context.SignalCommands.Where(i => i.id == key);
 
-            Request.QueryString = Request.QueryString.Add("$expand", "FuturesSignal");
+            Request.QueryString = Request.QueryString.Add("$expand", "StrategyCondition,Signal");
 
-            this.OnAfterFuturesSignalCommandCreated(item);
+            this.OnAfterSignalCommandCreated(item);
 
             return new ObjectResult(SingleResult.Create(itemToReturn))
             {

@@ -24,7 +24,7 @@
         </RadzenSplitButton>
         <RadzenTextBox Placeholder="Search ..." style="display: block; margin-bottom: 10px; width: 100%" Visible="false" Name="Textbox0" @oninput="@(async(args) => {search = $"{args.Value}";await grid0.GoToPage(0);await grid0.Reload();})">
         </RadzenTextBox>
-        <RadzenGrid @ref="grid0" AllowColumnResize="true" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Count="@getStrategiesCount" Data="@getStrategiesResult" EditMode="DataGridEditMode.Single" FilterMode="FilterMode.Advanced" TItem="CryptobotUi.Models.Cryptodb.Strategy" LoadData="@Grid0LoadData" RowExpand="@Grid0RowExpand" RowSelect="@Grid0RowSelect">
+        <RadzenGrid @ref="grid0" AllowColumnResize="true" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Count="@getStrategiesCount" Data="@getStrategiesResult" EditMode="DataGridEditMode.Single" FilterMode="Radzen.FilterMode.Advanced" TItem="CryptobotUi.Models.Cryptodb.Strategy" LoadData="@Grid0LoadData" RowExpand="@Grid0RowExpand" RowSelect="@Grid0RowSelect">
           <Columns>
             <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.Strategy" Property="name" Title="Name">
             </RadzenGridColumn>
@@ -54,7 +54,7 @@
             </RadzenHeading>
             <RadzenButton Icon="add_circle_outline" style="margin-bottom: 10px" Text="Add" Click="@((args) =>StrategyConditionAddButtonClick(args, cryptobotUiModelsCryptodbStrategy))">
             </RadzenButton>
-            <RadzenGrid @ref="grid1" AllowColumnResize="true" AllowFiltering="true" AllowPaging="true" AllowSorting="false" Data="@(cryptobotUiModelsCryptodbStrategy.StrategyConditions)" EditMode="DataGridEditMode.Single" EmptyText="No conditions. Click (+) to add." FilterMode="FilterMode.Advanced" TItem="CryptobotUi.Models.Cryptodb.StrategyCondition">
+            <RadzenGrid @ref="grid1" AllowColumnResize="true" AllowFiltering="true" AllowPaging="true" AllowSorting="false" Data="@(cryptobotUiModelsCryptodbStrategy.StrategyConditions)" EditMode="DataGridEditMode.Single" EmptyText="No conditions. Click (+) to add." FilterMode="Radzen.FilterMode.Advanced" TItem="CryptobotUi.Models.Cryptodb.StrategyCondition">
               <Columns>
                 <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.StrategyCondition" Property="id" Title="Id">
                 </RadzenGridColumn>

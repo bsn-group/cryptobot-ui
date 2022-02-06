@@ -19,8 +19,10 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 
 using CryptobotUi.Data;
+
 using Microsoft.AspNet.OData.Extensions;
 using Microsoft.AspNet.OData.Builder;
+
 namespace CryptobotUi
 {
     public partial class Startup
@@ -55,6 +57,7 @@ namespace CryptobotUi
             });
             services.AddOData();
             services.AddODataQueryFilter();
+            
 
             services.AddDbContext<CryptobotUi.Data.CryptodbContext>(options =>
             {
@@ -75,6 +78,7 @@ namespace CryptobotUi
                 options.SupportedCultures = supportedCultures;
                 options.SupportedUICultures = supportedCultures;
             });
+
 
             OnConfigureServices(services);
         }
@@ -135,11 +139,11 @@ namespace CryptobotUi
                 oDataBuilder.EntitySet<CryptobotUi.Models.Cryptodb.Config>("Configs");
                 oDataBuilder.EntitySet<CryptobotUi.Models.Cryptodb.Exchange>("Exchanges");
                 oDataBuilder.EntitySet<CryptobotUi.Models.Cryptodb.ExchangeOrder>("ExchangeOrders");
-                oDataBuilder.EntitySet<CryptobotUi.Models.Cryptodb.FuturesPnl>("FuturesPnls");
-                oDataBuilder.EntitySet<CryptobotUi.Models.Cryptodb.FuturesPosition>("FuturesPositions");
-                oDataBuilder.EntitySet<CryptobotUi.Models.Cryptodb.FuturesSignal>("FuturesSignals");
-                oDataBuilder.EntitySet<CryptobotUi.Models.Cryptodb.FuturesSignalCommand>("FuturesSignalCommands");
                 oDataBuilder.EntitySet<CryptobotUi.Models.Cryptodb.MarketEvent>("MarketEvents");
+                oDataBuilder.EntitySet<CryptobotUi.Models.Cryptodb.Pnl>("Pnls");
+                oDataBuilder.EntitySet<CryptobotUi.Models.Cryptodb.Position>("Positions");
+                oDataBuilder.EntitySet<CryptobotUi.Models.Cryptodb.Signal>("Signals");
+                oDataBuilder.EntitySet<CryptobotUi.Models.Cryptodb.SignalCommand>("SignalCommands");
                 oDataBuilder.EntitySet<CryptobotUi.Models.Cryptodb.Strategy>("Strategies");
                 oDataBuilder.EntitySet<CryptobotUi.Models.Cryptodb.StrategyCondition>("StrategyConditions");
                 oDataBuilder.EntitySet<CryptobotUi.Models.Cryptodb.Symbol>("Symbols");

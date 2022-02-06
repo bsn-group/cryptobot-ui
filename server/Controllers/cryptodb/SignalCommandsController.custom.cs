@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace  CryptobotUi.Controllers.Cryptodb
 {
-    partial class FuturesSignalCommandsController
+    partial class SignalCommandsController
     {
     }
 }

@@ -25,7 +25,7 @@ namespace CryptobotUi.Pages
             }
         }
 
-        protected async System.Threading.Tasks.Task OnGridRowExpand(CryptobotUi.Models.Cryptodb.FuturesSignal args)
+        protected async System.Threading.Tasks.Task OnGridRowExpand(CryptobotUi.Models.Cryptodb.Signal args)
         {
             try
             {
@@ -33,8 +33,8 @@ namespace CryptobotUi.Pages
 
                 // master = args;
 
-                var commands = await Cryptodb.GetFuturesSignalCommands(filter:$"signal_id eq {args.signal_id}");
-                args.FuturesSignalCommands = 
+                var commands = await Cryptodb.GetSignalCommands(filter:$"signal_id eq {args.signal_id}");
+                args.SignalCommands = 
                     commands.Value
                     .Select(c => {
                         c.action_date_time = c.action_date_time.ToLocalTime();
@@ -61,7 +61,7 @@ namespace CryptobotUi.Pages
             }
         }
 
-        protected IEnumerable<FuturesSignal> getFuturesSignalsResult;
+        protected IEnumerable<Signal> getFuturesSignalsResult;
         protected int getFuturesSignalsCount;
 
         protected async System.Threading.Tasks.Task OnGridLoadData(LoadDataArgs args)
@@ -77,7 +77,7 @@ namespace CryptobotUi.Pages
                     ? $"signal_id eq {SignalIdRouteParameter}"
                     : args.Filter;
 
-                var cryptodbGetFuturesSignalsResult = await Cryptodb.GetFuturesSignals(filter:$"{args.Filter}", orderby:$"{args.OrderBy}", expand:$"Exchange", top:args.Top, skip:args.Skip, count:args.Top != null && args.Skip != null);
+                var cryptodbGetFuturesSignalsResult = await Cryptodb.GetSignals(filter:$"{args.Filter}", orderby:$"{args.OrderBy}", expand:$"Exchange", top:args.Top, skip:args.Skip, count:args.Top != null && args.Skip != null);
                 getFuturesSignalsResult = 
                     cryptodbGetFuturesSignalsResult.Value
                     .Select(c => {

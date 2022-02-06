@@ -6,11 +6,14 @@ using Microsoft.Data.SqlClient;
 using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 using Microsoft.AspNetCore.Mvc;
+
 using Microsoft.AspNet.OData;
 using Microsoft.AspNet.OData.Routing;
+using Microsoft.AspNet.OData.Query;
+
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using Microsoft.AspNet.OData.Query;
+
 
 
 
@@ -43,12 +46,18 @@ namespace CryptobotUi.Controllers.Cryptodb
 
     partial void OnStrategiesRead(ref IQueryable<Models.Cryptodb.Strategy> items);
 
+    partial void OnStrategyGet(ref SingleResult<Models.Cryptodb.Strategy> item);
+
     [EnableQuery(MaxExpansionDepth=10,MaxAnyAllExpressionDepth=10,MaxNodeCount=1000)]
     [HttpGet("{id}")]
     public SingleResult<Strategy> GetStrategy(Int64 key)
     {
         var items = this.context.Strategies.Where(i=>i.id == key);
-        return SingleResult.Create(items);
+        var result = SingleResult.Create(items);
+
+        OnStrategyGet(ref result);
+
+        return result;
     }
     partial void OnStrategyDeleted(Models.Cryptodb.Strategy item);
     partial void OnAfterStrategyDeleted(Models.Cryptodb.Strategy item);
@@ -67,6 +76,7 @@ namespace CryptobotUi.Controllers.Cryptodb
             var items = this.context.Strategies
                 .Where(i => i.id == key)
                 .Include(i => i.StrategyConditions)
+                .Include(i => i.Signals)
                 .AsQueryable();
 
             items = EntityPatch.ApplyTo<Models.Cryptodb.Strategy>(Request, items);
@@ -109,6 +119,7 @@ namespace CryptobotUi.Controllers.Cryptodb
             var items = this.context.Strategies
                 .Where(i => i.id == key)
                 .Include(i => i.StrategyConditions)
+                .Include(i => i.Signals)
                 .AsQueryable();
 
             items = EntityPatch.ApplyTo<Models.Cryptodb.Strategy>(Request, items);

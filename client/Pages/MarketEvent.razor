@@ -12,7 +12,7 @@
     </RadzenHeading>
     <div class="row">
       <div class="col-md-12">
-        <RadzenGrid @ref="grid0" AllowColumnResize="true" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Count="@getMarketEventsCount" Data="@getMarketEventsResult" FilterMode="FilterMode.Advanced" TItem="CryptobotUi.Models.Cryptodb.MarketEvent" LoadData="@Grid0LoadData">
+        <RadzenGrid @ref="grid0" AllowColumnResize="true" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Count="@getMarketEventsCount" Data="@getMarketEventsResult" FilterMode="Radzen.FilterMode.Advanced" TItem="CryptobotUi.Models.Cryptodb.MarketEvent" LoadData="@Grid0LoadData">
           <Columns>
             <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.MarketEvent" Property="id" Title="Id">
             </RadzenGridColumn>

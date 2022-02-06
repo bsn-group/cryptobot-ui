@@ -24,7 +24,7 @@
         </RadzenSplitButton>
         <RadzenTextBox Placeholder="Search ..." style="display: block; margin-bottom: 10px; width: 100%" Name="Textbox0" @oninput="@(async(args) => {search = $"{args.Value}";await grid0.GoToPage(0);await grid0.Reload();})">
         </RadzenTextBox>
-        <RadzenGrid @ref="grid0" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Count="@getStrategyConditionsCount" Data="@getStrategyConditionsResult" FilterMode="FilterMode.Advanced" TItem="CryptobotUi.Models.Cryptodb.StrategyCondition" LoadData="@Grid0LoadData">
+        <RadzenGrid @ref="grid0" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Count="@getStrategyConditionsCount" Data="@getStrategyConditionsResult" FilterMode="Radzen.FilterMode.Advanced" TItem="CryptobotUi.Models.Cryptodb.StrategyCondition" LoadData="@Grid0LoadData">
           <Columns>
             <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.StrategyCondition" Property="category" Title="Category">
             </RadzenGridColumn>

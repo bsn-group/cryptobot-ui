@@ -6,11 +6,14 @@ using Microsoft.Data.SqlClient;
 using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 using Microsoft.AspNetCore.Mvc;
+
 using Microsoft.AspNet.OData;
 using Microsoft.AspNet.OData.Routing;
+using Microsoft.AspNet.OData.Query;
+
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using Microsoft.AspNet.OData.Query;
+
 
 
 
@@ -43,12 +46,18 @@ namespace CryptobotUi.Controllers.Cryptodb
 
     partial void OnConfigsRead(ref IQueryable<Models.Cryptodb.Config> items);
 
+    partial void OnConfigGet(ref SingleResult<Models.Cryptodb.Config> item);
+
     [EnableQuery(MaxExpansionDepth=10,MaxAnyAllExpressionDepth=10,MaxNodeCount=1000)]
     [HttpGet("{name}")]
     public SingleResult<Config> GetConfig(string key)
     {
         var items = this.context.Configs.Where(i=>i.name == key);
-        return SingleResult.Create(items);
+        var result = SingleResult.Create(items);
+
+        OnConfigGet(ref result);
+
+        return result;
     }
     partial void OnConfigDeleted(Models.Cryptodb.Config item);
     partial void OnAfterConfigDeleted(Models.Cryptodb.Config item);

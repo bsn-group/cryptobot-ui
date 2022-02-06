@@ -12,7 +12,7 @@ using CryptobotUi.Client.Pages;
 
 namespace CryptobotUi.Pages
 {
-    public partial class FuturesPnlsComponent : ComponentBase
+    public partial class PnlsComponent : ComponentBase
     {
         [Parameter(CaptureUnmatchedValues = true)]
         public IReadOnlyDictionary<string, dynamic> Attributes { get; set; }

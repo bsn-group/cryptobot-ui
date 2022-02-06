@@ -20,43 +20,7 @@ namespace CryptobotUi.Models.Cryptodb
     }
 
     [ConcurrencyCheck]
-    public Int64? exchange_id
-    {
-      get;
-      set;
-    }
-    [ConcurrencyCheck]
-    public string name
-    {
-      get;
-      set;
-    }
-    [ConcurrencyCheck]
-    public string position_type
-    {
-      get;
-      set;
-    }
-    [ConcurrencyCheck]
-    public string exchange_type
-    {
-      get;
-      set;
-    }
-    [ConcurrencyCheck]
-    public string symbol
-    {
-      get;
-      set;
-    }
-    [ConcurrencyCheck]
     public Int64 version
-    {
-      get;
-      set;
-    }
-    [ConcurrencyCheck]
-    public string status
     {
       get;
       set;
@@ -81,5 +45,42 @@ namespace CryptobotUi.Models.Cryptodb
     }
 
     public IEnumerable<StrategyCondition> StrategyConditions { get; set; }
+    public IEnumerable<Signal> Signals { get; set; }
+    [ConcurrencyCheck]
+    public Int64? exchange_id
+    {
+      get;
+      set;
+    }
+    [ConcurrencyCheck]
+    public string symbol
+    {
+      get;
+      set;
+    }
+    [ConcurrencyCheck]
+    public string status
+    {
+      get;
+      set;
+    }
+    [ConcurrencyCheck]
+    public string name
+    {
+      get;
+      set;
+    }
+    [ConcurrencyCheck]
+    public string position_type
+    {
+      get;
+      set;
+    }
+    [ConcurrencyCheck]
+    public string exchange_type
+    {
+      get;
+      set;
+    }
   }
 }

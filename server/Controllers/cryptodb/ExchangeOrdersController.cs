@@ -6,11 +6,14 @@ using Microsoft.Data.SqlClient;
 using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 using Microsoft.AspNetCore.Mvc;
+
 using Microsoft.AspNet.OData;
 using Microsoft.AspNet.OData.Routing;
+using Microsoft.AspNet.OData.Query;
+
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using Microsoft.AspNet.OData.Query;
+
 
 
 
@@ -43,12 +46,18 @@ namespace CryptobotUi.Controllers.Cryptodb
 
     partial void OnExchangeOrdersRead(ref IQueryable<Models.Cryptodb.ExchangeOrder> items);
 
+    partial void OnExchangeOrderGet(ref SingleResult<Models.Cryptodb.ExchangeOrder> item);
+
     [EnableQuery(MaxExpansionDepth=10,MaxAnyAllExpressionDepth=10,MaxNodeCount=1000)]
     [HttpGet("{id}")]
     public SingleResult<ExchangeOrder> GetExchangeOrder(Int64 key)
     {
         var items = this.context.ExchangeOrders.Where(i=>i.id == key);
-        return SingleResult.Create(items);
+        var result = SingleResult.Create(items);
+
+        OnExchangeOrderGet(ref result);
+
+        return result;
     }
     partial void OnExchangeOrderDeleted(Models.Cryptodb.ExchangeOrder item);
     partial void OnAfterExchangeOrderDeleted(Models.Cryptodb.ExchangeOrder item);
@@ -123,7 +132,7 @@ namespace CryptobotUi.Controllers.Cryptodb
             this.context.SaveChanges();
 
             var itemToReturn = this.context.ExchangeOrders.Where(i => i.id == key);
-            Request.QueryString = Request.QueryString.Add("$expand", "FuturesSignalCommand");
+            Request.QueryString = Request.QueryString.Add("$expand", "SignalCommand");
             this.OnAfterExchangeOrderUpdated(newItem);
             return new ObjectResult(SingleResult.Create(itemToReturn));
         }
@@ -163,7 +172,7 @@ namespace CryptobotUi.Controllers.Cryptodb
             this.context.SaveChanges();
 
             var itemToReturn = this.context.ExchangeOrders.Where(i => i.id == key);
-            Request.QueryString = Request.QueryString.Add("$expand", "FuturesSignalCommand");
+            Request.QueryString = Request.QueryString.Add("$expand", "SignalCommand");
             return new ObjectResult(SingleResult.Create(itemToReturn));
         }
         catch(Exception ex)
@@ -200,7 +209,7 @@ namespace CryptobotUi.Controllers.Cryptodb
 
             var itemToReturn = this.context.ExchangeOrders.Where(i => i.id == key);
 
-            Request.QueryString = Request.QueryString.Add("$expand", "FuturesSignalCommand");
+            Request.QueryString = Request.QueryString.Add("$expand", "SignalCommand");
 
             this.OnAfterExchangeOrderCreated(item);
 

@@ -10,7 +10,7 @@ using CryptobotUi.Client.Model.Extensions;
 
 namespace CryptobotUi.Pages
 {
-    public partial class FuturesPnlsComponent
+    public partial class PnlsComponent
     {
         private IEnumerable<FuturesPnlViewModel> futuresPnls;
         private int futuresPnlsCount;
@@ -66,7 +66,7 @@ namespace CryptobotUi.Pages
         }
         
 
-        private FuturesPnlViewModel ToFuturesPnlVM(FuturesPnl pnl)
+        private FuturesPnlViewModel ToFuturesPnlVM(Pnl pnl)
         {
             return new FuturesPnlViewModel
             {
@@ -80,7 +80,7 @@ namespace CryptobotUi.Pages
                 exit_time = pnl.exit_time.ToLocalTime(),
                 pending_buy_qty = pnl.pending_buy_qty,
                 pending_sell_qty = pnl.pending_sell_qty,
-                pnl = pnl.pnl,
+                pnl1 = pnl.pnl1,
                 pnl_percent = pnl.pnl_percent,
                 position_status = pnl.position_status,
                 position_type = pnl.position_type,
@@ -99,7 +99,7 @@ namespace CryptobotUi.Pages
 
                 args.OrderBy = string.IsNullOrWhiteSpace(args.OrderBy) ? "signal_id desc" : args.OrderBy;
 
-                var pnlsResult = await Cryptodb.GetFuturesPnls(filter: $@"(contains(symbol,""{search}"") or contains(position_type,""{search}"") or contains(strategy_pair_name,""{search}"") or contains(signal_status,""{search}"") or contains(position_status,""{search}"")) and {(string.IsNullOrEmpty(args.Filter) ? "true" : args.Filter)}", orderby: $"{args.OrderBy}", top: args.Top, skip: args.Skip, count: args.Top != null && args.Skip != null);
+                var pnlsResult = await Cryptodb.GetPnls(filter: $@"(contains(symbol,""{search}"") or contains(position_type,""{search}"") or contains(strategy_pair_name,""{search}"") or contains(signal_status,""{search}"") or contains(position_status,""{search}"")) and {(string.IsNullOrEmpty(args.Filter) ? "true" : args.Filter)}", orderby: $"{args.OrderBy}", top: args.Top, skip: args.Skip, count: args.Top != null && args.Skip != null);
 
                 FuturesPnls = pnlsResult.Value.Select(ToFuturesPnlVM).AsODataEnumerable();
                 FuturesPnlsCount = pnlsResult.Count;
@@ -118,13 +118,13 @@ namespace CryptobotUi.Pages
         {
             if (args?.Value == "csv")
             {
-                await Cryptodb.ExportFuturesPnlsToCSV(new Query() { Filter = $@"{pnlDataGrid.Query.Filter}", OrderBy = $"{pnlDataGrid.Query.OrderBy}", Expand = "", Select = "signal_id,symbol,position_type,exchange_id,strategy_pair_name,signal_status,position_status,executed_buy_qty,pending_buy_qty,executed_sell_qty,pending_sell_qty,entry_price,close_price,pnl,pnl_percent,entry_time,exit_time" }, $"Futures Pnls");
+                await Cryptodb.ExportPnlsToCSV(new Query() { Filter = $@"{pnlDataGrid.Query.Filter}", OrderBy = $"{pnlDataGrid.Query.OrderBy}", Expand = "", Select = "signal_id,symbol,position_type,exchange_id,strategy_pair_name,signal_status,position_status,executed_buy_qty,pending_buy_qty,executed_sell_qty,pending_sell_qty,entry_price,close_price,pnl,pnl_percent,entry_time,exit_time" }, $"Futures Pnls");
 
             }
 
             if (args == null || args.Value == "xlsx")
             {
-                await Cryptodb.ExportFuturesPnlsToExcel(new Query() { Filter = $@"{pnlDataGrid.Query.Filter}", OrderBy = $"{pnlDataGrid.Query.OrderBy}", Expand = "", Select = "signal_id,symbol,position_type,exchange_id,strategy_pair_name,signal_status,position_status,executed_buy_qty,pending_buy_qty,executed_sell_qty,pending_sell_qty,entry_price,close_price,pnl,pnl_percent,entry_time,exit_time" }, $"Futures Pnls");
+                await Cryptodb.ExportPnlsToExcel(new Query() { Filter = $@"{pnlDataGrid.Query.Filter}", OrderBy = $"{pnlDataGrid.Query.OrderBy}", Expand = "", Select = "signal_id,symbol,position_type,exchange_id,strategy_pair_name,signal_status,position_status,executed_buy_qty,pending_buy_qty,executed_sell_qty,pending_sell_qty,entry_price,close_price,pnl,pnl_percent,entry_time,exit_time" }, $"Futures Pnls");
 
             }
         }
@@ -148,7 +148,7 @@ namespace CryptobotUi.Pages
 
                 var signalId = pnl.signal_id;
                 args.Filter = string.IsNullOrWhiteSpace(args.Filter) ? $"signal_id eq {signalId}" : args.Filter;
-                var commands = await Cryptodb.GetFuturesSignalCommands(filter: $"{args.Filter}"); //, orderby: $"{args.OrderBy}", top: args.Top, skip: args.Skip, count: args.Top != null && args.Skip != null);
+                var commands = await Cryptodb.GetSignalCommands(filter: $"{args.Filter}"); //, orderby: $"{args.OrderBy}", top: args.Top, skip: args.Skip, count: args.Top != null && args.Skip != null);
 
                 pnl.Commands = commands.Value;
                 pnl.CommandCount = commands.Count;

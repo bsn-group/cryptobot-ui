@@ -12,67 +12,67 @@
     </RadzenHeading>
     <div class="row">
       <div class="col-md-12">
-        <RadzenGrid @ref="grid0" AllowColumnResize="true" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Count="@getFuturesSignalsCount" Data="@getFuturesSignalsResult" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" FilterMode="FilterMode.Advanced" TItem="CryptobotUi.Models.Cryptodb.FuturesSignal" LoadData="@Grid0LoadData" RowExpand="@Grid0RowExpand">
+        <RadzenGrid @ref="grid0" AllowColumnResize="true" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Count="@getFuturesSignalsCount" Data="@getFuturesSignalsResult" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" FilterMode="Radzen.FilterMode.Advanced" TItem="CryptobotUi.Models.Cryptodb.Signal" LoadData="@Grid0LoadData" RowExpand="@Grid0RowExpand">
           <Columns>
-            <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.FuturesSignal" Property="signal_id" Title="Signal Id">
+            <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.Signal" Property="signal_id" Title="Signal Id">
             </RadzenGridColumn>
-            <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.FuturesSignal" Property="strategy_pair_name" Title="Strategy">
+            <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.Signal" Property="strategy_pair_name" Title="Strategy">
             </RadzenGridColumn>
-            <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.FuturesSignal" Property="symbol" Title="Symbol">
+            <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.Signal" Property="symbol" Title="Symbol">
             </RadzenGridColumn>
-            <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.FuturesSignal" FilterProperty="Exchange.code" Property="exchange_id" SortProperty="Exchange.code" Title="Exchange">
+            <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.Signal" FilterProperty="Exchange.code" Property="exchange_id" SortProperty="Exchange.code" Title="Exchange">
               <Template Context="data">
               @(data.Exchange?.name)
               </Template>
             </RadzenGridColumn>
-            <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.FuturesSignal" Property="position_type" Title="Position Type">
+            <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.Signal" Property="position_type" Title="Position Type">
             </RadzenGridColumn>
-            <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.FuturesSignal" FormatString="{0:dd/MM/yy HH:mm:ss.fff zzz}" Property="created_date_time" Title="Created Time">
+            <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.Signal" FormatString="{0:dd/MM/yy HH:mm:ss.fff zzz}" Property="created_date_time" Title="Created Time">
             </RadzenGridColumn>
-            <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.FuturesSignal" FormatString="{0:dd/MM/yy HH:mm:ss.fff zzz}" Property="updated_date_time" Title="Updated Date Time" Visible="false">
+            <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.Signal" FormatString="{0:dd/MM/yy HH:mm:ss.fff zzz}" Property="updated_date_time" Title="Updated Date Time" Visible="false">
             </RadzenGridColumn>
-            <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.FuturesSignal" Property="ETag" Title="E Tag" Visible="false">
+            <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.Signal" Property="ETag" Title="E Tag" Visible="false">
             </RadzenGridColumn>
           </Columns>
-          <Template Context="cryptobotUiModelsCryptodbFuturesSignal">
+          <Template Context="cryptobotUiModelsCryptodbSignal">
             <RadzenHeading Size="H3" Text="Commands">
             </RadzenHeading>
-            <RadzenGrid @ref="grid1" AllowColumnResize="true" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@(cryptobotUiModelsCryptodbFuturesSignal.FuturesSignalCommands)" FilterMode="FilterMode.Advanced" TItem="CryptobotUi.Models.Cryptodb.FuturesSignalCommand">
+            <RadzenGrid @ref="grid1" AllowColumnResize="true" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@(cryptobotUiModelsCryptodbSignal.SignalCommands)" FilterMode="Radzen.FilterMode.Advanced" TItem="CryptobotUi.Models.Cryptodb.SignalCommand">
               <Columns>
-                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.FuturesSignalCommand" Property="id" Title="Id">
+                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.SignalCommand" Property="id" Title="Id">
                 </RadzenGridColumn>
-                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.FuturesSignalCommand" FilterProperty="FuturesSignal.symbol" Property="signal_id" SortProperty="FuturesSignal.symbol" Title="Signal" Visible="false">
+                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.SignalCommand" FilterProperty="FuturesSignal.symbol" Property="signal_id" SortProperty="FuturesSignal.symbol" Title="Signal" Visible="false">
                   <Template Context="data">
-                  @(data.FuturesSignal?.symbol)
+                  @(data.Signal?.symbol)
                   </Template>
                 </RadzenGridColumn>
-                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.FuturesSignalCommand" Property="price" Title="Price">
+                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.SignalCommand" Property="price" Title="Price">
                 </RadzenGridColumn>
-                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.FuturesSignalCommand" Property="quantity" Title="Quantity">
+                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.SignalCommand" Property="quantity" Title="Quantity">
                 </RadzenGridColumn>
-                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.FuturesSignalCommand" Property="leverage" Title="Leverage">
+                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.SignalCommand" Property="leverage" Title="Leverage">
                 </RadzenGridColumn>
-                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.FuturesSignalCommand" FormatString="{0:dd/MM/yy HH:mm:ss.fff zzz}" Property="request_date_time" Title="Request Date Time">
+                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.SignalCommand" FormatString="{0:dd/MM/yy HH:mm:ss.fff zzz}" Property="request_date_time" Title="Request Date Time">
                 </RadzenGridColumn>
-                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.FuturesSignalCommand" FormatString="{0:dd/MM/yy HH:mm:ss.fff zzz}" Property="action_date_time" Title="Action Date Time">
+                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.SignalCommand" FormatString="{0:dd/MM/yy HH:mm:ss.fff zzz}" Property="action_date_time" Title="Action Date Time">
                 </RadzenGridColumn>
-                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.FuturesSignalCommand" Property="strategy_name" Title="Strategy Name">
+                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.SignalCommand" Property="strategy_name" Title="Strategy Name">
                 </RadzenGridColumn>
-                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.FuturesSignalCommand" Property="strategy_hash" Title="Strategy Hash" Visible="false">
+                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.SignalCommand" Property="strategy_hash" Title="Strategy Hash" Visible="false">
                 </RadzenGridColumn>
-                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.FuturesSignalCommand" Property="strategy_data" Title="Strategy Data" Visible="false">
+                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.SignalCommand" Property="strategy_data" Title="Strategy Data" Visible="false">
                 </RadzenGridColumn>
-                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.FuturesSignalCommand" Property="signal_action" Title="Signal Action">
+                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.SignalCommand" Property="signal_action" Title="Signal Action">
                 </RadzenGridColumn>
-                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.FuturesSignalCommand" Property="status" Title="Status">
+                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.SignalCommand" Property="status" Title="Status">
                 </RadzenGridColumn>
-                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.FuturesSignalCommand" Property="ETag" Title="E Tag" Visible="false">
+                <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.SignalCommand" Property="ETag" Title="E Tag" Visible="false">
                 </RadzenGridColumn>
               </Columns>
             </RadzenGrid>
             <RadzenHeading Size="H3" Text="Exchange orders">
             </RadzenHeading>
-            <RadzenGrid @ref="grid2" AllowColumnResize="true" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@(cryptobotUiModelsCryptodbFuturesSignal.ExchangeOrders)" FilterMode="FilterMode.Advanced" TItem="CryptobotUi.Models.Cryptodb.ExchangeOrder">
+            <RadzenGrid @ref="grid2" AllowColumnResize="true" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@(cryptobotUiModelsCryptodbSignal.ExchangeOrders)" FilterMode="Radzen.FilterMode.Advanced" TItem="CryptobotUi.Models.Cryptodb.ExchangeOrder">
               <Columns>
                 <RadzenGridColumn TItem="CryptobotUi.Models.Cryptodb.ExchangeOrder" Property="id" Title="Id">
                 </RadzenGridColumn>

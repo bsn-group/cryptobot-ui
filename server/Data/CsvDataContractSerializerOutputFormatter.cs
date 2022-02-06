@@ -15,7 +15,6 @@ using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Net.Http.Headers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNet.OData.Query;
-
 namespace CryptobotUi.Data
 {
     public class CsvDataContractSerializerOutputFormatter : TextOutputFormatter

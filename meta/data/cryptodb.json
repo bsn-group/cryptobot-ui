@@ -10,20 +10,20 @@
       "x-table": "public.configs",
       "resource": "Configs",
       "required": [
-        "name",
-        "json_value"
+        "json_value",
+        "name"
       ],
       "properties": {
+        "json_value": {
+          "x-nullable": false,
+          "type": "string",
+          "length": 4096
+        },
         "name": {
           "x-key": true,
           "x-nullable": false,
           "type": "string",
           "length": 128
-        },
-        "json_value": {
-          "x-nullable": false,
-          "type": "string",
-          "length": 4096
         }
       }
     },
@@ -43,24 +43,20 @@
           "x-navigation": [
             {
               "inversePropertyName": "Exchange",
-              "name": "FuturesSignals",
-              "type": "FuturesSignal"
+              "name": "Signals",
+              "type": "Signal"
             }
           ]
-        },
-        "code": {
-          "type": "string",
-          "length": 255
-        },
-        "name": {
-          "x-nullable": false,
-          "type": "string",
-          "length": 50
         },
         "active": {
           "x-default-sql": "true",
           "x-nullable": false,
           "type": "boolean"
+        },
+        "name": {
+          "x-nullable": false,
+          "type": "string",
+          "length": 50
         }
       }
     },
@@ -68,39 +64,39 @@
       "x-table": "public.exchange_order",
       "resource": "ExchangeOrders",
       "required": [
-        "symbol",
         "price",
-        "exchange_order_id",
         "signal_id",
         "original_qty",
-        "status",
         "exchange_id",
-        "order_side",
         "created_time",
-        "updated_time"
+        "updated_time",
+        "symbol",
+        "exchange_order_id",
+        "status",
+        "order_side"
       ],
       "properties": {
-        "status_reason": {
-          "type": "string"
+        "SignalCommand": {
+          "type": "object",
+          "$ref": "#/definitions/SignalCommand"
         },
-        "symbol": {
-          "x-nullable": false,
-          "type": "string",
-          "length": 255
+        "signal_command_id": {
+          "type": "integer",
+          "format": "int64",
+          "x-foreignKey": {
+            "parentTable": "signal_command",
+            "parentEntityType": "SignalCommand",
+            "type": "SignalCommand",
+            "principalKey": "id",
+            "name": "SignalCommand",
+            "textProperty": "signal_action",
+            "navigationProperty": "ExchangeOrders"
+          }
         },
         "price": {
           "x-nullable": false,
           "type": "number",
           "format": "decimal"
-        },
-        "exchange_order_id": {
-          "x-nullable": false,
-          "type": "string",
-          "length": 255
-        },
-        "exchange_order_id_secondary": {
-          "type": "string",
-          "length": 255
         },
         "signal_id": {
           "x-nullable": false,
@@ -116,11 +112,6 @@
           "type": "number",
           "format": "decimal"
         },
-        "status": {
-          "x-nullable": false,
-          "type": "string",
-          "length": 128
-        },
         "exchange_id": {
           "x-nullable": false,
           "type": "integer",
@@ -132,15 +123,6 @@
           "x-nullable": false,
           "type": "integer",
           "format": "int64"
-        },
-        "order_side": {
-          "x-nullable": false,
-          "type": "string",
-          "length": 12
-        },
-        "fee_currency": {
-          "type": "string",
-          "length": 32
         },
         "fee_amount": {
           "type": "number",
@@ -166,29 +148,120 @@
           "type": "integer",
           "format": "int64"
         },
-        "FuturesSignalCommand": {
-          "type": "object",
-          "$ref": "#/definitions/FuturesSignalCommand"
+        "status_reason": {
+          "type": "string"
         },
-        "signal_command_id": {
-          "type": "integer",
-          "format": "int64",
-          "x-foreignKey": {
-            "parentTable": "futures_signal_command",
-            "parentEntityType": "FuturesSignalCommand",
-            "type": "FuturesSignalCommand",
-            "principalKey": "id",
-            "name": "FuturesSignalCommand",
-            "textProperty": "signal_action",
-            "navigationProperty": "ExchangeOrders"
-          }
+        "symbol": {
+          "x-nullable": false,
+          "type": "string",
+          "length": 255
+        },
+        "exchange_order_id": {
+          "x-nullable": false,
+          "type": "string",
+          "length": 255
+        },
+        "exchange_order_id_secondary": {
+          "type": "string",
+          "length": 255
+        },
+        "status": {
+          "x-nullable": false,
+          "type": "string",
+          "length": 128
+        },
+        "order_side": {
+          "x-nullable": false,
+          "type": "string",
+          "length": 12
+        },
+        "fee_currency": {
+          "type": "string",
+          "length": 32
         }
       }
     },
-    "FuturesPnl": {
+    "MarketEvent": {
+      "x-table": "public.market_event",
+      "resource": "MarketEvents",
+      "required": [
+        "id",
+        "event_time",
+        "price",
+        "time_frame",
+        "source",
+        "name",
+        "message",
+        "symbol",
+        "market",
+        "category"
+      ],
+      "properties": {
+        "id": {
+          "x-key": true,
+          "x-nullable": false,
+          "type": "integer",
+          "format": "int64"
+        },
+        "event_time": {
+          "x-nullable": false,
+          "type": "string",
+          "format": "date-time"
+        },
+        "price": {
+          "x-nullable": false,
+          "type": "number",
+          "format": "decimal"
+        },
+        "time_frame": {
+          "x-nullable": false,
+          "type": "integer",
+          "format": "int64"
+        },
+        "contracts": {
+          "type": "number",
+          "format": "decimal"
+        },
+        "exchange": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "source": {
+          "x-nullable": false,
+          "type": "string",
+          "length": 255
+        },
+        "name": {
+          "x-nullable": false,
+          "type": "string",
+          "length": 255
+        },
+        "message": {
+          "x-nullable": false,
+          "type": "string",
+          "length": 8192
+        },
+        "symbol": {
+          "x-nullable": false,
+          "type": "string",
+          "length": 255
+        },
+        "market": {
+          "x-nullable": false,
+          "type": "string",
+          "length": 255
+        },
+        "category": {
+          "x-nullable": false,
+          "type": "string",
+          "length": 128
+        }
+      }
+    },
+    "Pnl": {
       "x-view": true,
-      "x-table": "public.futures_pnl",
-      "resource": "FuturesPnls",
+      "x-table": "public.pnl",
+      "resource": "Pnls",
       "required": [],
       "properties": {
         "signal_id": {
@@ -262,7 +335,8 @@
           "type": "string",
           "format": "date-time"
         },
-        "pnl": {
+        "pnl1": {
+          "x-original-name": "pnl",
           "type": "number",
           "format": "decimal"
         },
@@ -276,10 +350,10 @@
         }
       }
     },
-    "FuturesPosition": {
+    "Position": {
       "x-view": true,
-      "x-table": "public.futures_positions",
-      "resource": "FuturesPositions",
+      "x-table": "public.positions",
+      "resource": "Positions",
       "required": [],
       "properties": {
         "signal_id": {
@@ -355,15 +429,15 @@
         }
       }
     },
-    "FuturesSignal": {
-      "x-table": "public.futures_signal",
-      "resource": "FuturesSignals",
+    "Signal": {
+      "x-table": "public.signal",
+      "resource": "Signals",
       "required": [
         "signal_id",
+        "created_date_time",
         "symbol",
         "strategy_pair_name",
-        "position_type",
-        "created_date_time"
+        "position_type"
       ],
       "properties": {
         "signal_id": {
@@ -373,26 +447,11 @@
           "format": "int64",
           "x-navigation": [
             {
-              "inversePropertyName": "FuturesSignal",
-              "name": "FuturesSignalCommands",
-              "type": "FuturesSignalCommand"
+              "inversePropertyName": "Signal",
+              "name": "SignalCommands",
+              "type": "SignalCommand"
             }
           ]
-        },
-        "symbol": {
-          "x-nullable": false,
-          "type": "string",
-          "length": 255
-        },
-        "strategy_pair_name": {
-          "x-nullable": false,
-          "type": "string",
-          "length": 255
-        },
-        "position_type": {
-          "x-nullable": false,
-          "type": "string",
-          "length": 32
         },
         "created_date_time": {
           "x-nullable": false,
@@ -418,37 +477,86 @@
             "type": "Exchange",
             "principalKey": "id",
             "name": "Exchange",
-            "textProperty": "code",
-            "navigationProperty": "FuturesSignals"
+            "textProperty": "code1",
+            "navigationProperty": "Signals"
           }
         },
-        "FuturesSignalCommands": {
+        "Strategy": {
+          "type": "object",
+          "$ref": "#/definitions/Strategy"
+        },
+        "strategy_pair_id": {
+          "x-default-sql": "nextval('signal_strategy_pair_id_seq'::regclass)",
+          "x-nullable": false,
+          "type": "integer",
+          "format": "int64",
+          "x-foreignKey": {
+            "parentTable": "strategy",
+            "parentEntityType": "Strategy",
+            "type": "Strategy",
+            "principalKey": "id",
+            "name": "Strategy",
+            "textProperty": "symbol",
+            "navigationProperty": "Signals"
+          }
+        },
+        "symbol": {
+          "x-nullable": false,
+          "type": "string",
+          "length": 255
+        },
+        "strategy_pair_name": {
+          "x-nullable": false,
+          "type": "string",
+          "length": 255
+        },
+        "position_type": {
+          "x-nullable": false,
+          "type": "string",
+          "length": 32
+        },
+        "SignalCommands": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/FuturesSignalCommand"
+            "$ref": "#/definitions/SignalCommand"
           }
         }
       }
     },
-    "FuturesSignalCommand": {
-      "x-table": "public.futures_signal_command",
-      "resource": "FuturesSignalCommands",
+    "SignalCommand": {
+      "x-table": "public.signal_command",
+      "resource": "SignalCommands",
       "required": [
         "id",
         "signal_id",
         "price",
         "leverage",
+        "request_date_time",
         "signal_action",
         "status",
-        "request_date_time",
         "strategy_name",
         "strategy_hash",
         "strategy_data"
       ],
       "properties": {
-        "market_event_id": {
+        "StrategyCondition": {
+          "type": "object",
+          "$ref": "#/definitions/StrategyCondition"
+        },
+        "strategy_condition_id": {
+          "x-default-sql": "nextval('signal_command_strategy_condition_id_seq'::regclass)",
+          "x-nullable": false,
           "type": "integer",
-          "format": "int64"
+          "format": "int64",
+          "x-foreignKey": {
+            "parentTable": "strategy_conditions",
+            "parentEntityType": "StrategyCondition",
+            "type": "StrategyCondition",
+            "principalKey": "id",
+            "name": "StrategyCondition",
+            "textProperty": "category",
+            "navigationProperty": "SignalCommands"
+          }
         },
         "id": {
           "x-key": true,
@@ -457,28 +565,28 @@
           "format": "int64",
           "x-navigation": [
             {
-              "inversePropertyName": "FuturesSignalCommand",
+              "inversePropertyName": "SignalCommand",
               "name": "ExchangeOrders",
               "type": "ExchangeOrder"
             }
           ]
         },
-        "FuturesSignal": {
+        "Signal": {
           "type": "object",
-          "$ref": "#/definitions/FuturesSignal"
+          "$ref": "#/definitions/Signal"
         },
         "signal_id": {
           "x-nullable": false,
           "type": "integer",
           "format": "int64",
           "x-foreignKey": {
-            "parentTable": "futures_signal",
-            "parentEntityType": "FuturesSignal",
-            "type": "FuturesSignal",
+            "parentTable": "signal",
+            "parentEntityType": "Signal",
+            "type": "Signal",
             "principalKey": "signal_id",
-            "name": "FuturesSignal",
+            "name": "Signal",
             "textProperty": "symbol",
-            "navigationProperty": "FuturesSignalCommands"
+            "navigationProperty": "SignalCommands"
           }
         },
         "price": {
@@ -494,6 +602,19 @@
           "x-nullable": false,
           "type": "integer"
         },
+        "request_date_time": {
+          "x-nullable": false,
+          "type": "string",
+          "format": "date-time"
+        },
+        "action_date_time": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "market_event_id": {
+          "type": "integer",
+          "format": "int64"
+        },
         "signal_action": {
           "x-nullable": false,
           "type": "string",
@@ -503,15 +624,6 @@
           "x-nullable": false,
           "type": "string",
           "length": 32
-        },
-        "request_date_time": {
-          "x-nullable": false,
-          "type": "string",
-          "format": "date-time"
-        },
-        "action_date_time": {
-          "type": "string",
-          "format": "date-time"
         },
         "strategy_name": {
           "x-nullable": false,
@@ -536,129 +648,24 @@
         }
       }
     },
-    "MarketEvent": {
-      "x-table": "public.market_event",
-      "resource": "MarketEvents",
-      "required": [
-        "time_frame",
-        "id",
-        "source",
-        "name",
-        "message",
-        "event_time",
-        "symbol",
-        "price",
-        "market",
-        "category"
-      ],
-      "properties": {
-        "time_frame": {
-          "x-nullable": false,
-          "type": "integer",
-          "format": "int64"
-        },
-        "exchange": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "id": {
-          "x-key": true,
-          "x-nullable": false,
-          "type": "integer",
-          "format": "int64"
-        },
-        "source": {
-          "x-nullable": false,
-          "type": "string",
-          "length": 255
-        },
-        "name": {
-          "x-nullable": false,
-          "type": "string",
-          "length": 255
-        },
-        "message": {
-          "x-nullable": false,
-          "type": "string",
-          "length": 8192
-        },
-        "event_time": {
-          "x-nullable": false,
-          "type": "string",
-          "format": "date-time"
-        },
-        "symbol": {
-          "x-nullable": false,
-          "type": "string",
-          "length": 255
-        },
-        "price": {
-          "x-nullable": false,
-          "type": "number",
-          "format": "decimal"
-        },
-        "market": {
-          "x-nullable": false,
-          "type": "string",
-          "length": 255
-        },
-        "category": {
-          "x-nullable": false,
-          "type": "string",
-          "length": 128
-        },
-        "contracts": {
-          "type": "number",
-          "format": "decimal"
-        }
-      }
-    },
     "Strategy": {
       "x-table": "public.strategy",
       "resource": "Strategies",
       "required": [
+        "version",
+        "updated_time",
+        "created_time",
+        "symbol",
+        "status",
         "name",
         "position_type",
-        "exchange_type",
-        "symbol",
-        "version",
-        "status",
-        "updated_time",
-        "created_time"
+        "exchange_type"
       ],
       "properties": {
-        "exchange_id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "name": {
-          "x-nullable": false,
-          "type": "string",
-          "length": 255
-        },
-        "position_type": {
-          "x-nullable": false,
-          "type": "string",
-          "length": 255
-        },
-        "exchange_type": {
-          "x-nullable": false,
-          "type": "string",
-          "length": 255
-        },
-        "symbol": {
-          "x-nullable": false,
-          "type": "string"
-        },
         "version": {
           "x-nullable": false,
           "type": "integer",
           "format": "int64"
-        },
-        "status": {
-          "x-nullable": false,
-          "type": "string",
-          "length": 54
         },
         "updated_time": {
           "x-nullable": false,
@@ -681,8 +688,41 @@
               "inversePropertyName": "Strategy",
               "name": "StrategyConditions",
               "type": "StrategyCondition"
+            },
+            {
+              "inversePropertyName": "Strategy",
+              "name": "Signals",
+              "type": "Signal"
             }
           ]
+        },
+        "exchange_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "symbol": {
+          "x-nullable": false,
+          "type": "string"
+        },
+        "status": {
+          "x-nullable": false,
+          "type": "string",
+          "length": 54
+        },
+        "name": {
+          "x-nullable": false,
+          "type": "string",
+          "length": 255
+        },
+        "position_type": {
+          "x-nullable": false,
+          "type": "string",
+          "length": 255
+        },
+        "exchange_type": {
+          "x-nullable": false,
+          "type": "string",
+          "length": 255
         },
         "StrategyConditions": {
           "type": "array",
@@ -696,18 +736,51 @@
       "x-table": "public.strategy_conditions",
       "resource": "StrategyConditions",
       "required": [
+        "strategy_id",
+        "time_frame",
+        "last_observed",
+        "created_time",
         "sequence",
         "version",
         "condition_sub_group",
-        "strategy_id",
-        "name",
-        "time_frame",
-        "last_observed",
         "category",
         "condition_group",
-        "created_time"
+        "name"
       ],
       "properties": {
+        "Strategy": {
+          "type": "object",
+          "$ref": "#/definitions/Strategy"
+        },
+        "strategy_id": {
+          "x-nullable": false,
+          "type": "integer",
+          "format": "int64",
+          "x-foreignKey": {
+            "parentTable": "strategy",
+            "parentEntityType": "Strategy",
+            "type": "Strategy",
+            "principalKey": "id",
+            "name": "Strategy",
+            "textProperty": "symbol",
+            "navigationProperty": "StrategyConditions"
+          }
+        },
+        "time_frame": {
+          "x-nullable": false,
+          "type": "integer",
+          "format": "int64"
+        },
+        "last_observed": {
+          "x-nullable": false,
+          "type": "integer",
+          "format": "int64"
+        },
+        "created_time": {
+          "x-nullable": false,
+          "type": "string",
+          "format": "date-time"
+        },
         "sequence": {
           "x-nullable": false,
           "type": "integer",
@@ -728,40 +801,14 @@
           "x-default-sql": "nextval('strategy_conditions_id_seq'::regclass)",
           "x-nullable": false,
           "type": "integer",
-          "format": "int64"
-        },
-        "Strategy": {
-          "type": "object",
-          "$ref": "#/definitions/Strategy"
-        },
-        "strategy_id": {
-          "x-nullable": false,
-          "type": "integer",
           "format": "int64",
-          "x-foreignKey": {
-            "parentTable": "strategy",
-            "parentEntityType": "Strategy",
-            "type": "Strategy",
-            "principalKey": "id",
-            "name": "Strategy",
-            "textProperty": "name",
-            "navigationProperty": "StrategyConditions"
-          }
-        },
-        "name": {
-          "x-nullable": false,
-          "type": "string",
-          "length": 255
-        },
-        "time_frame": {
-          "x-nullable": false,
-          "type": "integer",
-          "format": "int64"
-        },
-        "last_observed": {
-          "x-nullable": false,
-          "type": "integer",
-          "format": "int64"
+          "x-navigation": [
+            {
+              "inversePropertyName": "StrategyCondition",
+              "name": "SignalCommands",
+              "type": "SignalCommand"
+            }
+          ]
         },
         "category": {
           "x-nullable": false,
@@ -773,10 +820,10 @@
           "type": "string",
           "length": 255
         },
-        "created_time": {
+        "name": {
           "x-nullable": false,
           "type": "string",
-          "format": "date-time"
+          "length": 255
         }
       }
     },
@@ -834,6 +881,11 @@
           {
             "in": "query",
             "name": "$format",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
             "type": "string"
           }
         ],
@@ -921,6 +973,11 @@
             "in": "query",
             "name": "$format",
             "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "type": "string"
           }
         ],
         "responses": {
@@ -1007,6 +1064,11 @@
             "in": "query",
             "name": "$format",
             "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "type": "string"
           }
         ],
         "responses": {
@@ -1055,302 +1117,6 @@
         }
       }
     },
-    "/FuturesPnls": {
-      "get": {
-        "operationId": "getFuturesPnls",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "$filter",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$orderby",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$expand",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$top",
-            "type": "integer"
-          },
-          {
-            "in": "query",
-            "name": "$skip",
-            "type": "integer"
-          },
-          {
-            "in": "query",
-            "name": "$count",
-            "type": "boolean"
-          },
-          {
-            "in": "query",
-            "name": "$format",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "schema": {
-              "properties": {
-                "value": {
-                  "items": {
-                    "$ref": "#/definitions/FuturesPnl"
-                  },
-                  "type": "array"
-                }
-              },
-              "type": "object"
-            }
-          },
-          "default": {
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        }
-      }
-    },
-    "/FuturesPositions": {
-      "get": {
-        "operationId": "getFuturesPositions",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "$filter",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$orderby",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$expand",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$top",
-            "type": "integer"
-          },
-          {
-            "in": "query",
-            "name": "$skip",
-            "type": "integer"
-          },
-          {
-            "in": "query",
-            "name": "$count",
-            "type": "boolean"
-          },
-          {
-            "in": "query",
-            "name": "$format",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "schema": {
-              "properties": {
-                "value": {
-                  "items": {
-                    "$ref": "#/definitions/FuturesPosition"
-                  },
-                  "type": "array"
-                }
-              },
-              "type": "object"
-            }
-          },
-          "default": {
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        }
-      }
-    },
-    "/FuturesSignals": {
-      "get": {
-        "operationId": "getFuturesSignals",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "$filter",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$orderby",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$expand",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$top",
-            "type": "integer"
-          },
-          {
-            "in": "query",
-            "name": "$skip",
-            "type": "integer"
-          },
-          {
-            "in": "query",
-            "name": "$count",
-            "type": "boolean"
-          },
-          {
-            "in": "query",
-            "name": "$format",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "schema": {
-              "properties": {
-                "value": {
-                  "items": {
-                    "$ref": "#/definitions/FuturesSignal"
-                  },
-                  "type": "array"
-                }
-              },
-              "type": "object"
-            }
-          },
-          "default": {
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        }
-      },
-      "post": {
-        "operationId": "createFuturesSignal",
-        "parameters": [
-          {
-            "in": "body",
-            "name": "FuturesSignal",
-            "schema": {
-              "$ref": "#/definitions/FuturesSignal"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "schema": {
-              "$ref": "#/definitions/FuturesSignal"
-            }
-          },
-          "default": {
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        }
-      }
-    },
-    "/FuturesSignalCommands": {
-      "get": {
-        "operationId": "getFuturesSignalCommands",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "$filter",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$orderby",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$expand",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$top",
-            "type": "integer"
-          },
-          {
-            "in": "query",
-            "name": "$skip",
-            "type": "integer"
-          },
-          {
-            "in": "query",
-            "name": "$count",
-            "type": "boolean"
-          },
-          {
-            "in": "query",
-            "name": "$format",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "schema": {
-              "properties": {
-                "value": {
-                  "items": {
-                    "$ref": "#/definitions/FuturesSignalCommand"
-                  },
-                  "type": "array"
-                }
-              },
-              "type": "object"
-            }
-          },
-          "default": {
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        }
-      },
-      "post": {
-        "operationId": "createFuturesSignalCommand",
-        "parameters": [
-          {
-            "in": "body",
-            "name": "FuturesSignalCommand",
-            "schema": {
-              "$ref": "#/definitions/FuturesSignalCommand"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "schema": {
-              "$ref": "#/definitions/FuturesSignalCommand"
-            }
-          },
-          "default": {
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        }
-      }
-    },
     "/MarketEvents": {
       "get": {
         "operationId": "getMarketEvents",
@@ -1388,6 +1154,11 @@
           {
             "in": "query",
             "name": "$format",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
             "type": "string"
           }
         ],
@@ -1437,6 +1208,322 @@
         }
       }
     },
+    "/Pnls": {
+      "get": {
+        "operationId": "getPnls",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$format",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/Pnl"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/Positions": {
+      "get": {
+        "operationId": "getPositions",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$format",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/Position"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/Signals": {
+      "get": {
+        "operationId": "getSignals",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$format",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/Signal"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createSignal",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Signal",
+            "schema": {
+              "$ref": "#/definitions/Signal"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/Signal"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/SignalCommands": {
+      "get": {
+        "operationId": "getSignalCommands",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$format",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/SignalCommand"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createSignalCommand",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "SignalCommand",
+            "schema": {
+              "$ref": "#/definitions/SignalCommand"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/SignalCommand"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
     "/Strategies": {
       "get": {
         "operationId": "getStrategies",
@@ -1474,6 +1561,11 @@
           {
             "in": "query",
             "name": "$format",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
             "type": "string"
           }
         ],
@@ -1561,6 +1653,11 @@
             "in": "query",
             "name": "$format",
             "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "type": "string"
           }
         ],
         "responses": {
@@ -1647,6 +1744,11 @@
             "in": "query",
             "name": "$format",
             "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "type": "string"
           }
         ],
         "responses": {
@@ -1718,6 +1820,11 @@
         "operationId": "getConfigByname",
         "parameters": [
           {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
             "in": "path",
             "name": "name",
             "type": "string"
@@ -1785,6 +1892,11 @@
       "get": {
         "operationId": "getExchangeByid",
         "parameters": [
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
           {
             "in": "path",
             "name": "id",
@@ -1856,6 +1968,11 @@
         "operationId": "getExchangeOrderByid",
         "parameters": [
           {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
             "in": "path",
             "name": "id",
             "type": "integer",
@@ -1902,146 +2019,6 @@
         }
       }
     },
-    "/FuturesSignals({signal_id})": {
-      "delete": {
-        "operationId": "deleteFuturesSignal",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "signal_id",
-            "type": "integer",
-            "format": "int64"
-          }
-        ],
-        "responses": {
-          "204": {},
-          "default": {
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        }
-      },
-      "get": {
-        "operationId": "getFuturesSignalBysignal_id",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "signal_id",
-            "type": "integer",
-            "format": "int64"
-          }
-        ],
-        "responses": {
-          "200": {
-            "schema": {
-              "$ref": "#/definitions/FuturesSignal"
-            }
-          },
-          "default": {
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        }
-      },
-      "patch": {
-        "operationId": "updateFuturesSignal",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "signal_id",
-            "type": "integer",
-            "format": "int64"
-          },
-          {
-            "in": "body",
-            "name": "FuturesSignal",
-            "schema": {
-              "$ref": "#/definitions/FuturesSignal"
-            }
-          }
-        ],
-        "responses": {
-          "204": {},
-          "default": {
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        }
-      }
-    },
-    "/FuturesSignalCommands({id})": {
-      "delete": {
-        "operationId": "deleteFuturesSignalCommand",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "type": "integer",
-            "format": "int64"
-          }
-        ],
-        "responses": {
-          "204": {},
-          "default": {
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        }
-      },
-      "get": {
-        "operationId": "getFuturesSignalCommandByid",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "type": "integer",
-            "format": "int64"
-          }
-        ],
-        "responses": {
-          "200": {
-            "schema": {
-              "$ref": "#/definitions/FuturesSignalCommand"
-            }
-          },
-          "default": {
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        }
-      },
-      "patch": {
-        "operationId": "updateFuturesSignalCommand",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "type": "integer",
-            "format": "int64"
-          },
-          {
-            "in": "body",
-            "name": "FuturesSignalCommand",
-            "schema": {
-              "$ref": "#/definitions/FuturesSignalCommand"
-            }
-          }
-        ],
-        "responses": {
-          "204": {},
-          "default": {
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        }
-      }
-    },
     "/MarketEvents({id})": {
       "delete": {
         "operationId": "deleteMarketEvent",
@@ -2065,6 +2042,11 @@
       "get": {
         "operationId": "getMarketEventByid",
         "parameters": [
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
           {
             "in": "path",
             "name": "id",
@@ -2112,6 +2094,156 @@
         }
       }
     },
+    "/Signals({signal_id})": {
+      "delete": {
+        "operationId": "deleteSignal",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "signal_id",
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "getSignalBysignal_id",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "signal_id",
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Signal"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "updateSignal",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "signal_id",
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "in": "body",
+            "name": "Signal",
+            "schema": {
+              "$ref": "#/definitions/Signal"
+            }
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/SignalCommands({id})": {
+      "delete": {
+        "operationId": "deleteSignalCommand",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "getSignalCommandByid",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/SignalCommand"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "updateSignalCommand",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "in": "body",
+            "name": "SignalCommand",
+            "schema": {
+              "$ref": "#/definitions/SignalCommand"
+            }
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
     "/Strategies({id})": {
       "delete": {
         "operationId": "deleteStrategy",
@@ -2135,6 +2267,11 @@
       "get": {
         "operationId": "getStrategyByid",
         "parameters": [
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
           {
             "in": "path",
             "name": "id",
@@ -2206,6 +2343,11 @@
         "operationId": "getStrategyConditionByid",
         "parameters": [
           {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
             "in": "path",
             "name": "id",
             "type": "integer",
@@ -2274,6 +2416,11 @@
       "get": {
         "operationId": "getSymbolByname",
         "parameters": [
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
           {
             "in": "path",
             "name": "name",

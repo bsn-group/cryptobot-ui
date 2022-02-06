@@ -49,8 +49,8 @@ namespace CryptobotUi.Pages
 
         [Parameter]
         public dynamic SignalId { get; set; }
-        protected RadzenGrid<CryptobotUi.Models.Cryptodb.FuturesSignal> grid0;
-        protected RadzenGrid<CryptobotUi.Models.Cryptodb.FuturesSignalCommand> grid1;
+        protected RadzenGrid<CryptobotUi.Models.Cryptodb.Signal> grid0;
+        protected RadzenGrid<CryptobotUi.Models.Cryptodb.SignalCommand> grid1;
         protected RadzenGrid<CryptobotUi.Models.Cryptodb.ExchangeOrder> grid2;
 
         protected override async System.Threading.Tasks.Task OnInitializedAsync()
@@ -67,7 +67,7 @@ namespace CryptobotUi.Pages
             await OnGridLoadData(args);
         }
 
-        protected async System.Threading.Tasks.Task Grid0RowExpand(CryptobotUi.Models.Cryptodb.FuturesSignal args)
+        protected async System.Threading.Tasks.Task Grid0RowExpand(CryptobotUi.Models.Cryptodb.Signal args)
         {
             await OnGridRowExpand(args);
         }

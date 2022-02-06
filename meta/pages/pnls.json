@@ -1,12 +1,11 @@
 {
-  "access": [],
   "components": [
     {
       "components": [
         {
           "name": "pageTitle",
           "size": "H1",
-          "text": "Futures Pnls",
+          "text": "Pnls",
           "type": "heading"
         },
         {
@@ -205,18 +204,18 @@
                           "style": {
                             "color": "#B9F6CA"
                           },
-                          "text": "@(String.Format(\"{0:F4} ({1:F2} %)\", cryptobotUiClientModelFuturesPnlViewModel.pnl, cryptobotUiClientModelFuturesPnlViewModel.pnl_percent))",
+                          "text": "@(String.Format(\"{0:F4} ({1:F2} %)\", cryptobotUiClientModelFuturesPnlViewModel.pnl1, cryptobotUiClientModelFuturesPnlViewModel.pnl_percent))",
                           "type": "label",
-                          "visible": "@(cryptobotUiClientModelFuturesPnlViewModel.pnl >= 0)"
+                          "visible": "@(cryptobotUiClientModelFuturesPnlViewModel.pnl1 >= 0)"
                         },
                         {
                           "name": "label6",
                           "style": {
                             "color": "#FF8A80"
                           },
-                          "text": "@(String.Format(\"{0:F4} ({1:F2} %)\", cryptobotUiClientModelFuturesPnlViewModel.pnl, cryptobotUiClientModelFuturesPnlViewModel.pnl_percent))",
+                          "text": "@(String.Format(\"{0:F4} ({1:F2} %)\", cryptobotUiClientModelFuturesPnlViewModel.pnl1, cryptobotUiClientModelFuturesPnlViewModel.pnl_percent))",
                           "type": "label",
-                          "visible": "@(cryptobotUiClientModelFuturesPnlViewModel.pnl < 0)"
+                          "visible": "@(cryptobotUiClientModelFuturesPnlViewModel.pnl1 < 0)"
                         }
                       ],
                       "textAlign": "right",
@@ -316,5 +315,5 @@
     ]
   },
   "layout": "Main",
-  "name": "Futures Pnls"
+  "name": "Pnls"
 }

@@ -18,14 +18,14 @@ namespace CryptobotUi.Models.Cryptodb
         set;
     }
 
-    [Key]
-    public string name
+    [ConcurrencyCheck]
+    public string json_value
     {
       get;
       set;
     }
-    [ConcurrencyCheck]
-    public string json_value
+    [Key]
+    public string name
     {
       get;
       set;

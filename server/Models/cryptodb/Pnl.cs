@@ -6,8 +6,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CryptobotUi.Models.Cryptodb
 {
-  [Table("futures_pnl", Schema = "public")]
-  public partial class FuturesPnl
+  [Table("pnl", Schema = "public")]
+  public partial class Pnl
   {
     [NotMapped]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
@@ -126,8 +126,10 @@ namespace CryptobotUi.Models.Cryptodb
       get;
       set;
     }
+
+    [Column("pnl")]
     [ConcurrencyCheck]
-    public decimal? pnl
+    public decimal? pnl1
     {
       get;
       set;

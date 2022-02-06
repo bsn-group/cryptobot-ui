@@ -6,11 +6,14 @@ using Microsoft.Data.SqlClient;
 using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 using Microsoft.AspNetCore.Mvc;
+
 using Microsoft.AspNet.OData;
 using Microsoft.AspNet.OData.Routing;
+using Microsoft.AspNet.OData.Query;
+
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using Microsoft.AspNet.OData.Query;
+
 
 
 
@@ -43,12 +46,18 @@ namespace CryptobotUi.Controllers.Cryptodb
 
     partial void OnMarketEventsRead(ref IQueryable<Models.Cryptodb.MarketEvent> items);
 
+    partial void OnMarketEventGet(ref SingleResult<Models.Cryptodb.MarketEvent> item);
+
     [EnableQuery(MaxExpansionDepth=10,MaxAnyAllExpressionDepth=10,MaxNodeCount=1000)]
     [HttpGet("{id}")]
     public SingleResult<MarketEvent> GetMarketEvent(Int64 key)
     {
         var items = this.context.MarketEvents.Where(i=>i.id == key);
-        return SingleResult.Create(items);
+        var result = SingleResult.Create(items);
+
+        OnMarketEventGet(ref result);
+
+        return result;
     }
     partial void OnMarketEventDeleted(Models.Cryptodb.MarketEvent item);
     partial void OnAfterMarketEventDeleted(Models.Cryptodb.MarketEvent item);

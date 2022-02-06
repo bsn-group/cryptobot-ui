@@ -18,6 +18,24 @@ namespace CryptobotUi.Models.Cryptodb
         set;
     }
 
+    [Key]
+    public Int64 id
+    {
+      get;
+      set;
+    }
+    [ConcurrencyCheck]
+    public DateTime event_time
+    {
+      get;
+      set;
+    }
+    [ConcurrencyCheck]
+    public decimal price
+    {
+      get;
+      set;
+    }
     [ConcurrencyCheck]
     public Int64 time_frame
     {
@@ -25,13 +43,13 @@ namespace CryptobotUi.Models.Cryptodb
       set;
     }
     [ConcurrencyCheck]
-    public Int64? exchange
+    public decimal? contracts
     {
       get;
       set;
     }
-    [Key]
-    public Int64 id
+    [ConcurrencyCheck]
+    public Int64? exchange
     {
       get;
       set;
@@ -55,19 +73,7 @@ namespace CryptobotUi.Models.Cryptodb
       set;
     }
     [ConcurrencyCheck]
-    public DateTime event_time
-    {
-      get;
-      set;
-    }
-    [ConcurrencyCheck]
     public string symbol
-    {
-      get;
-      set;
-    }
-    [ConcurrencyCheck]
-    public decimal price
     {
       get;
       set;
@@ -80,12 +86,6 @@ namespace CryptobotUi.Models.Cryptodb
     }
     [ConcurrencyCheck]
     public string category
-    {
-      get;
-      set;
-    }
-    [ConcurrencyCheck]
-    public decimal? contracts
     {
       get;
       set;

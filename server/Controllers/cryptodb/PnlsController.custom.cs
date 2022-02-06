@@ -2,9 +2,9 @@ using System.Linq;
 
 namespace CryptobotUi.Controllers.Cryptodb
 {
-    partial class FuturesPnlsController
+    partial class PnlsController
     {
-        partial void OnFuturesPnlsRead(ref IQueryable<Models.Cryptodb.FuturesPnl> items)
+        partial void OnPnlsRead(ref IQueryable<Models.Cryptodb.Pnl> items)
         {
             items = items.OrderByDescending(p => p.signal_id);
         }

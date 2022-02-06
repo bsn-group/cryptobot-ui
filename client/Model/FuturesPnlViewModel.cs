@@ -4,12 +4,12 @@ using System.ComponentModel;
 
 namespace CryptobotUi.Client.Model
 {
-    public class FuturesPnlViewModel : FuturesPnl, INotifyPropertyChanged
+    public class FuturesPnlViewModel : Pnl, INotifyPropertyChanged
     {
-        private IEnumerable<FuturesSignalCommand> commands;
+        private IEnumerable<SignalCommand> commands;
         private int commandCount;
 
-        public IEnumerable<FuturesSignalCommand> Commands
+        public IEnumerable<SignalCommand> Commands
         {
             get => commands;
             set

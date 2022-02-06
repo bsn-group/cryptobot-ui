@@ -5,7 +5,7 @@
         {
           "name": "pageTitle",
           "size": "H1",
-          "text": "Futures Positions",
+          "text": "Positions",
           "type": "heading"
         },
         {
@@ -18,8 +18,8 @@
                     "click": [
                       {
                         "condition": "${event?.Value == \"csv\"}",
-                        "fileName": "Futures Positions",
-                        "name": "cryptodb.getFuturesPositions",
+                        "fileName": "Positions",
+                        "name": "cryptodb.getPositions",
                         "parameters": [
                           {
                             "name": "$filter",
@@ -42,9 +42,9 @@
                       },
                       {
                         "condition": "${event == null || event.Value == \"xlsx\"}",
-                        "fileName": "Futures Positions",
+                        "fileName": "Positions",
                         "format": "xlsx",
-                        "name": "cryptodb.getFuturesPositions",
+                        "name": "cryptodb.getPositions",
                         "parameters": [
                           {
                             "name": "$filter",
@@ -163,8 +163,6 @@
                       "title": "Close Price"
                     }
                   ],
-                  "count": "${getFuturesPositionsCount}",
-                  "data": "${getFuturesPositionsResult}",
                   "events": {
                     "loadData": [
                       {
@@ -172,106 +170,6 @@
                         "type": "set",
                         "value": "true",
                         "valueType": "bool"
-                      },
-                      {
-                        "error": [
-                          {
-                            "name": "AppState.IsBusy",
-                            "type": "set",
-                            "value": "false",
-                            "valueType": "bool"
-                          },
-                          {
-                            "detail": "Unable to load FuturesPositions",
-                            "severity": "error",
-                            "summary": "Error",
-                            "type": "notify"
-                          }
-                        ],
-                        "name": "cryptodb.getFuturesPositions",
-                        "parameters": [
-                          {
-                            "name": "$top",
-                            "value": "event.top"
-                          },
-                          {
-                            "name": "$skip",
-                            "value": "event.skip"
-                          },
-                          {
-                            "name": "$count",
-                            "value": "event.top != null && event.skip != null"
-                          },
-                          {
-                            "name": "$filter",
-                            "operator": "and",
-                            "value": [
-                              {
-                                "filters": [
-                                  {
-                                    "operation": "contains",
-                                    "property": "symbol",
-                                    "type": "string",
-                                    "value": "\"${search}\""
-                                  },
-                                  {
-                                    "operation": "contains",
-                                    "property": "position_type",
-                                    "type": "string",
-                                    "value": "\"${search}\""
-                                  },
-                                  {
-                                    "operation": "contains",
-                                    "property": "strategy_pair_name",
-                                    "type": "string",
-                                    "value": "\"${search}\""
-                                  },
-                                  {
-                                    "operation": "contains",
-                                    "property": "signal_status",
-                                    "type": "string",
-                                    "value": "\"${search}\""
-                                  },
-                                  {
-                                    "operation": "contains",
-                                    "property": "position_status",
-                                    "type": "string",
-                                    "value": "\"${search}\""
-                                  }
-                                ],
-                                "operator": "or"
-                              },
-                              {
-                                "value": "${(string.IsNullOrEmpty(event.filter)? \"true\" : event.filter)}"
-                              }
-                            ]
-                          },
-                          {
-                            "name": "$orderby",
-                            "value": "${event.orderby}"
-                          }
-                        ],
-                        "then": [
-                          {
-                            "name": "getFuturesPositionsResult",
-                            "type": "set",
-                            "value": "${result.Value.AsODataEnumerable()}",
-                            "valueType": "IEnumerable<CryptobotUi.Models.Cryptodb.FuturesPosition>"
-                          },
-                          {
-                            "name": "getFuturesPositionsCount",
-                            "type": "set",
-                            "value": "${result.Count}",
-                            "valueType": "int"
-                          },
-                          {
-                            "name": "AppState.IsBusy",
-                            "type": "set",
-                            "value": "false",
-                            "valueType": "bool"
-                          }
-                        ],
-                        "type": "invoke"
                       }
                     ]
                   },
@@ -304,6 +202,5 @@
     ]
   },
   "layout": "Main",
-  "name": "Futures Positions",
-  "access": []
+  "name": "Positions"
 }

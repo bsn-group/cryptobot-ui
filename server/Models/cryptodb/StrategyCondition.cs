@@ -1,6 +1,7 @@
 using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -18,6 +19,31 @@ namespace CryptobotUi.Models.Cryptodb
         set;
     }
 
+    [ConcurrencyCheck]
+    public Int64 strategy_id
+    {
+      get;
+      set;
+    }
+    public Strategy Strategy { get; set; }
+    [ConcurrencyCheck]
+    public Int64 time_frame
+    {
+      get;
+      set;
+    }
+    [ConcurrencyCheck]
+    public Int64 last_observed
+    {
+      get;
+      set;
+    }
+    [ConcurrencyCheck]
+    public DateTime created_time
+    {
+      get;
+      set;
+    }
     [ConcurrencyCheck]
     public Int64 sequence
     {
@@ -42,31 +68,8 @@ namespace CryptobotUi.Models.Cryptodb
       get;
       set;
     }
-    [ConcurrencyCheck]
-    public Int64 strategy_id
-    {
-      get;
-      set;
-    }
-    public Strategy Strategy { get; set; }
-    [ConcurrencyCheck]
-    public string name
-    {
-      get;
-      set;
-    }
-    [ConcurrencyCheck]
-    public Int64 time_frame
-    {
-      get;
-      set;
-    }
-    [ConcurrencyCheck]
-    public Int64 last_observed
-    {
-      get;
-      set;
-    }
+
+    public IEnumerable<SignalCommand> SignalCommands { get; set; }
     [ConcurrencyCheck]
     public string category
     {
@@ -80,7 +83,7 @@ namespace CryptobotUi.Models.Cryptodb
       set;
     }
     [ConcurrencyCheck]
-    public DateTime created_time
+    public string name
     {
       get;
       set;

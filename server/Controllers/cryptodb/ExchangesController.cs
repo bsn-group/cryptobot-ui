@@ -6,11 +6,14 @@ using Microsoft.Data.SqlClient;
 using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 using Microsoft.AspNetCore.Mvc;
+
 using Microsoft.AspNet.OData;
 using Microsoft.AspNet.OData.Routing;
+using Microsoft.AspNet.OData.Query;
+
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using Microsoft.AspNet.OData.Query;
+
 
 
 
@@ -43,12 +46,18 @@ namespace CryptobotUi.Controllers.Cryptodb
 
     partial void OnExchangesRead(ref IQueryable<Models.Cryptodb.Exchange> items);
 
+    partial void OnExchangeGet(ref SingleResult<Models.Cryptodb.Exchange> item);
+
     [EnableQuery(MaxExpansionDepth=10,MaxAnyAllExpressionDepth=10,MaxNodeCount=1000)]
     [HttpGet("{id}")]
     public SingleResult<Exchange> GetExchange(Int64 key)
     {
         var items = this.context.Exchanges.Where(i=>i.id == key);
-        return SingleResult.Create(items);
+        var result = SingleResult.Create(items);
+
+        OnExchangeGet(ref result);
+
+        return result;
     }
     partial void OnExchangeDeleted(Models.Cryptodb.Exchange item);
     partial void OnAfterExchangeDeleted(Models.Cryptodb.Exchange item);
@@ -66,7 +75,7 @@ namespace CryptobotUi.Controllers.Cryptodb
 
             var items = this.context.Exchanges
                 .Where(i => i.id == key)
-                .Include(i => i.FuturesSignals)
+                .Include(i => i.Signals)
                 .AsQueryable();
 
             items = EntityPatch.ApplyTo<Models.Cryptodb.Exchange>(Request, items);
@@ -108,7 +117,7 @@ namespace CryptobotUi.Controllers.Cryptodb
 
             var items = this.context.Exchanges
                 .Where(i => i.id == key)
-                .Include(i => i.FuturesSignals)
+                .Include(i => i.Signals)
                 .AsQueryable();
 
             items = EntityPatch.ApplyTo<Models.Cryptodb.Exchange>(Request, items);

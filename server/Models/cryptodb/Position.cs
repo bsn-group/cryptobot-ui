@@ -6,8 +6,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CryptobotUi.Models.Cryptodb
 {
-  [Table("exchange_order", Schema = "public")]
-  public partial class ExchangeOrder
+  [Table("positions", Schema = "public")]
+  public partial class Position
   {
     [NotMapped]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
@@ -18,81 +18,8 @@ namespace CryptobotUi.Models.Cryptodb
         set;
     }
 
-    [ConcurrencyCheck]
-    public Int64? signal_command_id
-    {
-      get;
-      set;
-    }
-    public SignalCommand SignalCommand { get; set; }
-    [ConcurrencyCheck]
-    public decimal price
-    {
-      get;
-      set;
-    }
-    [ConcurrencyCheck]
-    public Int64 signal_id
-    {
-      get;
-      set;
-    }
-    [ConcurrencyCheck]
-    public decimal original_qty
-    {
-      get;
-      set;
-    }
-    [ConcurrencyCheck]
-    public decimal? executed_qty
-    {
-      get;
-      set;
-    }
-    [ConcurrencyCheck]
-    public Int64 exchange_id
-    {
-      get;
-      set;
-    }
     [Key]
-    public Int64 id
-    {
-      get;
-      set;
-    }
-    [ConcurrencyCheck]
-    public decimal? fee_amount
-    {
-      get;
-      set;
-    }
-    [ConcurrencyCheck]
-    public decimal? executed_price
-    {
-      get;
-      set;
-    }
-    [ConcurrencyCheck]
-    public DateTime created_time
-    {
-      get;
-      set;
-    }
-    [ConcurrencyCheck]
-    public DateTime updated_time
-    {
-      get;
-      set;
-    }
-    [ConcurrencyCheck]
-    public Int64 last_trade_id
-    {
-      get;
-      set;
-    }
-    [ConcurrencyCheck]
-    public string status_reason
+    public Int64? signal_id
     {
       get;
       set;
@@ -104,31 +31,97 @@ namespace CryptobotUi.Models.Cryptodb
       set;
     }
     [ConcurrencyCheck]
-    public string exchange_order_id
+    public string position_type
     {
       get;
       set;
     }
     [ConcurrencyCheck]
-    public string exchange_order_id_secondary
+    public Int64? exchange_id
     {
       get;
       set;
     }
     [ConcurrencyCheck]
-    public string status
+    public string strategy_pair_name
     {
       get;
       set;
     }
     [ConcurrencyCheck]
-    public string order_side
+    public string signal_status
     {
       get;
       set;
     }
     [ConcurrencyCheck]
-    public string fee_currency
+    public string position_status
+    {
+      get;
+      set;
+    }
+    [ConcurrencyCheck]
+    public decimal? executed_buy_qty
+    {
+      get;
+      set;
+    }
+    [ConcurrencyCheck]
+    public decimal? pending_buy_qty
+    {
+      get;
+      set;
+    }
+    [ConcurrencyCheck]
+    public decimal? executed_sell_qty
+    {
+      get;
+      set;
+    }
+    [ConcurrencyCheck]
+    public decimal? pending_sell_qty
+    {
+      get;
+      set;
+    }
+    [ConcurrencyCheck]
+    public Int64? open_commands_count
+    {
+      get;
+      set;
+    }
+    [ConcurrencyCheck]
+    public Int64? close_commands_count
+    {
+      get;
+      set;
+    }
+    [ConcurrencyCheck]
+    public Int64? pending_commands_count
+    {
+      get;
+      set;
+    }
+    [ConcurrencyCheck]
+    public decimal? entry_price
+    {
+      get;
+      set;
+    }
+    [ConcurrencyCheck]
+    public decimal? close_price
+    {
+      get;
+      set;
+    }
+    [ConcurrencyCheck]
+    public DateTime? entry_time
+    {
+      get;
+      set;
+    }
+    [ConcurrencyCheck]
+    public DateTime? exit_time
     {
       get;
       set;

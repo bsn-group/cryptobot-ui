@@ -9,11 +9,11 @@ namespace CryptobotUi
     public partial class ExportCryptodbController : ExportController
     {
         private readonly CryptodbContext context;
-
         public ExportCryptodbController(CryptodbContext context)
         {
             this.context = context;
         }
+
         [HttpGet("/export/Cryptodb/configs/csv")]
         [HttpGet("/export/Cryptodb/configs/csv(fileName='{fileName}')")]
         public FileStreamResult ExportConfigsToCSV(string fileName = null)
@@ -53,58 +53,6 @@ namespace CryptobotUi
         {
             return ToExcel(ApplyQuery(context.ExchangeOrders, Request.Query), fileName);
         }
-        [HttpGet("/export/Cryptodb/futurespnls/csv")]
-        [HttpGet("/export/Cryptodb/futurespnls/csv(fileName='{fileName}')")]
-        public FileStreamResult ExportFuturesPnlsToCSV(string fileName = null)
-        {
-            return ToCSV(ApplyQuery(context.FuturesPnls, Request.Query), fileName);
-        }
-
-        [HttpGet("/export/Cryptodb/futurespnls/excel")]
-        [HttpGet("/export/Cryptodb/futurespnls/excel(fileName='{fileName}')")]
-        public FileStreamResult ExportFuturesPnlsToExcel(string fileName = null)
-        {
-            return ToExcel(ApplyQuery(context.FuturesPnls, Request.Query), fileName);
-        }
-        [HttpGet("/export/Cryptodb/futurespositions/csv")]
-        [HttpGet("/export/Cryptodb/futurespositions/csv(fileName='{fileName}')")]
-        public FileStreamResult ExportFuturesPositionsToCSV(string fileName = null)
-        {
-            return ToCSV(ApplyQuery(context.FuturesPositions, Request.Query), fileName);
-        }
-
-        [HttpGet("/export/Cryptodb/futurespositions/excel")]
-        [HttpGet("/export/Cryptodb/futurespositions/excel(fileName='{fileName}')")]
-        public FileStreamResult ExportFuturesPositionsToExcel(string fileName = null)
-        {
-            return ToExcel(ApplyQuery(context.FuturesPositions, Request.Query), fileName);
-        }
-        [HttpGet("/export/Cryptodb/futuressignals/csv")]
-        [HttpGet("/export/Cryptodb/futuressignals/csv(fileName='{fileName}')")]
-        public FileStreamResult ExportFuturesSignalsToCSV(string fileName = null)
-        {
-            return ToCSV(ApplyQuery(context.FuturesSignals, Request.Query), fileName);
-        }
-
-        [HttpGet("/export/Cryptodb/futuressignals/excel")]
-        [HttpGet("/export/Cryptodb/futuressignals/excel(fileName='{fileName}')")]
-        public FileStreamResult ExportFuturesSignalsToExcel(string fileName = null)
-        {
-            return ToExcel(ApplyQuery(context.FuturesSignals, Request.Query), fileName);
-        }
-        [HttpGet("/export/Cryptodb/futuressignalcommands/csv")]
-        [HttpGet("/export/Cryptodb/futuressignalcommands/csv(fileName='{fileName}')")]
-        public FileStreamResult ExportFuturesSignalCommandsToCSV(string fileName = null)
-        {
-            return ToCSV(ApplyQuery(context.FuturesSignalCommands, Request.Query), fileName);
-        }
-
-        [HttpGet("/export/Cryptodb/futuressignalcommands/excel")]
-        [HttpGet("/export/Cryptodb/futuressignalcommands/excel(fileName='{fileName}')")]
-        public FileStreamResult ExportFuturesSignalCommandsToExcel(string fileName = null)
-        {
-            return ToExcel(ApplyQuery(context.FuturesSignalCommands, Request.Query), fileName);
-        }
         [HttpGet("/export/Cryptodb/marketevents/csv")]
         [HttpGet("/export/Cryptodb/marketevents/csv(fileName='{fileName}')")]
         public FileStreamResult ExportMarketEventsToCSV(string fileName = null)
@@ -117,6 +65,58 @@ namespace CryptobotUi
         public FileStreamResult ExportMarketEventsToExcel(string fileName = null)
         {
             return ToExcel(ApplyQuery(context.MarketEvents, Request.Query), fileName);
+        }
+        [HttpGet("/export/Cryptodb/pnls/csv")]
+        [HttpGet("/export/Cryptodb/pnls/csv(fileName='{fileName}')")]
+        public FileStreamResult ExportPnlsToCSV(string fileName = null)
+        {
+            return ToCSV(ApplyQuery(context.Pnls, Request.Query), fileName);
+        }
+
+        [HttpGet("/export/Cryptodb/pnls/excel")]
+        [HttpGet("/export/Cryptodb/pnls/excel(fileName='{fileName}')")]
+        public FileStreamResult ExportPnlsToExcel(string fileName = null)
+        {
+            return ToExcel(ApplyQuery(context.Pnls, Request.Query), fileName);
+        }
+        [HttpGet("/export/Cryptodb/positions/csv")]
+        [HttpGet("/export/Cryptodb/positions/csv(fileName='{fileName}')")]
+        public FileStreamResult ExportPositionsToCSV(string fileName = null)
+        {
+            return ToCSV(ApplyQuery(context.Positions, Request.Query), fileName);
+        }
+
+        [HttpGet("/export/Cryptodb/positions/excel")]
+        [HttpGet("/export/Cryptodb/positions/excel(fileName='{fileName}')")]
+        public FileStreamResult ExportPositionsToExcel(string fileName = null)
+        {
+            return ToExcel(ApplyQuery(context.Positions, Request.Query), fileName);
+        }
+        [HttpGet("/export/Cryptodb/signals/csv")]
+        [HttpGet("/export/Cryptodb/signals/csv(fileName='{fileName}')")]
+        public FileStreamResult ExportSignalsToCSV(string fileName = null)
+        {
+            return ToCSV(ApplyQuery(context.Signals, Request.Query), fileName);
+        }
+
+        [HttpGet("/export/Cryptodb/signals/excel")]
+        [HttpGet("/export/Cryptodb/signals/excel(fileName='{fileName}')")]
+        public FileStreamResult ExportSignalsToExcel(string fileName = null)
+        {
+            return ToExcel(ApplyQuery(context.Signals, Request.Query), fileName);
+        }
+        [HttpGet("/export/Cryptodb/signalcommands/csv")]
+        [HttpGet("/export/Cryptodb/signalcommands/csv(fileName='{fileName}')")]
+        public FileStreamResult ExportSignalCommandsToCSV(string fileName = null)
+        {
+            return ToCSV(ApplyQuery(context.SignalCommands, Request.Query), fileName);
+        }
+
+        [HttpGet("/export/Cryptodb/signalcommands/excel")]
+        [HttpGet("/export/Cryptodb/signalcommands/excel(fileName='{fileName}')")]
+        public FileStreamResult ExportSignalCommandsToExcel(string fileName = null)
+        {
+            return ToExcel(ApplyQuery(context.SignalCommands, Request.Query), fileName);
         }
         [HttpGet("/export/Cryptodb/strategies/csv")]
         [HttpGet("/export/Cryptodb/strategies/csv(fileName='{fileName}')")]

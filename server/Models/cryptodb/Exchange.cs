@@ -26,23 +26,15 @@ namespace CryptobotUi.Models.Cryptodb
       set;
     }
 
-    public IEnumerable<FuturesSignal> FuturesSignals { get; set; }
-
-    [Column("code")]
+    public IEnumerable<Signal> Signals { get; set; }
     [ConcurrencyCheck]
-    public string _code
+    public bool active
     {
       get;
       set;
     }
     [ConcurrencyCheck]
     public string name
-    {
-      get;
-      set;
-    }
-    [ConcurrencyCheck]
-    public bool active
     {
       get;
       set;

@@ -9,7 +9,7 @@ using CryptobotUi.Client.Model;
 
 namespace CryptobotUi.Pages
 {
-    public partial class FuturesPositionsComponent
+    public partial class PositionsComponent
     {
         [Inject]
         protected AppState AppState { get; set; }
